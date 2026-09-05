@@ -1,0 +1,32 @@
+/* Colores del sistema. Valores exactos del handoff (docs/diseno/README.md).
+   Regla de la marca: un solo acento. El rojo nunca es fondo grande salvo en
+   los CTA y el plan destacado. Nada de degradés decorativos. */
+:root{
+  --negro:#0b0b0b;         /* fondo de toda la página */
+  --hueso:#f4f1ec;         /* texto principal sobre oscuro, fondo de contacto */
+  --rojo:#E2231A;          /* el único acento */
+  --blanco:#ffffff;        /* texto sobre rojo */
+  --panel:#141414;         /* fondo de figure mientras carga la foto */
+
+  /* grises sobre fondo oscuro */
+  --gris-texto:#c9c5be;    /* párrafos          — 11.45:1 sobre --negro */
+  --gris-claro:#a8a49d;    /* rótulo del hero   —  7.93:1 */
+  --gris-mudo:#8a8781;     /* rótulos mono      —  5.50:1 */
+
+  /* grises sobre el hueso de la sección contacto */
+  --gris-sobre-claro:#3a3833;  /* párrafo   — 10.39:1 sobre --hueso */
+  --gris-meta:#6b6862;         /* dirección —  4.93:1 */
+
+  /* líneas. La profundidad de esta página son bordes, no sombras. */
+  --linea-tenue:rgba(244,241,236,.14);
+  --linea-media:rgba(244,241,236,.16);
+  --linea-fuerte:rgba(244,241,236,.3);
+  --linea-clara:rgba(11,11,11,.25);   /* sobre el hueso */
+
+  /* Textos cuando el fondo se pone rojo (hover de tarjeta, plan destacado).
+     El handoff decía que el texto no cambiaba y "ganaba contraste solo".
+     Medido, es al revés: --gris-texto sobre rojo da 2.72:1 y --gris-mudo
+     1.31:1. Sobre rojo el texto pasa a blanco o a un blanco velado. */
+  --sobre-rojo:var(--blanco);            /* 4.68:1 */
+  --sobre-rojo-mudo:rgba(255,255,255,.82);
+}

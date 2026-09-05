@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Chivo+Mono:wght@400;700&display=swap">
+  <style>
+    body{margin:0;background:#eceae6;font-family:'Chivo',system-ui,sans-serif;color:#2e2c28}
+    a{color:#8a2018}a:hover{color:#5e1610}
+    .rot{font-family:'Chivo Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+         text-transform:uppercase;color:#75726c}
+    .tit{font-family:'Chivo Mono',monospace;font-size:13px;letter-spacing:.08em;
+         text-transform:uppercase;font-weight:700;color:#2e2c28}
+    .card{border:1px solid #c2c0ba;background:#f6f5f2;padding:16px 18px}
+    .card--rojo{border-color:#E2231A;background:#fbe6e4}
+    .p{font-size:13px;line-height:1.5;color:#57544f}
+    .fila{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #ddd9d2}
+    .fila:last-child{border-bottom:0}
+    .num{font-family:'Chivo Mono',monospace;font-size:10px;color:#8c8981;width:20px;flex:none}
+    .nom{font-family:'Chivo Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+    .pin{margin-left:auto;background:#E2231A;color:#fff;font-family:'Chivo Mono',monospace;
+         font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;font-weight:700}
+    .pin--nueva{background:transparent;color:#E2231A;border:1px solid #E2231A}
+  </style>
+</helmet>
+
+<div style="width:1400px;background:#eceae6;padding:34px 36px 40px">
+
+  <div style="margin-bottom:26px">
+    <div class="tit" style="font-size:17px">Cómo llega alguien y cómo termina escribiendo</div>
+    <div class="rot" style="margin-top:7px">Mapa del sitio y flujo de conversión · una sola página, un solo destino</div>
+  </div>
+
+  <div style="display:flex;gap:26px;align-items:stretch">
+
+    <!-- ORIGEN -->
+    <div style="flex:0 0 250px;display:flex;flex-direction:column;gap:14px">
+      <div class="rot">De dónde llega</div>
+      <div class="card">
+        <div class="tit" style="font-size:11px">Búsqueda en Google</div>
+        <div class="p" style="margin-top:8px">«gimnasio de boxeo rosario». Es la razón por la que el texto tiene que estar en la página, no armado por un programa.</div>
+      </div>
+      <div class="card">
+        <div class="tit" style="font-size:11px">Instagram</div>
+        <div class="p" style="margin-top:8px">El link de la bio. Hoy es el canal principal del club.</div>
+      </div>
+      <div class="card">
+        <div class="tit" style="font-size:11px">Link pegado en un chat</div>
+        <div class="p" style="margin-top:8px">Alguien lo recomienda. Por eso importa cómo se ve la vista previa del link.</div>
+      </div>
+      <div class="rot" style="margin-top:2px;line-height:1.6">Casi todo esto<br>entra desde un celular</div>
+    </div>
+
+    <!-- flecha -->
+    <div style="flex:none;display:flex;align-items:center;padding-top:30px">
+      <svg width="40" height="24" viewBox="0 0 40 24" fill="none" stroke="#a5a29b" stroke-width="1.5">
+        <path d="M2 12h34M28 4l8 8-8 8" stroke-linecap="square"/>
+      </svg>
+    </div>
+
+    <!-- LA PÁGINA -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+      <div class="rot">La página · una sola, 13 bloques</div>
+      <div class="card" style="padding:8px 18px 12px">
+        <div class="fila"><div class="num">01</div><div class="nom">Header fijo</div><div class="pin">WhatsApp 1</div></div>
+        <div class="fila"><div class="num">02</div><div class="nom">Hero</div><div class="pin">Reservar</div></div>
+        <div class="fila"><div class="num">03</div><div class="nom">Marquesina</div></div>
+        <div class="fila"><div class="num">04</div><div class="nom">El rincón · el campeón</div></div>
+        <div class="fila"><div class="num">05</div><div class="nom">Las clases</div></div>
+        <div class="fila"><div class="num">06</div><div class="nom">Testimonios</div><div class="pin pin--nueva">Nueva</div></div>
+        <div class="fila"><div class="num">07</div><div class="nom">Los planes</div></div>
+        <div class="fila"><div class="num">08</div><div class="nom">Preguntas frecuentes</div><div class="pin pin--nueva">Nueva</div></div>
+        <div class="fila"><div class="num">09</div><div class="nom">El gimnasio · fotos</div></div>
+        <div class="fila"><div class="num">10</div><div class="nom">Contacto</div><div class="pin">WhatsApp 2</div></div>
+        <div class="fila"><div class="num">11</div><div class="nom">Formulario</div><div class="pin">WhatsApp 3</div></div>
+        <div class="fila"><div class="num">12</div><div class="nom">Mapa</div><div class="pin pin--nueva">Nueva</div></div>
+        <div class="fila"><div class="num">13</div><div class="nom">Pie</div><div class="pin pin--nueva">Nueva</div></div>
+      </div>
+      <div class="rot" style="line-height:1.7">El menú no lleva a otras páginas: baja hasta un bloque.<br>Nadie se pierde y nada tarda en cargar dos veces.</div>
+    </div>
+
+    <!-- flecha -->
+    <div style="flex:none;display:flex;align-items:center;padding-top:30px">
+      <svg width="40" height="24" viewBox="0 0 40 24" fill="none" stroke="#E2231A" stroke-width="1.5">
+        <path d="M2 12h34M28 4l8 8-8 8" stroke-linecap="square"/>
+      </svg>
+    </div>
+
+    <!-- DESTINO -->
+    <div style="flex:0 0 290px;display:flex;flex-direction:column;gap:14px">
+      <div class="rot">A dónde va todo</div>
+      <div class="card card--rojo">
+        <div class="tit" style="font-size:13px">WhatsApp del club</div>
+        <div class="p" style="margin-top:10px">Con el mensaje ya escrito: «¡Hola! Quiero reservar mi primera clase gratis.»</div>
+        <div class="p" style="margin-top:10px;color:#8a2018">Que no haya que redactar nada es lo que hace que se mande.</div>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <svg width="24" height="34" viewBox="0 0 24 34" fill="none" stroke="#E2231A" stroke-width="1.5">
+          <path d="M12 2v28M4 22l8 8 8-8" stroke-linecap="square"/>
+        </svg>
+      </div>
+      <div class="card card--rojo">
+        <div class="tit" style="font-size:13px">Primera clase gratis</div>
+        <div class="p" style="margin-top:10px">La conversión del sitio no es una compra: es una conversación que termina en una clase.</div>
+      </div>
+      <div class="card" style="margin-top:2px">
+        <div class="rot">Sin pagos, sin cuentas</div>
+        <div class="p" style="margin-top:8px">No hace falta ni pasarela de pago ni sistema de turnos. Eso mantiene el sitio barato de sostener.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- banda inferior -->
+  <div style="display:flex;gap:20px;margin-top:28px;border-top:1px solid #c2c0ba;padding-top:22px">
+    <div style="flex:1">
+      <div class="tit" style="font-size:11px">Tres puntos para escribir, cuatro en el celular</div>
+      <div class="p" style="margin-top:9px">Uno siempre visible arriba, uno en la primera pantalla y dos abajo, cuando ya decidió. En el celular se propone además una barra fija.</div>
+    </div>
+    <div style="flex:1">
+      <div class="tit" style="font-size:11px">Dos secciones se pueden apagar</div>
+      <div class="p" style="margin-top:9px">Planes y «el rincón» tienen interruptor: si los precios no llegan o los datos del campeón no se confirman, el sitio sale igual sin esas dos.</div>
+    </div>
+    <div style="flex:1">
+      <div class="tit" style="font-size:11px">Lo que falta para lanzar</div>
+      <div class="p" style="margin-top:9px">Teléfono y dirección confirmados, horarios, precios y las fotos del gimnasio. Sin esos cinco, la página está lista pero no se publica.</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

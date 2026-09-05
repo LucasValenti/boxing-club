@@ -1,0 +1,17 @@
+{
+  "artboards": [
+    { "file": "Flujo.dc.html",            "x": 0,    "y": 0,    "w": 1400, "h": 830,  "title": "Cómo llega alguien y cómo escribe" },
+    { "file": "SeccionesNuevas.dc.html",  "x": 1520, "y": 0,    "w": 1400, "h": 1060, "title": "Las cuatro secciones que faltan" },
+    { "file": "Main.dc.html",             "x": 0,    "y": 1240, "w": 1440, "h": 4450, "title": "Escritorio 1440" },
+    { "file": "Mobile.dc.html",           "x": 1560, "y": 1240, "w": 390,  "h": 4450, "title": "Celular 390" }
+  ],
+  "annotations": [
+    { "id": "leyenda", "x": 2060, "y": 1240, "w": 300,
+      "text": "Cómo leer esto\n\nGris = estructura, no diseño. Las barras son textos que todavía no se escribieron y las cajas son fotos.\n\nRojo = donde se toca. Es el único color del wireframe, a propósito: en una página que vive de que la gente escriba, lo primero que hay que discutir es dónde están esos botones.\n\nNúmero rojo al costado = sección nueva, no estaba en el diseño." },
+    { "id": "pendientes", "x": 2060, "y": 1620, "w": 300,
+      "text": "Lo que falta para publicar\n\n1. Teléfono, dirección y mail confirmados\n2. Horarios reales\n3. Precios de los tres planes\n4. Fotos del gimnasio\n5. El visto bueno a los datos del campeón\n\nEl sitio se termina sin esto; publicarse, no." },
+    { "id": "decision-movil", "x": 2060, "y": 1980, "w": 300,
+      "text": "Una decisión para el cliente\n\nEn el celular proponemos una barra fija abajo con WhatsApp y Llamar, siempre a mano.\n\nNo estaba en el diseño original y tapa unos 60px de pantalla. Está dibujada al pie del artboard del celular." }
+  ],
+  "launch": { "view": "canvas" }
+}

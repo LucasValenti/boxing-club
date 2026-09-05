@@ -1,0 +1,159 @@
+/* Estilos de las secciones. El orden es el vertical de la página.
+   Las medidas salen de docs/diseno/SECCIONES.md — cuando algo no cierre,
+   ese archivo manda. */
+
+/* ── Reveal al hacer scroll ──────────────────────────────────────────────
+   El estado inicial vive en CSS y la clase la pone app.js. Si el JS falla,
+   nada aparecería nunca: por eso la regla se anula sin JS (ver el <noscript>
+   de index.html) y con movimiento reducido (tokens/motion.css). */
+[data-reveal]{opacity:0;transform:translateY(26px);
+  transition:opacity .75s var(--curva),transform .75s var(--curva)}
+[data-reveal].visible{opacity:1;transform:none}
+
+/* ── 1. Header ───────────────────────────────────────────────────────── */
+.header{position:sticky;top:0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:14px var(--pad-x);
+  background:rgba(11,11,11,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea-tenue)}
+
+.marca{display:flex;align-items:center;gap:12px;flex:none}
+/* El cuadrado rojo es la marca hasta que el cliente traiga un logo.
+   Cuando lo traiga, va exactamente acá y con esta medida. */
+.marca__cuadro{display:block;width:26px;height:26px;background:var(--rojo);flex:none}
+.marca__nombre{font-family:var(--f-titulo);font-weight:900;font-size:22px;
+  line-height:.9;letter-spacing:.02em;text-transform:uppercase}
+.marca__ciudad{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.18em;color:var(--gris-mudo);text-transform:uppercase;padding-top:2px}
+
+.nav{display:flex;align-items:center;gap:clamp(14px,2.2vw,30px);
+  font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.16em;
+  text-transform:uppercase}
+.nav a:hover{color:var(--rojo)}
+.nav__cta{background:var(--rojo);color:var(--blanco);padding:11px 18px;
+  font-weight:700;letter-spacing:.14em;transition:background .2s,color .2s}
+.nav__cta:hover{background:var(--hueso);color:var(--negro)}
+
+/* El botón del menú solo existe en pantallas angostas. */
+.menu-boton{display:none;font-family:var(--f-mono);font-size:var(--t-rotulo);
+  letter-spacing:.16em;text-transform:uppercase;padding:12px;margin:-12px}
+.menu-panel{display:none}
+
+/* ── 2. Hero ─────────────────────────────────────────────────────────── */
+.hero{position:relative;min-height:min(90vh,800px);display:flex;
+  align-items:flex-end;overflow:hidden;
+  padding:clamp(72px,10vw,120px) var(--pad-x) clamp(26px,3.5vw,48px)}
+.hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:58% 34%;filter:grayscale(1) contrast(1.14) brightness(.82);
+  animation:ri-zoom 28s ease-in-out infinite alternate}
+/* Dos velos: el diagonal apoya el texto de la izquierda, el de abajo funde
+   el hero con la sección siguiente. Son los únicos gradientes del sitio. */
+.hero::before,.hero::after{content:"";position:absolute;inset:0;pointer-events:none}
+.hero::before{background:linear-gradient(96deg,rgba(11,11,11,.97) 0%,rgba(11,11,11,.9) 34%,rgba(11,11,11,.5) 68%,rgba(11,11,11,.72) 100%)}
+.hero::after{background:linear-gradient(to top,#0b0b0b 0%,rgba(11,11,11,0) 38%)}
+.hero__cuerpo{position:relative;z-index:2;max-width:1000px;width:100%}
+
+.hero__lugar{display:flex;align-items:center;gap:10px;
+  font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.2em;
+  color:var(--gris-claro);text-transform:uppercase;
+  animation:ri-up .7s var(--curva) .05s both}
+.hero__punto{width:8px;height:8px;border-radius:50%;background:var(--rojo);
+  flex:none;animation:ri-pulse 2s infinite}
+
+.hero h1{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-h1);
+  line-height:.82;letter-spacing:-.015em;text-transform:uppercase;
+  text-wrap:balance;margin:clamp(14px,2vw,26px) 0 clamp(18px,2.4vw,30px)}
+/* La animación firma: cada línea se descubre de izquierda a derecha, como
+   un golpe. Las dos líneas entran con un cuarto de segundo de diferencia. */
+.hero h1 span{display:block;animation:ri-wipe .8s var(--curva-golpe) both}
+.hero h1 span:nth-child(1){animation-delay:.1s}
+.hero h1 span:nth-child(2){color:var(--rojo);animation-delay:.25s}
+
+.hero__texto{font-size:var(--t-parrafo-hero);line-height:1.55;max-width:46ch;
+  color:var(--gris-texto);text-wrap:pretty;animation:ri-up .7s var(--curva) .45s both}
+.hero__texto strong{color:var(--hueso);font-weight:700}
+
+.botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(22px,3vw,34px);
+  animation:ri-up .7s var(--curva) .55s both}
+.btn{display:inline-block;font-family:var(--f-titulo);font-weight:800;
+  font-size:var(--t-boton);letter-spacing:.06em;text-transform:uppercase;
+  padding:19px 30px;transition:background .2s,color .2s,border-color .2s}
+.btn--rojo{background:var(--rojo);color:var(--blanco)}
+.btn--rojo:hover{background:var(--hueso);color:var(--negro)}
+.btn--linea{border:1px solid var(--linea-fuerte)}
+.btn--linea:hover{border-color:var(--hueso);background:rgba(244,241,236,.06)}
+.btn--negro{background:var(--negro);color:var(--hueso)}
+.btn--negro:hover{background:var(--rojo);color:var(--blanco)}
+.btn--linea-clara{border:1px solid var(--linea-clara)}
+.btn--linea-clara:hover{border-color:var(--negro)}
+
+.hero__datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:rgba(244,241,236,.2);border:1px solid rgba(244,241,236,.2);
+  margin-top:clamp(26px,3.4vw,44px);animation:ri-up .7s var(--curva) .65s both}
+.hero__datos > div{background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px}
+.hero__datos dt{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
+.hero__datos dd{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-dato);
+  text-transform:uppercase;line-height:1;margin-top:8px}
+
+/* ── 3. Marquesina ───────────────────────────────────────────────────── */
+.marquesina{border-top:1px solid var(--linea-tenue);
+  border-bottom:1px solid var(--linea-tenue);padding:14px 0;overflow:hidden;
+  margin-top:clamp(20px,3vw,40px)}
+.marquesina__cinta{display:flex;width:max-content;animation:ri-march 26s linear infinite}
+/* La cadena va duplicada exacta en el HTML: eso es lo que hace que el loop
+   no tenga costura. Si sacás una copia, la marquesina salta. */
+.marquesina__cinta > span{font-family:var(--f-titulo);font-weight:800;
+  font-size:clamp(30px,4vw,54px);text-transform:uppercase;white-space:nowrap;
+  padding-right:.4em}
+.marquesina i{color:var(--rojo);font-style:normal}
+
+/* ── Encabezado de sección (se repite en Clases, Planes y Gimnasio) ──── */
+.seccion{padding:var(--pad-y) var(--pad-x);border-bottom:1px solid var(--linea-tenue)}
+.seccion__cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;
+  align-items:baseline;gap:16px;margin-bottom:clamp(28px,4vw,54px)}
+.seccion__cabeza h2{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-h2);
+  line-height:.9;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.seccion__rotulo{font-family:var(--f-mono);font-size:var(--t-rotulo);
+  letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
+
+/* ── Cáscaras de las secciones todavía no portadas ───────────────────── */
+/* Marcan el lugar, el orden y el alto aproximado de cada sección que falta.
+   No es diseño: es andamio, y sale cuando entra la sección de verdad. */
+.pendiente{border:1px dashed var(--linea-fuerte);padding:clamp(28px,5vw,64px);
+  display:grid;gap:12px;place-items:start;min-height:clamp(180px,26vw,300px);
+  align-content:center}
+/* En rojo daría 4.21:1 a 10px: es justo lo que la regla del sitio prohíbe,
+   y axe lo marcó. El acento acá lo pone el borde, no el texto. */
+.pendiente__n{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.2em;color:var(--gris-mudo);text-transform:uppercase}
+.pendiente__que{font-family:var(--f-titulo);font-weight:800;
+  font-size:var(--t-h3-clase);line-height:.95;text-transform:uppercase}
+.pendiente__ref{font-family:var(--f-mono);font-size:var(--t-rotulo);
+  color:var(--gris-mudo);letter-spacing:.06em}
+.pendiente--nueva{border-color:var(--rojo)}
+.pendiente--nueva .pendiente__n{color:var(--hueso)}
+
+/* ── Pie ─────────────────────────────────────────────────────────────── */
+.pie{padding:clamp(36px,5vw,64px) var(--pad-x);display:flex;flex-wrap:wrap;
+  gap:16px 32px;justify-content:space-between;align-items:baseline;
+  font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.14em;
+  color:var(--gris-mudo);text-transform:uppercase}
+.pie a:hover{color:var(--rojo)}
+
+/* ── Angosto ─────────────────────────────────────────────────────────── */
+@media (max-width:640px){
+  .nav{display:none}
+  .menu-boton{display:block}
+  .menu-panel{display:block;position:fixed;inset:56px 0 0;z-index:49;
+    background:var(--negro);padding:var(--pad-x);
+    border-top:1px solid var(--linea-tenue)}
+  .menu-panel ul{display:grid;gap:1px;background:var(--linea-tenue)}
+  .menu-panel li{background:var(--negro)}
+  .menu-panel a{display:block;padding:22px 4px;font-family:var(--f-titulo);
+    font-weight:800;font-size:var(--t-h3-clase);text-transform:uppercase;line-height:1}
+  .menu-panel .nav__cta{margin-top:24px;text-align:center;padding:20px;
+    font-family:var(--f-titulo);font-size:var(--t-boton);letter-spacing:.06em}
+  /* En un teclado táctil, 19px de padding en el CTA deja el botón por debajo
+     de los 44px que pide la norma cuando el texto es corto. */
+  .btn{width:100%;text-align:center}
+}

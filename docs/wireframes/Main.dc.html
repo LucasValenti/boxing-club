@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Chivo+Mono:wght@400;700&display=swap">
+  <style>
+    body{margin:0;background:#eceae6;font-family:'Chivo',system-ui,sans-serif;color:#2e2c28}
+    a{color:#8a2018}a:hover{color:#5e1610}
+    .wf{background:#f6f5f2;border:1px solid #c2c0ba}
+    /* bloque: cada sección de la página, con su número y su nombre */
+    .blk{position:relative;border-bottom:1px solid #c2c0ba;padding:26px 40px 30px 78px;background:#f6f5f2}
+    .n{position:absolute;left:0;top:0;width:52px;bottom:0;border-right:1px solid #c2c0ba;
+       background:#e7e5e0;font-family:'Chivo Mono',monospace;font-size:12px;color:#75726c;
+       display:flex;justify-content:center;padding-top:26px}
+    .blk--nueva .n{background:#E2231A;color:#fff}
+    .rot{font-family:'Chivo Mono',monospace;font-size:11px;letter-spacing:.16em;
+         text-transform:uppercase;color:#75726c}
+    .tit{font-family:'Chivo Mono',monospace;font-size:13px;letter-spacing:.1em;
+         text-transform:uppercase;font-weight:700;color:#2e2c28}
+    /* barras: párrafos que todavía no se escribieron */
+    .b{height:9px;background:#d7d5cf}
+    .b--osc{background:#bfbcb5}
+    /* caja: una foto, un mapa, cualquier cosa que sea imagen */
+    .caja{background:#e0ded8;border:1px solid #c2c0ba;display:flex;align-items:center;
+          justify-content:center;font-family:'Chivo Mono',monospace;font-size:11px;
+          letter-spacing:.14em;text-transform:uppercase;color:#8c8981}
+    /* el único color del wireframe: dónde toca la gente */
+    .cta{background:#E2231A;color:#fff;font-family:'Chivo Mono',monospace;font-size:11px;
+         letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:13px 20px;
+         display:inline-flex;align-items:center;justify-content:center}
+    .cta--linea{background:transparent;color:#8a2018;border:1px solid #E2231A}
+    .nota{font-family:'Chivo Mono',monospace;font-size:10.5px;line-height:1.5;color:#8c8981;
+          border-left:2px solid #c2c0ba;padding-left:10px}
+    .marca-nueva{font-family:'Chivo Mono',monospace;font-size:10px;letter-spacing:.16em;
+                 text-transform:uppercase;color:#E2231A;font-weight:700}
+  </style>
+</helmet>
+
+<div style="width:1440px;background:#eceae6;padding:32px 32px 40px">
+
+  <!-- rótulo del artboard -->
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px">
+    <div>
+      <div class="tit" style="font-size:16px">Alanis Boxing Club — una sola página</div>
+      <div class="rot" style="margin-top:6px">Wireframe · escritorio 1440 · 13 bloques</div>
+    </div>
+    <div class="rot">Rojo = donde se toca</div>
+  </div>
+
+  <div class="wf">
+
+    <!-- 01 HEADER -->
+    <div class="blk" style="padding-top:20px;padding-bottom:20px">
+      <div class="n">01</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:24px;height:24px;background:#2e2c28"></div>
+          <div class="tit">Alanis Boxing Club</div>
+          <div class="rot">Rosario</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:22px">
+          <div class="rot">Clases</div>
+          <div class="rot">Planes</div>
+          <div class="rot">Contacto</div>
+          <div class="cta">Escribinos</div>
+        </div>
+      </div>
+      <div class="rot" style="margin-top:14px">Header fijo · queda arriba todo el scroll, así el botón de WhatsApp nunca se va de pantalla</div>
+    </div>
+
+    <!-- 02 HERO -->
+    <div class="blk" style="padding-bottom:38px">
+      <div class="n">02</div>
+      <div style="display:flex;gap:40px">
+        <div style="flex:1.35;display:flex;flex-direction:column;gap:16px">
+          <div class="rot">◍ Rosario, Santa Fe</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="b b--osc" style="height:52px;width:58%"></div>
+            <div class="b" style="height:52px;width:78%;background:#E2231A;opacity:.22"></div>
+          </div>
+          <div class="rot" style="margin-top:-4px">«Ponete / los guantes» — la segunda línea en rojo</div>
+          <div style="display:flex;flex-direction:column;gap:7px;max-width:440px;margin-top:6px">
+            <div class="b"></div><div class="b"></div><div class="b" style="width:82%"></div>
+            <div class="b b--osc" style="width:56%"></div>
+          </div>
+          <div class="rot">Última línea: «La primera clase no se paga»</div>
+          <div style="display:flex;gap:12px;margin-top:8px">
+            <div class="cta">Reservá tu clase gratis</div>
+            <div class="cta cta--linea">Ver planes</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#c2c0ba;border:1px solid #c2c0ba;margin-top:14px">
+            <div style="background:#efedea;padding:12px 14px"><div class="rot">Horarios</div><div class="tit" style="margin-top:6px">A confirmar</div></div>
+            <div style="background:#efedea;padding:12px 14px"><div class="rot">Grupos</div><div class="tit" style="margin-top:6px">Hasta 12</div></div>
+            <div style="background:#efedea;padding:12px 14px"><div class="rot">Equipo</div><div class="tit" style="margin-top:6px">Guantes incluidos</div></div>
+          </div>
+        </div>
+        <div class="caja" style="flex:1;min-height:340px">Foto a sangre · blanco y negro</div>
+      </div>
+    </div>
+
+    <!-- 03 MARQUESINA -->
+    <div class="blk" style="padding-top:16px;padding-bottom:16px">
+      <div class="n">03</div>
+      <div style="display:flex;align-items:center;gap:14px;overflow:hidden">
+        <div class="tit" style="white-space:nowrap;font-size:15px">Principiantes ✳ Box fitness ✳ Kids &amp; juvenil ✳ Mujeres ✳ Personal 1 a 1 ✳ Amateur ✳ Principiantes ✳</div>
+      </div>
+      <div class="rot" style="margin-top:10px">Cinta que se desplaza sola · dice de un vistazo todo lo que se hace acá</div>
+    </div>
+
+    <!-- 04 EL RINCÓN -->
+    <div class="blk">
+      <div class="n">04</div>
+      <div style="display:flex;gap:48px;align-items:flex-start">
+        <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+          <div class="rot">El rincón</div>
+          <div class="b b--osc" style="height:30px;width:88%"></div>
+          <div class="b" style="height:30px;width:72%;background:#E2231A;opacity:.22"></div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-top:8px">
+            <div class="b"></div><div class="b"></div><div class="b" style="width:76%"></div>
+          </div>
+          <div class="nota" style="margin-top:6px">Charly formó a un campeón sudamericano.<br>Es la prueba de autoridad de la página.</div>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+          <div style="background:#efedea;padding:18px 14px"><div class="tit" style="font-size:22px">13–1</div><div class="rot" style="margin-top:8px">Récord</div></div>
+          <div style="background:#efedea;padding:18px 14px"><div class="tit" style="font-size:22px">2018</div><div class="rot" style="margin-top:8px">Plata Odesur</div></div>
+          <div style="background:#efedea;padding:18px 14px"><div class="tit" style="font-size:22px">01</div><div class="rot" style="margin-top:8px">Sudamericano</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 LAS CLASES -->
+    <div class="blk">
+      <div class="n">05</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px">
+        <div class="tit" style="font-size:20px">Las clases</div>
+        <div class="rot">Cuatro formas de entrenar</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+        <div style="background:#efedea;padding:16px 16px 20px"><div class="rot">01</div><div class="tit" style="margin-top:44px">Boxeo<br>principiantes</div><div class="b" style="margin-top:14px"></div><div class="b" style="margin-top:6px;width:80%"></div><div class="rot" style="margin-top:12px">60 min · sin contacto</div></div>
+        <div style="background:#efedea;padding:16px 16px 20px"><div class="rot">02</div><div class="tit" style="margin-top:44px">Box<br>fitness</div><div class="b" style="margin-top:14px"></div><div class="b" style="margin-top:6px;width:80%"></div><div class="rot" style="margin-top:12px">50 min · todos los niveles</div></div>
+        <div style="background:#efedea;padding:16px 16px 20px"><div class="rot">03</div><div class="tit" style="margin-top:44px">Kids y<br>juvenil</div><div class="b" style="margin-top:14px"></div><div class="b" style="margin-top:6px;width:80%"></div><div class="rot" style="margin-top:12px">55 min · por edades</div></div>
+        <div style="background:#efedea;padding:16px 16px 20px"><div class="rot">04</div><div class="tit" style="margin-top:44px">Personal<br>1 a 1</div><div class="b" style="margin-top:14px"></div><div class="b" style="margin-top:6px;width:80%"></div><div class="rot" style="margin-top:12px">45 min · con turno</div></div>
+      </div>
+      <div class="rot" style="margin-top:12px">Al pasar el mouse la tarjeta se pinta de rojo y el texto pasa a blanco</div>
+    </div>
+
+    <!-- 06 TESTIMONIOS -->
+    <div class="blk blk--nueva">
+      <div class="n">06</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div class="tit" style="font-size:20px">Los que ya entrenan</div>
+        <div class="marca-nueva">Sección nueva</div>
+      </div>
+      <div class="rot" style="margin-bottom:18px">Va acá a propósito: después de ver las clases y justo antes del precio</div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+        <div style="background:#efedea;padding:20px"><div class="b" style="height:11px"></div><div class="b" style="height:11px;margin-top:7px"></div><div class="b" style="height:11px;margin-top:7px;width:70%"></div><div style="display:flex;align-items:center;gap:10px;margin-top:18px"><div style="width:34px;height:34px;background:#d7d5cf;border:1px solid #c2c0ba"></div><div><div class="tit" style="font-size:11px">Nombre</div><div class="rot" style="margin-top:3px">Hace 2 años</div></div></div></div>
+        <div style="background:#efedea;padding:20px"><div class="b" style="height:11px"></div><div class="b" style="height:11px;margin-top:7px"></div><div class="b" style="height:11px;margin-top:7px;width:70%"></div><div style="display:flex;align-items:center;gap:10px;margin-top:18px"><div style="width:34px;height:34px;background:#d7d5cf;border:1px solid #c2c0ba"></div><div><div class="tit" style="font-size:11px">Nombre</div><div class="rot" style="margin-top:3px">Hace 8 meses</div></div></div></div>
+        <div style="background:#efedea;padding:20px"><div class="b" style="height:11px"></div><div class="b" style="height:11px;margin-top:7px"></div><div class="b" style="height:11px;margin-top:7px;width:70%"></div><div style="display:flex;align-items:center;gap:10px;margin-top:18px"><div style="width:34px;height:34px;background:#d7d5cf;border:1px solid #c2c0ba"></div><div><div class="tit" style="font-size:11px">Nombre</div><div class="rot" style="margin-top:3px">Mamá de alumno</div></div></div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Bloqueada: hacen falta tres testimonios reales, con nombre.<br>Sirven más los concretos («llegué sin poder saltar a la soga») que los elogios.</div>
+    </div>
+
+    <!-- 07 PLANES -->
+    <div class="blk">
+      <div class="n">07</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px">
+        <div class="tit" style="font-size:20px">Los planes</div>
+        <div class="rot">Sin matrícula · guantes incluidos</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px">
+        <div style="border:1px solid #c2c0ba;padding:22px;background:#efedea"><div class="tit">2 por semana</div><div class="b b--osc" style="height:26px;width:70%;margin-top:20px"></div><div class="rot" style="margin-top:10px">valor mensual</div><div class="b" style="margin-top:20px"></div><div class="b" style="margin-top:6px;width:76%"></div></div>
+        <div style="border:1px solid #E2231A;padding:22px;background:#fbe6e4"><div class="tit">Libre</div><div class="b b--osc" style="height:26px;width:70%;margin-top:20px;background:#E2231A;opacity:.35"></div><div class="rot" style="margin-top:10px">valor mensual</div><div class="b" style="margin-top:20px"></div><div class="b" style="margin-top:6px;width:76%"></div><div class="marca-nueva" style="margin-top:16px">El plan destacado</div></div>
+        <div style="border:1px solid #c2c0ba;padding:22px;background:#efedea"><div class="tit">Personal 1 a 1</div><div class="b b--osc" style="height:26px;width:70%;margin-top:20px"></div><div class="rot" style="margin-top:10px">valor por sesión</div><div class="b" style="margin-top:20px"></div><div class="b" style="margin-top:6px;width:76%"></div></div>
+      </div>
+      <div class="nota" style="margin-top:14px">Hoy los tres dicen «A confirmar». Cuando lleguen los montos el número crece y el layout no cambia.</div>
+    </div>
+
+    <!-- 08 FAQ -->
+    <div class="blk blk--nueva">
+      <div class="n">08</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div class="tit" style="font-size:20px">Antes de venir</div>
+        <div class="marca-nueva">Sección nueva</div>
+      </div>
+      <div class="rot" style="margin-bottom:18px">Saca los miedos del medio justo después del precio, que es donde aparecen</div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Qué llevo a la primera clase?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Hace falta estado físico?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Desde qué edad?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Se pelea o se recibe golpes?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Puedo ir sola?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:16px 20px;display:flex;justify-content:space-between;align-items:center"><div class="tit" style="font-size:12px">¿Qué pasa si falto?</div><div class="rot">+</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Las seis son propuestas, a confirmar con el gimnasio.<br>Además le dan a Google contenido para mostrar el sitio con las preguntas desplegadas.</div>
+    </div>
+
+    <!-- 09 EL GIMNASIO -->
+    <div class="blk">
+      <div class="n">09</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px">
+        <div class="tit" style="font-size:20px">El gimnasio</div>
+        <div class="rot">Fotos reales del club</div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <div class="caja" style="flex:0 0 260px;height:280px">Sala de bolsas</div>
+        <div class="caja" style="flex:0 0 260px;height:280px">Clase de bolsa</div>
+        <div class="caja" style="flex:0 0 260px;height:280px">El ring</div>
+        <div class="caja" style="flex:0 0 260px;height:280px">—</div>
+        <div class="caja" style="flex:1;height:280px;opacity:.55">→</div>
+      </div>
+      <div class="rot" style="margin-top:12px">Tira que se arrastra con el dedo · en blanco y negro, recupera color al tocarla</div>
+    </div>
+
+    <!-- 10 CONTACTO -->
+    <div class="blk" style="background:#e2e0da">
+      <div class="n" style="background:#d3d1ca">10</div>
+      <div style="display:flex;gap:48px;align-items:center">
+        <div style="flex:1">
+          <div class="b b--osc" style="height:38px;width:70%"></div>
+          <div class="b b--osc" style="height:38px;width:56%;margin-top:8px"></div>
+          <div class="b" style="height:38px;width:44%;margin-top:8px;background:#E2231A;opacity:.28"></div>
+          <div class="rot" style="margin-top:12px">«Tu primera / clase es / gratis»</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+          <div class="b"></div><div class="b" style="width:84%"></div>
+          <div style="display:flex;gap:12px;margin-top:6px">
+            <div class="cta">Escribinos por WhatsApp</div>
+            <div class="cta cta--linea">341 563-2194</div>
+          </div>
+          <div class="rot" style="margin-top:4px">Dirección · Rosario · email</div>
+        </div>
+      </div>
+      <div class="nota" style="margin-top:16px">Única sección clara de la página. El corte de negro a hueso avisa que acá se actúa.</div>
+    </div>
+
+    <!-- 11 FORMULARIO -->
+    <div class="blk blk--nueva" style="background:#e2e0da">
+      <div class="n">11</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+        <div class="tit" style="font-size:20px">Reservá tu clase</div>
+        <div class="marca-nueva">Sección nueva</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:760px">
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px 16px"><div class="rot">Nombre</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px 16px"><div class="rot">Teléfono</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px 16px"><div class="rot">Qué clase te interesa</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px 16px"><div class="rot">Qué días podés</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;margin-top:16px">
+        <div class="cta">Enviar por WhatsApp</div>
+        <div class="rot">→ abre WhatsApp con el mensaje ya escrito</div>
+      </div>
+      <div class="nota" style="margin-top:14px">Cuatro campos y ninguno más: cada campo de menos es gente que termina de mandarlo.<br>No hay servidor — el formulario arma el mensaje y lo abre en WhatsApp.</div>
+    </div>
+
+    <!-- 12 MAPA -->
+    <div class="blk blk--nueva" style="background:#e2e0da">
+      <div class="n">12</div>
+      <div style="display:flex;gap:24px;align-items:stretch">
+        <div class="caja" style="flex:1.6;height:220px;background:#d3d1ca">Mapa · Rueda 2553, Rosario</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <div class="marca-nueva">Sección nueva</div>
+          <div class="tit">Cómo llegar</div>
+          <div class="b"></div><div class="b" style="width:70%"></div>
+          <div class="cta cta--linea" style="align-self:flex-start;margin-top:6px">Abrir en Google Maps</div>
+        </div>
+      </div>
+      <div class="nota" style="margin-top:14px">Bloqueado hasta que el cliente confirme la dirección.<br>Mientras tanto va la dirección en texto y el link a Maps: el mapa no frena el lanzamiento.</div>
+    </div>
+
+    <!-- 13 PIE -->
+    <div class="blk blk--nueva" style="border-bottom:0;padding-top:22px;padding-bottom:22px">
+      <div class="n">13</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px">
+        <div class="rot">Alanis Boxing Club · Rueda 2553, Rosario</div>
+        <div style="display:flex;gap:20px">
+          <div class="rot">Instagram</div>
+          <div class="rot">341 563-2194</div>
+          <div class="rot">Horarios</div>
+        </div>
+      </div>
+      <div class="nota" style="margin-top:12px">No estaba en el diseño original y hace falta: es donde la gente busca horario y dirección cuando ya decidió venir.</div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alanis Boxing Club — Boxeo en Rosario | Primera clase gratis</title>
+<meta name="description" content="Gimnasio de boxeo en Rosario. Clases para principiantes, box fitness, kids y juvenil, y personal 1 a 1. Guantes incluidos y la primera clase no se paga.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b0b0b">
+
+<!-- Cuando alguien pega el link en WhatsApp, esto es lo que se ve. Para este
+     público es la primera impresión más frecuente, antes que Google.
+     ⚠ Falta la imagen og-alanis.jpg (1200×630) con una foto real. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Alanis Boxing Club — Boxeo en Rosario">
+<meta property="og:description" content="Primera clase gratis. Principiantes, mujeres, chicos y adultos. Guantes incluidos.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+
+<!-- Búsqueda local: es como Google entiende que esto es un gimnasio de
+     Rosario y no un blog de boxeo. ⚠ Los datos de contacto no están
+     confirmados — ver docs/contenido-pendiente.md. No publicar así. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  "name": "Alanis Boxing Club",
+  "description": "Gimnasio de boxeo en Rosario. Recreativo y competitivo, femenino y masculino.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rueda 2553",
+    "addressLocality": "Rosario",
+    "addressRegion": "Santa Fe",
+    "addressCountry": "AR"
+  },
+  "telephone": "+5493415632194",
+  "email": "alanisbox@hotmail.com"
+}
+</script>
+</head>
+<body>
+
+<a class="saltar" href="#top">Saltar al contenido</a>
+
+<!-- ── 1. Header ─────────────────────────────────────────────────────── -->
+<header class="header">
+  <a class="marca" href="#top">
+    <span class="marca__cuadro" aria-hidden="true"></span>
+    <span class="marca__nombre">Alanis Boxing Club</span>
+    <span class="marca__ciudad">Rosario</span>
+  </a>
+
+  <nav class="nav" aria-label="Principal">
+    <a href="#clases">Clases</a>
+    <a href="#planes">Planes</a>
+    <a href="#contacto">Contacto</a>
+    <a class="nav__cta" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos</a>
+  </nav>
+
+  <button class="menu-boton" type="button" aria-expanded="false"
+          aria-controls="menu-panel" data-menu-boton>Menú</button>
+</header>
+
+<div class="menu-panel" id="menu-panel" hidden data-menu-panel>
+  <ul>
+    <li><a href="#clases">Clases</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#gimnasio">El gimnasio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav__cta" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos</a>
+</div>
+
+<main>
+
+<!-- ── 2. Hero ───────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <!-- ⚠ Foto de referencia (Unsplash). Va la del gimnasio, con el mismo
+       tratamiento en blanco y negro. Es el LCP de la página: se carga con
+       prioridad y nunca en lazy. -->
+  <img class="hero__foto" alt="" fetchpriority="high" decoding="async"
+       width="2400" height="1600"
+       src="https://images.unsplash.com/photo-1517438322307-e67111335449?w=2400&q=72&auto=format&fit=crop">
+
+  <div class="hero__cuerpo">
+    <p class="hero__lugar">
+      <span class="hero__punto" aria-hidden="true"></span>
+      Rosario, Santa Fe
+    </p>
+
+    <h1><span>Ponete</span><span>los guantes</span></h1>
+
+    <p class="hero__texto">
+      Entrenamiento completo de boxeo, recreativo y competitivo, femenino y
+      masculino. Para principiantes, mujeres, chicos y adultos que nunca
+      pisaron un gimnasio. <strong>La primera clase no se paga.</strong>
+    </p>
+
+    <div class="botones">
+      <a class="btn btn--rojo" href="#contacto">Reservá tu clase gratis</a>
+      <a class="btn btn--linea" href="#planes">Ver planes</a>
+    </div>
+
+    <dl class="hero__datos">
+      <div><dt>Horarios</dt><dd data-negocio="horarios">Mañana y tarde</dd></div>
+      <div><dt>Grupos</dt><dd>Hasta 12 personas</dd></div>
+      <div><dt>Equipo</dt><dd>Guantes incluidos</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ── 3. Marquesina ─────────────────────────────────────────────────── -->
+<!-- La cadena va dos veces, idéntica: así el loop no tiene costura. -->
+<div class="marquesina" aria-hidden="true">
+  <div class="marquesina__cinta">
+    <span>Principiantes <i>✳</i> Box fitness <i>✳</i> Kids &amp; juvenil <i>✳</i> Mujeres <i>✳</i> Personal 1 a 1 <i>✳</i> Amateur <i>✳</i> </span>
+    <span>Principiantes <i>✳</i> Box fitness <i>✳</i> Kids &amp; juvenil <i>✳</i> Mujeres <i>✳</i> Personal 1 a 1 <i>✳</i> Amateur <i>✳</i> </span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     De acá para abajo son cáscaras: marcan orden, ancla y alto aproximado.
+     Cada una se reemplaza por su sección real siguiendo la spec que cita.
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── 4. El rincón ──────────────────────────────────────────────────── -->
+<section class="seccion" data-reveal>
+  <div class="pendiente">
+    <p class="pendiente__n">04 — Fase 2</p>
+    <p class="pendiente__que">El rincón<br>Linaje del campeón</p>
+    <p class="pendiente__ref">SECCIONES.md §4 · verificar los datos de Carlos «Junior» Alanís antes de publicar</p>
+  </div>
+</section>
+
+<!-- ── 5. Las clases ─────────────────────────────────────────────────── -->
+<section class="seccion" id="clases" data-reveal>
+  <div class="seccion__cabeza">
+    <h2>Las clases</h2>
+    <p class="seccion__rotulo">Cuatro formas de entrenar</p>
+  </div>
+  <div class="pendiente">
+    <p class="pendiente__n">05 — Fase 2</p>
+    <p class="pendiente__que">Cuatro tarjetas</p>
+    <p class="pendiente__ref">SECCIONES.md §5 · en hover la tarjeta se pinta de rojo Y el texto pasa a blanco</p>
+  </div>
+</section>
+
+<!-- ── 6. Testimonios (sección nueva) ────────────────────────────────── -->
+<section class="seccion" id="testimonios" data-reveal>
+  <div class="seccion__cabeza">
+    <h2>Los que ya entrenan</h2>
+    <p class="seccion__rotulo">Tres voces</p>
+  </div>
+  <div class="pendiente pendiente--nueva">
+    <p class="pendiente__n">06 — Sección nueva · falta contenido</p>
+    <p class="pendiente__que">Testimonios</p>
+    <p class="pendiente__ref">Bloqueada: hay que pedirle al cliente tres testimonios reales con nombre y foto</p>
+  </div>
+</section>
+
+<!-- ── 7. Los planes ─────────────────────────────────────────────────── -->
+<section class="seccion" id="planes" data-reveal>
+  <div class="seccion__cabeza">
+    <h2>Los planes</h2>
+    <p class="seccion__rotulo">Sin matrícula · guantes incluidos</p>
+  </div>
+  <div class="pendiente">
+    <p class="pendiente__n">07 — Fase 2</p>
+    <p class="pendiente__que">Tres planes</p>
+    <p class="pendiente__ref">SECCIONES.md §6 · los precios dicen «a confirmar» hasta que lleguen los montos</p>
+  </div>
+</section>
+
+<!-- ── 8. FAQ (sección nueva) ────────────────────────────────────────── -->
+<section class="seccion" id="faq" data-reveal>
+  <div class="seccion__cabeza">
+    <h2>Antes de venir</h2>
+    <p class="seccion__rotulo">Lo que todos preguntan</p>
+  </div>
+  <div class="pendiente pendiente--nueva">
+    <p class="pendiente__n">08 — Sección nueva</p>
+    <p class="pendiente__que">Preguntas frecuentes</p>
+    <p class="pendiente__ref">Seis preguntas en &lt;details&gt; · suma FAQPage al JSON-LD</p>
+  </div>
+</section>
+
+<!-- ── 9. El gimnasio ────────────────────────────────────────────────── -->
+<section class="seccion" id="gimnasio" data-reveal>
+  <div class="seccion__cabeza">
+    <h2>El gimnasio</h2>
+    <p class="seccion__rotulo">Fotos de referencia</p>
+  </div>
+  <div class="pendiente">
+    <p class="pendiente__n">09 — Fase 2</p>
+    <p class="pendiente__que">Galería con scroll</p>
+    <p class="pendiente__ref">SECCIONES.md §7 · el color al pasar el mouse necesita equivalente táctil</p>
+  </div>
+</section>
+
+<!-- ── 10-12. Contacto, mapa y formulario ────────────────────────────── -->
+<section class="seccion" id="contacto" data-reveal>
+  <div class="pendiente">
+    <p class="pendiente__n">10, 11 y 12 — Fase 2</p>
+    <p class="pendiente__que">Contacto<br>Mapa · Formulario</p>
+    <p class="pendiente__ref">SECCIONES.md §8 · invierte a fondo hueso · mapa bloqueado hasta confirmar la dirección</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ── 13. Pie ───────────────────────────────────────────────────────── -->
+<footer class="pie">
+  <p>Alanis Boxing Club · <span data-negocio="direccion">Rueda 2553</span>, Rosario</p>
+  <p>
+    <a href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a> ·
+    <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
+  </p>
+</footer>
+
+<noscript>
+  <!-- Sin JavaScript no hay quien agregue la clase que revela: se muestra
+       todo de una. La página es contenido, no una aplicación. -->
+  <style>[data-reveal]{opacity:1;transform:none}</style>
+</noscript>
+
+<script src="sitio/datos.js"></script>
+<script src="sitio/app.js" defer></script>
+</body>
+</html>

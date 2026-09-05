@@ -1,0 +1,25 @@
+/* Tipografía. Los tamaños son los del handoff, tal cual: escala fluida con
+   clamp() y nada de breakpoints para el texto. */
+:root{
+  --f-titulo:'Big Shoulders Display','Oswald',Impact,sans-serif;
+  --f-cuerpo:'Chivo',system-ui,-apple-system,sans-serif;
+  --f-mono:'Chivo Mono',ui-monospace,SFMono-Regular,monospace;
+
+  --t-h1:clamp(64px,13.5vw,208px);
+  --t-h2:clamp(40px,6vw,88px);
+  --t-h2-contacto:clamp(46px,8vw,120px);
+  --t-h3-clase:clamp(28px,3vw,42px);
+  --t-h3-plan:26px;
+  --t-stat:clamp(44px,5vw,72px);
+  --t-dato:clamp(24px,2.4vw,34px);
+  --t-precio:clamp(30px,3.4vw,44px);
+  --t-boton:20px;
+  --t-parrafo-hero:clamp(16px,1.5vw,20px);
+  --t-parrafo:17px;
+  --t-rotulo:11px;
+  --t-rotulo-chico:10px;
+}
+
+/* El rojo como texto da 4.21:1 sobre negro: pasa la norma solo en tamaño
+   grande. Esta clase existe para que el acento no se cuele en texto chico. */
+.acento{color:var(--rojo);font-size:max(24px,1em)}

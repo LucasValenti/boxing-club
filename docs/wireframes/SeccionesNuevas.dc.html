@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Chivo+Mono:wght@400;700&display=swap">
+  <style>
+    body{margin:0;background:#eceae6;font-family:'Chivo',system-ui,sans-serif;color:#2e2c28}
+    a{color:#8a2018}a:hover{color:#5e1610}
+    .rot{font-family:'Chivo Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+         text-transform:uppercase;color:#75726c}
+    .tit{font-family:'Chivo Mono',monospace;font-size:13px;letter-spacing:.08em;
+         text-transform:uppercase;font-weight:700;color:#2e2c28}
+    .p{font-size:13px;line-height:1.55;color:#57544f}
+    .celda{border:1px solid #c2c0ba;background:#f6f5f2;padding:22px 24px 24px;
+           display:flex;flex-direction:column;gap:16px}
+    .cabeza{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+            border-bottom:1px solid #ddd9d2;padding-bottom:12px}
+    .chip{background:#E2231A;color:#fff;font-family:'Chivo Mono',monospace;font-size:9px;
+          letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;font-weight:700;flex:none}
+    .boceto{background:#e7e5e0;border:1px solid #ddd9d2;padding:16px}
+    .b{height:8px;background:#d0cec8}
+    .cta{background:#E2231A;color:#fff;font-family:'Chivo Mono',monospace;font-size:9.5px;
+         letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:11px 14px;
+         display:inline-flex;align-items:center;justify-content:center}
+    .pide{border-left:2px solid #E2231A;padding-left:12px}
+    .pide dt{font-family:'Chivo Mono',monospace;font-size:9.5px;letter-spacing:.14em;
+             text-transform:uppercase;color:#8a2018;font-weight:700}
+    .pide dd{margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#57544f}
+  </style>
+</helmet>
+
+<div style="width:1400px;background:#eceae6;padding:34px 36px 40px">
+
+  <div style="margin-bottom:24px">
+    <div class="tit" style="font-size:17px">Las cuatro secciones que faltan</div>
+    <div class="rot" style="margin-top:7px">Estaban en el pedido original y no llegaron al diseño · qué son, dónde van y qué hace falta para hacerlas</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px">
+
+    <!-- TESTIMONIOS -->
+    <div class="celda">
+      <div class="cabeza">
+        <div><div class="tit">Testimonios</div><div class="rot" style="margin-top:6px">Bloque 06 · entre las clases y el precio</div></div>
+        <div class="chip">Falta contenido</div>
+      </div>
+      <div class="boceto">
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+          <div style="background:#f6f5f2;border:1px solid #d5d2cb;padding:12px"><div class="b"></div><div class="b" style="margin-top:5px"></div><div class="b" style="margin-top:5px;width:64%"></div><div style="display:flex;gap:7px;align-items:center;margin-top:12px"><div style="width:22px;height:22px;background:#d5d2cb"></div><div class="b" style="width:44px;height:7px"></div></div></div>
+          <div style="background:#f6f5f2;border:1px solid #d5d2cb;padding:12px"><div class="b"></div><div class="b" style="margin-top:5px"></div><div class="b" style="margin-top:5px;width:64%"></div><div style="display:flex;gap:7px;align-items:center;margin-top:12px"><div style="width:22px;height:22px;background:#d5d2cb"></div><div class="b" style="width:44px;height:7px"></div></div></div>
+          <div style="background:#f6f5f2;border:1px solid #d5d2cb;padding:12px"><div class="b"></div><div class="b" style="margin-top:5px"></div><div class="b" style="margin-top:5px;width:64%"></div><div style="display:flex;gap:7px;align-items:center;margin-top:12px"><div style="width:22px;height:22px;background:#d5d2cb"></div><div class="b" style="width:44px;height:7px"></div></div></div>
+        </div>
+      </div>
+      <div class="p"><strong>Por qué va justo ahí.</strong> Después de ver las clases aparece la duda de si esto es para uno; antes del precio, que es donde se decide. Tres voces alcanzan: más se vuelve un muro que nadie lee.</div>
+      <dl class="pide">
+        <dt>Hace falta del cliente</dt>
+        <dd>Tres testimonios reales con nombre y hace cuánto entrenan. Con foto si aceptan; sin foto también funciona.</dd>
+      </dl>
+      <div class="p" style="color:#8a2018">Sirven los concretos —«llegué sin poder saltar a la soga»— más que los elogios generales.</div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="celda">
+      <div class="cabeza">
+        <div><div class="tit">Preguntas frecuentes</div><div class="rot" style="margin-top:6px">Bloque 08 · después del precio</div></div>
+        <div class="chip">Lista para hacer</div>
+      </div>
+      <div class="boceto">
+        <div style="display:grid;gap:1px;background:#d5d2cb;border:1px solid #d5d2cb">
+          <div style="background:#f6f5f2;padding:11px 13px;display:flex;justify-content:space-between"><div class="b" style="width:190px"></div><div class="rot">+</div></div>
+          <div style="background:#f6f5f2;padding:11px 13px;display:flex;justify-content:space-between"><div class="b" style="width:150px"></div><div class="rot">+</div></div>
+          <div style="background:#f6f5f2;padding:11px 13px"><div class="b" style="width:170px"></div><div style="margin-top:10px"><div class="b" style="height:7px"></div><div class="b" style="height:7px;margin-top:5px;width:78%"></div></div></div>
+          <div style="background:#f6f5f2;padding:11px 13px;display:flex;justify-content:space-between"><div class="b" style="width:130px"></div><div class="rot">+</div></div>
+        </div>
+      </div>
+      <div class="p"><strong>Por qué va justo ahí.</strong> Las dudas aparecen cuando ya viste el precio: si sirvo, si me van a pegar, si puedo ir sola. Contestarlas ahí evita la consulta que nunca llega a hacerse.</div>
+      <dl class="pide">
+        <dt>Hace falta del cliente</dt>
+        <dd>Las respuestas a seis preguntas ya propuestas. Es la sección más barata de las cuatro: no necesita fotos ni permisos de nadie.</dd>
+      </dl>
+      <div class="p" style="color:#8a2018">De regalo, Google puede mostrar el sitio con las preguntas desplegadas en el resultado.</div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div class="celda">
+      <div class="cabeza">
+        <div><div class="tit">Formulario</div><div class="rot" style="margin-top:6px">Bloque 11 · dentro de contacto</div></div>
+        <div class="chip">Falta una decisión</div>
+      </div>
+      <div class="boceto">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px">
+          <div style="border:1px solid #d5d2cb;background:#f6f5f2;padding:11px"><div class="b" style="width:52px;height:7px"></div></div>
+          <div style="border:1px solid #d5d2cb;background:#f6f5f2;padding:11px"><div class="b" style="width:58px;height:7px"></div></div>
+          <div style="border:1px solid #d5d2cb;background:#f6f5f2;padding:11px"><div class="b" style="width:78px;height:7px"></div></div>
+          <div style="border:1px solid #d5d2cb;background:#f6f5f2;padding:11px"><div class="b" style="width:66px;height:7px"></div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+          <div class="cta">Enviar por WhatsApp</div>
+          <svg width="30" height="16" viewBox="0 0 30 16" fill="none" stroke="#E2231A" stroke-width="1.4"><path d="M1 8h25M20 2l6 6-6 6" stroke-linecap="square"/></svg>
+          <div class="rot" style="color:#8a2018">Mensaje ya escrito</div>
+        </div>
+      </div>
+      <div class="p"><strong>Cuatro campos y ninguno más.</strong> Nombre, teléfono, qué clase y qué días. Cada campo de más es gente que abandona a la mitad.</div>
+      <div class="p"><strong>No hay servidor.</strong> El formulario arma el mensaje y abre WhatsApp. Nada que mantener, nada que se rompa, y la consulta llega al canal que el club ya mira.</div>
+      <dl class="pide">
+        <dt>Decisión del cliente</dt>
+        <dd>¿Alcanza con que llegue por WhatsApp, o además lo quieren por mail? Lo segundo se puede, pero suma una pieza que hay que mantener.</dd>
+      </dl>
+    </div>
+
+    <!-- MAPA -->
+    <div class="celda">
+      <div class="cabeza">
+        <div><div class="tit">Mapa</div><div class="rot" style="margin-top:6px">Bloque 12 · al lado de contacto</div></div>
+        <div class="chip">Bloqueada</div>
+      </div>
+      <div class="boceto">
+        <div style="display:flex;gap:12px">
+          <div style="flex:1.5;height:120px;background:#f6f5f2;border:1px solid #d5d2cb;display:flex;align-items:center;justify-content:center">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#b9b6ae" stroke-width="1.4">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>
+            </svg>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div class="b" style="width:80%"></div><div class="b" style="width:60%"></div>
+            <div style="border:1px solid #E2231A;color:#8a2018;font-family:'Chivo Mono',monospace;
+                        font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:9px 10px;
+                        text-align:center;margin-top:4px">Abrir en Maps</div>
+          </div>
+        </div>
+      </div>
+      <div class="p"><strong>Por qué está frenada.</strong> La dirección que tenemos salió de una búsqueda pública y el club no la confirmó. Un mapa en la dirección equivocada es peor que no tener mapa.</div>
+      <div class="p"><strong>Mientras tanto</strong> va la dirección en texto y un botón que abre Google Maps. No frena el lanzamiento.</div>
+      <dl class="pide">
+        <dt>Hace falta del cliente</dt>
+        <dd>La dirección exacta, confirmada. Es el mismo dato que destraba la ficha de Google, que es lo que más mueve la búsqueda local.</dd>
+      </dl>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

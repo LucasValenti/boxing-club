@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&family=Chivo+Mono:wght@400;700&display=swap">
+  <style>
+    body{margin:0;background:#eceae6;font-family:'Chivo',system-ui,sans-serif;color:#2e2c28}
+    a{color:#8a2018}a:hover{color:#5e1610}
+    .blk{position:relative;border-bottom:1px solid #c2c0ba;padding:20px 18px 22px 46px;background:#f6f5f2}
+    .n{position:absolute;left:0;top:0;width:30px;bottom:0;border-right:1px solid #c2c0ba;
+       background:#e7e5e0;font-family:'Chivo Mono',monospace;font-size:10px;color:#75726c;
+       display:flex;justify-content:center;padding-top:20px}
+    .blk--nueva .n{background:#E2231A;color:#fff}
+    .rot{font-family:'Chivo Mono',monospace;font-size:10px;letter-spacing:.14em;
+         text-transform:uppercase;color:#75726c}
+    .tit{font-family:'Chivo Mono',monospace;font-size:12px;letter-spacing:.08em;
+         text-transform:uppercase;font-weight:700;color:#2e2c28}
+    .b{height:8px;background:#d7d5cf}
+    .b--osc{background:#bfbcb5}
+    .caja{background:#e0ded8;border:1px solid #c2c0ba;display:flex;align-items:center;
+          justify-content:center;font-family:'Chivo Mono',monospace;font-size:10px;
+          letter-spacing:.12em;text-transform:uppercase;color:#8c8981;text-align:center}
+    .cta{background:#E2231A;color:#fff;font-family:'Chivo Mono',monospace;font-size:10px;
+         letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:15px 16px;
+         display:flex;align-items:center;justify-content:center}
+    .cta--linea{background:transparent;color:#8a2018;border:1px solid #E2231A}
+    .nota{font-family:'Chivo Mono',monospace;font-size:9.5px;line-height:1.55;color:#8c8981;
+          border-left:2px solid #c2c0ba;padding-left:9px}
+    .marca-nueva{font-family:'Chivo Mono',monospace;font-size:9px;letter-spacing:.14em;
+                 text-transform:uppercase;color:#E2231A;font-weight:700}
+  </style>
+</helmet>
+
+<div style="width:390px;background:#eceae6;padding:20px 14px 28px">
+
+  <div style="margin-bottom:14px">
+    <div class="tit" style="font-size:13px">Alanis Boxing Club</div>
+    <div class="rot" style="margin-top:5px">Wireframe · celular 390 · los mismos 13 bloques</div>
+  </div>
+
+  <div style="border:1px solid #c2c0ba;background:#f6f5f2">
+
+    <!-- 01 HEADER -->
+    <div class="blk" style="padding-top:14px;padding-bottom:14px">
+      <div class="n">01</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:18px;height:18px;background:#2e2c28"></div>
+          <div class="tit" style="font-size:10px">Alanis Boxing Club</div>
+        </div>
+        <div class="rot" style="border:1px solid #c2c0ba;padding:8px 10px">Menú</div>
+      </div>
+      <div class="nota" style="margin-top:11px">Acá el diseño original no decidía nada: los cuatro ítems se apretaban hasta entrar. Se pliegan en un panel.</div>
+    </div>
+
+    <!-- 02 HERO -->
+    <div class="blk">
+      <div class="n">02</div>
+      <div class="caja" style="height:150px;margin-bottom:14px">Foto a sangre</div>
+      <div class="rot">◍ Rosario, Santa Fe</div>
+      <div class="b b--osc" style="height:30px;width:70%;margin-top:10px"></div>
+      <div class="b" style="height:30px;width:92%;margin-top:6px;background:#E2231A;opacity:.22"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+        <div class="b"></div><div class="b"></div><div class="b" style="width:78%"></div>
+        <div class="b b--osc" style="width:62%"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+        <div class="cta">Reservá tu clase gratis</div>
+        <div class="cta cta--linea">Ver planes</div>
+      </div>
+      <div style="display:grid;gap:1px;background:#c2c0ba;border:1px solid #c2c0ba;margin-top:14px">
+        <div style="background:#efedea;padding:10px 12px"><div class="rot">Horarios · a confirmar</div></div>
+        <div style="background:#efedea;padding:10px 12px"><div class="rot">Grupos · hasta 12</div></div>
+        <div style="background:#efedea;padding:10px 12px"><div class="rot">Equipo · guantes incluidos</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Los botones ocupan todo el ancho: en el celular, un botón angosto se falla con el pulgar.</div>
+    </div>
+
+    <!-- 03 MARQUESINA -->
+    <div class="blk" style="padding-top:12px;padding-bottom:12px">
+      <div class="n">03</div>
+      <div class="tit" style="white-space:nowrap;overflow:hidden;font-size:13px">Principiantes ✳ Box fitness ✳ Kids ✳</div>
+      <div class="rot" style="margin-top:8px">Se desplaza sola</div>
+    </div>
+
+    <!-- 04 EL RINCÓN -->
+    <div class="blk">
+      <div class="n">04</div>
+      <div class="rot">El rincón</div>
+      <div class="b b--osc" style="height:22px;width:90%;margin-top:9px"></div>
+      <div class="b" style="height:22px;width:78%;margin-top:5px;background:#E2231A;opacity:.22"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
+        <div class="b"></div><div class="b"></div><div class="b" style="width:72%"></div>
+      </div>
+      <div style="display:grid;gap:1px;background:#c2c0ba;border:1px solid #c2c0ba;margin-top:14px">
+        <div style="background:#efedea;padding:12px"><div class="tit" style="font-size:17px">13–1</div><div class="rot" style="margin-top:5px">Récord</div></div>
+        <div style="background:#efedea;padding:12px"><div class="tit" style="font-size:17px">2018</div><div class="rot" style="margin-top:5px">Plata Odesur</div></div>
+        <div style="background:#efedea;padding:12px"><div class="tit" style="font-size:17px">01</div><div class="rot" style="margin-top:5px">Sudamericano</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Las tres cifras pasan de fila a columna: apiladas se leen, en fila quedan ilegibles.</div>
+    </div>
+
+    <!-- 05 CLASES -->
+    <div class="blk">
+      <div class="n">05</div>
+      <div class="tit" style="font-size:16px">Las clases</div>
+      <div class="rot" style="margin-top:5px;margin-bottom:14px">Cuatro formas de entrenar</div>
+      <div style="display:grid;gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+        <div style="background:#efedea;padding:14px"><div class="rot">01</div><div class="tit" style="margin-top:24px">Boxeo principiantes</div><div class="b" style="margin-top:10px"></div><div class="b" style="margin-top:5px;width:76%"></div><div class="rot" style="margin-top:10px">60 min · sin contacto</div></div>
+        <div style="background:#efedea;padding:14px"><div class="rot">02</div><div class="tit" style="margin-top:24px">Box fitness</div><div class="b" style="margin-top:10px"></div><div class="b" style="margin-top:5px;width:76%"></div><div class="rot" style="margin-top:10px">50 min · todos los niveles</div></div>
+        <div style="background:#efedea;padding:14px"><div class="rot">03</div><div class="tit" style="margin-top:24px">Kids y juvenil</div><div class="b" style="margin-top:10px"></div><div class="b" style="margin-top:5px;width:76%"></div><div class="rot" style="margin-top:10px">55 min · por edades</div></div>
+        <div style="background:#efedea;padding:14px"><div class="rot">04</div><div class="tit" style="margin-top:24px">Personal 1 a 1</div><div class="b" style="margin-top:10px"></div><div class="b" style="margin-top:5px;width:76%"></div><div class="rot" style="margin-top:10px">45 min · con turno</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">En una pantalla táctil no existe el «pasar el mouse»: acá las cuatro tarjetas van planas, sin estado.</div>
+    </div>
+
+    <!-- 06 TESTIMONIOS -->
+    <div class="blk blk--nueva">
+      <div class="n">06</div>
+      <div class="marca-nueva">Sección nueva</div>
+      <div class="tit" style="font-size:16px;margin-top:6px;margin-bottom:14px">Los que ya entrenan</div>
+      <div style="display:flex;gap:10px;overflow:hidden">
+        <div style="flex:0 0 240px;border:1px solid #c2c0ba;background:#efedea;padding:16px"><div class="b" style="height:10px"></div><div class="b" style="height:10px;margin-top:6px"></div><div class="b" style="height:10px;margin-top:6px;width:66%"></div><div style="display:flex;align-items:center;gap:9px;margin-top:14px"><div style="width:30px;height:30px;background:#d7d5cf;border:1px solid #c2c0ba"></div><div class="rot">Nombre · hace 2 años</div></div></div>
+        <div style="flex:0 0 240px;border:1px solid #c2c0ba;background:#efedea;padding:16px;opacity:.5"><div class="b" style="height:10px"></div><div class="b" style="height:10px;margin-top:6px"></div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Uno al lado del otro se arrastran con el dedo. Apilados serían tres pantallas de scroll antes del precio.</div>
+    </div>
+
+    <!-- 07 PLANES -->
+    <div class="blk">
+      <div class="n">07</div>
+      <div class="tit" style="font-size:16px">Los planes</div>
+      <div class="rot" style="margin-top:5px;margin-bottom:14px">Sin matrícula · guantes incluidos</div>
+      <div style="display:grid;gap:12px">
+        <div style="border:1px solid #E2231A;background:#fbe6e4;padding:18px"><div class="tit">Libre</div><div class="b b--osc" style="height:22px;width:60%;margin-top:14px;background:#E2231A;opacity:.35"></div><div class="rot" style="margin-top:8px">valor mensual</div><div class="marca-nueva" style="margin-top:12px">Primero en el celular</div></div>
+        <div style="border:1px solid #c2c0ba;background:#efedea;padding:18px"><div class="tit">2 por semana</div><div class="b b--osc" style="height:22px;width:60%;margin-top:14px"></div><div class="rot" style="margin-top:8px">valor mensual</div></div>
+        <div style="border:1px solid #c2c0ba;background:#efedea;padding:18px"><div class="tit">Personal 1 a 1</div><div class="b b--osc" style="height:22px;width:60%;margin-top:14px"></div><div class="rot" style="margin-top:8px">valor por sesión</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Apilados, el destacado va primero. En escritorio va al medio, que es donde se mira.</div>
+    </div>
+
+    <!-- 08 FAQ -->
+    <div class="blk blk--nueva">
+      <div class="n">08</div>
+      <div class="marca-nueva">Sección nueva</div>
+      <div class="tit" style="font-size:16px;margin-top:6px;margin-bottom:14px">Antes de venir</div>
+      <div style="display:grid;gap:1px;background:#c2c0ba;border:1px solid #c2c0ba">
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Qué llevo a la primera clase?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Hace falta estado físico?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Desde qué edad?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Se pelea o se recibe golpes?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Puedo ir sola?</div><div class="rot">+</div></div>
+        <div style="background:#efedea;padding:14px;display:flex;justify-content:space-between;gap:10px"><div class="tit" style="font-size:11px">¿Qué pasa si falto?</div><div class="rot">+</div></div>
+      </div>
+      <div class="nota" style="margin-top:12px">Cerradas de entrada: seis respuestas abiertas serían media pantalla de texto que nadie lee.</div>
+    </div>
+
+    <!-- 09 GIMNASIO -->
+    <div class="blk">
+      <div class="n">09</div>
+      <div class="tit" style="font-size:16px;margin-bottom:14px">El gimnasio</div>
+      <div style="display:flex;gap:10px;overflow:hidden">
+        <div class="caja" style="flex:0 0 210px;height:230px">Sala de bolsas</div>
+        <div class="caja" style="flex:0 0 130px;height:230px;opacity:.55">→</div>
+      </div>
+      <div class="nota" style="margin-top:12px">En el celular las fotos van en color: el gesto de «recuperar el color al pasar el mouse» no existe con el dedo.</div>
+    </div>
+
+    <!-- 10 CONTACTO -->
+    <div class="blk" style="background:#e2e0da">
+      <div class="n" style="background:#d3d1ca">10</div>
+      <div class="b b--osc" style="height:28px;width:74%"></div>
+      <div class="b b--osc" style="height:28px;width:58%;margin-top:6px"></div>
+      <div class="b" style="height:28px;width:46%;margin-top:6px;background:#E2231A;opacity:.28"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+        <div class="b"></div><div class="b" style="width:80%"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+        <div class="cta">Escribinos por WhatsApp</div>
+        <div class="cta cta--linea">Llamar · 341 563-2194</div>
+      </div>
+    </div>
+
+    <!-- 11 FORMULARIO -->
+    <div class="blk blk--nueva" style="background:#e2e0da">
+      <div class="n">11</div>
+      <div class="marca-nueva">Sección nueva</div>
+      <div class="tit" style="font-size:16px;margin-top:6px;margin-bottom:14px">Reservá tu clase</div>
+      <div style="display:grid;gap:10px">
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px"><div class="rot">Nombre</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px"><div class="rot">Teléfono</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px"><div class="rot">Qué clase te interesa</div></div>
+        <div style="border:1px solid #c2c0ba;background:#f6f5f2;padding:14px"><div class="rot">Qué días podés</div></div>
+        <div class="cta" style="margin-top:4px">Enviar por WhatsApp</div>
+      </div>
+    </div>
+
+    <!-- 12 MAPA -->
+    <div class="blk blk--nueva" style="background:#e2e0da">
+      <div class="n">12</div>
+      <div class="marca-nueva">Sección nueva</div>
+      <div class="caja" style="height:170px;background:#d3d1ca;margin-top:10px">Mapa · Rueda 2553</div>
+      <div class="cta cta--linea" style="margin-top:12px">Abrir en Google Maps</div>
+      <div class="nota" style="margin-top:12px">El mapa embebido pesa casi tanto como la página entera: se carga recién cuando se llega hasta acá.</div>
+    </div>
+
+    <!-- 13 PIE -->
+    <div class="blk blk--nueva" style="border-bottom:0">
+      <div class="n">13</div>
+      <div class="rot">Alanis Boxing Club</div>
+      <div class="rot" style="margin-top:6px">Rueda 2553, Rosario</div>
+      <div class="rot" style="margin-top:6px">Instagram · Teléfono · Horarios</div>
+    </div>
+
+  </div>
+
+  <!-- barra fija: propuesta -->
+  <div style="margin-top:18px;border:1px dashed #E2231A;padding:14px;background:#fbe6e4">
+    <div class="marca-nueva">Propuesta a decidir</div>
+    <div class="tit" style="margin-top:8px;font-size:11px">Barra fija abajo, solo en el celular</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <div class="cta" style="flex:1">WhatsApp</div>
+      <div class="cta cta--linea" style="flex:1">Llamar</div>
+    </div>
+    <div class="nota" style="margin-top:12px;border-color:#E2231A">No está en el diseño original. Pone el botón a un pulgar de distancia en todo el scroll,<br>a cambio de tapar unos 60px de pantalla. Decisión del cliente.</div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

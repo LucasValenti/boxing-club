@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Oswald:wght@500;700&family=Chivo:wght@400;700&family=Chivo+Mono:wght@400&display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0b0b0b;color:#f4f1ec;font-family:'Chivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#f4f1ec;text-decoration:none}
+a:hover{color:#E2231A}
+::selection{background:#E2231A;color:#fff}
+@keyframes ri-up{from{opacity:0;transform:translateY(0.5em)}to{opacity:1;transform:none}}
+@keyframes ri-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes ri-march{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ri-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ri-zoom{from{transform:scale(1.06)}to{transform:scale(1.14)}}
+</style>
+</helmet>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#0b0b0b"></rect>
+    <rect x="30" y="30" width="40" height="40" fill="#E2231A"></rect>
+    <text x="50" y="59" font-family="Impact, 'Big Shoulders Display', sans-serif" font-size="26" font-weight="900" fill="#ffffff" text-anchor="middle">AB</text>
+  </svg>
+</template>
+<div style="min-height:100vh;background:#0b0b0b;overflow-x:hidden">
+
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,48px);background:rgba(11,11,11,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(244,241,236,.14)">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="display:block;width:26px;height:26px;background:#E2231A;flex:none"></span>
+      <span style="display:block;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:22px;line-height:.9;letter-spacing:.02em;text-transform:uppercase">Alanis Boxing Club</span>
+      <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.18em;color:#8a8781;text-transform:uppercase;padding-top:2px">Rosario</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:clamp(14px,2.2vw,30px);font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase">
+      <a href="#clases">Clases</a>
+      <a href="#planes">Planes</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/5493415632194" style="display:block;background:#E2231A;color:#fff;padding:11px 18px;font-weight:700;letter-spacing:.14em" style-hover="background:#f4f1ec;color:#0b0b0b">Escribinos</a>
+    </nav>
+  </header>
+
+  <section id="top" style="position:relative;min-height:min(90vh,800px);display:flex;align-items:flex-end;padding:clamp(72px,10vw,120px) clamp(16px,4vw,48px) clamp(26px,3.5vw,48px);overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1517438322307-e67111335449?w=2400&amp;q=72&amp;auto=format&amp;fit=crop" alt="Entrenamiento de boxeo" style="position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 34%;filter:grayscale(1) contrast(1.14) brightness(.82);animation:ri-zoom 28s ease-in-out infinite alternate">
+    <div style="position:absolute;z-index:1;inset:0;background:linear-gradient(96deg,rgba(11,11,11,.97) 0%,rgba(11,11,11,.9) 34%,rgba(11,11,11,.5) 68%,rgba(11,11,11,.72) 100%)"></div>
+    <div style="position:absolute;z-index:1;inset:0;background:linear-gradient(to top,#0b0b0b 0%,rgba(11,11,11,0) 38%)"></div>
+    <div style="position:relative;z-index:2;min-width:0;width:100%;max-width:1000px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:clamp(20px,3vw,34px);animation:ri-up .7s .05s both cubic-bezier(.2,.7,.2,1)">
+        <span style="display:block;width:8px;height:8px;border-radius:50%;background:#E2231A;animation:ri-pulse 2s infinite"></span>
+        <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#a8a49d;white-space:nowrap">Rosario, Santa Fe</span>
+      </div>
+      <h1 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(64px,13.5vw,208px);line-height:.82;letter-spacing:-.015em;text-transform:uppercase;text-wrap:balance">
+        <span style="display:block;animation:ri-wipe .8s .1s both cubic-bezier(.6,0,.2,1)">Ponete</span>
+        <span style="display:block;color:#E2231A;animation:ri-wipe .8s .25s both cubic-bezier(.6,0,.2,1)">los guantes</span>
+      </h1>
+      <p style="margin:clamp(22px,3vw,34px) 0 0;max-width:46ch;font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:#c9c5be;text-wrap:pretty;animation:ri-up .7s .45s both cubic-bezier(.2,.7,.2,1)">Entrenamiento completo de boxeo, recreativo y competitivo, femenino y masculino. Para principiantes, mujeres, chicos y adultos que nunca pisaron un gimnasio. <strong style="color:#f4f1ec;font-weight:700">La primera clase no se paga.</strong></p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin:clamp(26px,3.5vw,40px) 0 0;animation:ri-up .7s .55s both cubic-bezier(.2,.7,.2,1)">
+        <a href="#contacto" style="display:block;background:#E2231A;color:#fff;padding:19px 30px;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase" style-hover="background:#f4f1ec;color:#0b0b0b">Reservá tu clase gratis</a>
+        <a href="#planes" style="display:block;border:1px solid rgba(244,241,236,.3);padding:19px 30px;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase" style-hover="border-color:#f4f1ec;background:rgba(244,241,236,.06)">Ver planes</a>
+      </div>
+      <dl style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin:clamp(32px,4.5vw,56px) 0 0;background:rgba(244,241,236,.2);border:1px solid rgba(244,241,236,.2);animation:ri-up .7s .65s both cubic-bezier(.2,.7,.2,1)">
+        <div style="background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px">
+          <dt style="font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a8a49d">Horarios</dt>
+          <dd style="margin:8px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1;text-transform:uppercase">Mañana y tarde</dd>
+        </div>
+        <div style="background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px">
+          <dt style="font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a8a49d">Grupos</dt>
+          <dd style="margin:8px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1;text-transform:uppercase">Hasta 12 personas</dd>
+        </div>
+        <div style="background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px">
+          <dt style="font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a8a49d">Equipo</dt>
+          <dd style="margin:8px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1;text-transform:uppercase">Guantes incluidos</dd>
+        </div>
+      </dl>
+    </div>
+
+  </section>
+
+  <div style="overflow:hidden;border-top:1px solid rgba(244,241,236,.14);border-bottom:1px solid rgba(244,241,236,.14);background:#0b0b0b;padding:14px 0;margin-top:clamp(20px,3vw,40px)">
+    <div style="display:flex;width:max-content;animation:ri-march 26s linear infinite">
+      <span style="font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(30px,4vw,54px);line-height:1;text-transform:uppercase;white-space:nowrap;color:#f4f1ec">Principiantes <span style="color:#E2231A">✳</span> Box fitness <span style="color:#E2231A">✳</span> Kids &amp; juvenil <span style="color:#E2231A">✳</span> Mujeres <span style="color:#E2231A">✳</span> Personal 1 a 1 <span style="color:#E2231A">✳</span> Amateur <span style="color:#E2231A">✳</span>&nbsp;</span>
+      <span style="font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(30px,4vw,54px);line-height:1;text-transform:uppercase;white-space:nowrap;color:#f4f1ec">Principiantes <span style="color:#E2231A">✳</span> Box fitness <span style="color:#E2231A">✳</span> Kids &amp; juvenil <span style="color:#E2231A">✳</span> Mujeres <span style="color:#E2231A">✳</span> Personal 1 a 1 <span style="color:#E2231A">✳</span> Amateur <span style="color:#E2231A">✳</span>&nbsp;</span>
+    </div>
+  </div>
+
+  <sc-if value="{{ mostrarLinaje }}" hint-placeholder-val="{{ true }}">
+  <section style="padding:clamp(56px,8vw,116px) clamp(16px,4vw,48px);border-bottom:1px solid rgba(244,241,236,.14);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,64px);align-items:start">
+    <div style="min-width:0" data-reveal="">
+      <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a8781;margin-bottom:18px">El rincón</span>
+      <h2 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(38px,5.4vw,78px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em;text-wrap:balance">Acá se formó un<br><span style="color:#E2231A">campeón sudamericano</span></h2>
+      <p style="margin:24px 0 0;max-width:48ch;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#c9c5be;text-wrap:pretty">Charly Alanis dirige el club y es el entrenador que formó a <strong style="color:#f4f1ec;font-weight:700">Carlos «Junior» Alanís</strong>: medalla de plata en los Juegos Odesur 2018 y campeón sudamericano ligero. El mismo trabajo de rincón que llevó a un profesional al título es el que vas a tener desde tu primera clase.</p>
+    </div>
+    <dl style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:rgba(244,241,236,.14);margin:0;min-width:0" data-reveal="">
+      <div style="background:#0b0b0b;padding:22px 18px">
+        <dd style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(44px,5vw,72px);line-height:.86">13<span style="color:#E2231A">–</span>1</dd>
+        <dt style="margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8a8781">Récord profesional</dt>
+      </div>
+      <div style="background:#0b0b0b;padding:22px 18px">
+        <dd style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(44px,5vw,72px);line-height:.86">2018</dd>
+        <dt style="margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8a8781">Plata Odesur</dt>
+      </div>
+      <div style="background:#0b0b0b;padding:22px 18px">
+        <dd style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(44px,5vw,72px);line-height:.86;color:#E2231A">01</dd>
+        <dt style="margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8a8781">Título sudamericano</dt>
+      </div>
+    </dl>
+  </section>
+  </sc-if>
+
+  <section id="clases" style="padding:clamp(56px,8vw,120px) clamp(16px,4vw,48px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:clamp(28px,4vw,52px)" data-reveal="">
+      <h2 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(40px,6vw,88px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em">Las clases</h2>
+      <span style="font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a8781">Cuatro formas de entrenar</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:rgba(244,241,236,.14)">
+      <article style="background:#0b0b0b;padding:clamp(22px,2.6vw,34px)" style-hover="background:#E2231A" data-reveal="">
+        <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:#8a8781">01</span>
+        <h3 style="margin:clamp(60px,9vw,110px) 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(28px,3vw,42px);line-height:.95;text-transform:uppercase">Boxeo<br>principiantes</h3>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#c9c5be">Guardia, desplazamiento y golpes básicos. No hace falta experiencia ni estado físico.</p>
+        <span style="display:block;margin-top:18px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a8781">60 min · sin contacto</span>
+      </article>
+      <article style="background:#0b0b0b;padding:clamp(22px,2.6vw,34px)" style-hover="background:#E2231A" data-reveal="">
+        <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:#8a8781">02</span>
+        <h3 style="margin:clamp(60px,9vw,110px) 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(28px,3vw,42px);line-height:.95;text-transform:uppercase">Box<br>fitness</h3>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#c9c5be">Bolsa, soga y circuitos. Toda la técnica del boxeo, cero golpes recibidos.</p>
+        <span style="display:block;margin-top:18px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a8781">50 min · todos los niveles</span>
+      </article>
+      <article style="background:#0b0b0b;padding:clamp(22px,2.6vw,34px)" style-hover="background:#E2231A" data-reveal="">
+        <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:#8a8781">03</span>
+        <h3 style="margin:clamp(60px,9vw,110px) 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(28px,3vw,42px);line-height:.95;text-transform:uppercase">Kids y<br>juvenil</h3>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#c9c5be">De 8 a 17 años. Coordinación, disciplina y juego, con acompañamiento cercano.</p>
+        <span style="display:block;margin-top:18px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a8781">55 min · por edades</span>
+      </article>
+      <article style="background:#0b0b0b;padding:clamp(22px,2.6vw,34px)" style-hover="background:#E2231A" data-reveal="">
+        <span style="display:block;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:#8a8781">04</span>
+        <h3 style="margin:clamp(60px,9vw,110px) 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:clamp(28px,3vw,42px);line-height:.95;text-transform:uppercase">Personal<br>1 a 1</h3>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:#c9c5be">Entrenador dedicado, plan a medida y seguimiento. Con turno reservado.</p>
+        <span style="display:block;margin-top:18px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a8781">45 min · con turno</span>
+      </article>
+    </div>
+  </section>
+
+  <sc-if value="{{ mostrarPrecios }}" hint-placeholder-val="{{ true }}">
+  <section id="planes" style="padding:0 clamp(16px,4vw,48px) clamp(56px,8vw,110px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:clamp(24px,3.5vw,44px)" data-reveal="">
+      <h2 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(40px,6vw,88px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em">Los planes</h2>
+      <span style="font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a8781">Sin matrícula · guantes incluidos</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(14px,2vw,22px)">
+      <div style="border:1px solid rgba(244,241,236,.16);padding:clamp(22px,2.6vw,32px)" data-reveal="">
+        <h3 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:.04em">2 por semana</h3>
+        <p style="margin:18px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,44px);line-height:1;text-transform:uppercase">A confirmar<span style="display:block;margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:12px;font-weight:400;letter-spacing:.14em;color:#8a8781">valor mensual</span></p>
+      </div>
+      <div style="border:1px solid #E2231A;background:#E2231A;padding:clamp(22px,2.6vw,32px)" data-reveal="">
+        <h3 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:.04em;color:#fff">Libre</h3>
+        <p style="margin:18px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,44px);line-height:1;text-transform:uppercase;color:#fff">A confirmar<span style="display:block;margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:12px;font-weight:400;letter-spacing:.14em;color:#fff"> valor mensual</span></p>
+      </div>
+      <div style="border:1px solid rgba(244,241,236,.16);padding:clamp(22px,2.6vw,32px)" data-reveal="">
+        <h3 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;letter-spacing:.04em">Personal 1 a 1</h3>
+        <p style="margin:18px 0 0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,44px);line-height:1;text-transform:uppercase">A confirmar<span style="display:block;margin-top:10px;font-family:'Chivo Mono',ui-monospace,monospace;font-size:12px;font-weight:400;letter-spacing:.14em;color:#8a8781">valor por sesión</span></p>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="gimnasio" style="padding:0 clamp(16px,4vw,48px) clamp(56px,8vw,110px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:clamp(24px,3.5vw,44px)" data-reveal="">
+      <h2 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(40px,6vw,88px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em">El gimnasio</h2>
+      <span style="flex:none;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a8781;white-space:nowrap">Fotos de referencia</span>
+    </div>
+    <div style="display:flex;gap:clamp(8px,1.2vw,14px);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin">
+      <figure style="position:relative;flex:0 0 clamp(230px,30vw,400px);margin:0;aspect-ratio:4/5;overflow:hidden;background:#141414;scroll-snap-align:start" data-reveal="">
+        <img src="https://images.unsplash.com/photo-1754630591156-ef00f2e0d888?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="Sala de bolsas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .5s,transform .7s cubic-bezier(.2,.7,.2,1)" style-hover="filter:grayscale(0) contrast(1);transform:scale(1.05)">
+        <figcaption style="position:absolute;left:0;bottom:0;background:#E2231A;color:#fff;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:7px 10px">Sala de bolsas</figcaption>
+      </figure>
+      <figure style="position:relative;flex:0 0 clamp(230px,30vw,400px);margin:0;aspect-ratio:4/5;overflow:hidden;background:#141414;scroll-snap-align:start" data-reveal="">
+        <img src="https://images.unsplash.com/photo-1636581563867-1ecab574858f?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="Clase de bolsa" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .5s,transform .7s cubic-bezier(.2,.7,.2,1)" style-hover="filter:grayscale(0) contrast(1);transform:scale(1.05)">
+        <figcaption style="position:absolute;left:0;bottom:0;background:#0b0b0b;color:#f4f1ec;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:7px 10px">Clase de bolsa</figcaption>
+      </figure>
+      <figure style="position:relative;flex:0 0 clamp(230px,30vw,400px);margin:0;aspect-ratio:4/5;overflow:hidden;background:#141414;scroll-snap-align:start" data-reveal="">
+        <img src="https://images.unsplash.com/photo-1716307046875-4c4ba2f43cab?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="El ring" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .5s,transform .7s cubic-bezier(.2,.7,.2,1)" style-hover="filter:grayscale(0) contrast(1);transform:scale(1.05)">
+        <figcaption style="position:absolute;left:0;bottom:0;background:#0b0b0b;color:#f4f1ec;font-family:'Chivo Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:7px 10px">El ring</figcaption>
+      </figure>
+      <figure style="position:relative;flex:0 0 clamp(230px,30vw,400px);margin:0;aspect-ratio:4/5;overflow:hidden;background:#141414;scroll-snap-align:start" data-reveal="">
+        <img src="https://images.unsplash.com/photo-1636302925863-6ad504baaf3c?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="Boxeador en guardia" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .5s,transform .7s cubic-bezier(.2,.7,.2,1)" style-hover="filter:grayscale(0) contrast(1);transform:scale(1.05)">
+      </figure>
+      <figure style="position:relative;flex:0 0 clamp(230px,30vw,400px);margin:0;aspect-ratio:4/5;overflow:hidden;background:#141414;scroll-snap-align:start" data-reveal="">
+        <img src="https://images.unsplash.com/photo-1633394782368-6e7260566004?w=1200&amp;q=70&amp;auto=format&amp;fit=crop" alt="Guantes colgados" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .5s,transform .7s cubic-bezier(.2,.7,.2,1)" style-hover="filter:grayscale(0) contrast(1);transform:scale(1.05)">
+      </figure>
+    </div>
+  </section>
+
+  <section id="contacto" style="background:#f4f1ec;color:#0b0b0b;padding:clamp(48px,7vw,104px) clamp(16px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,4vw,56px);align-items:center">
+    <h2 style="margin:0;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:900;font-size:clamp(46px,8vw,120px);line-height:.85;text-transform:uppercase;letter-spacing:-.015em" data-reveal="">Tu primera<br>clase es<br><span style="color:#E2231A">gratis</span></h2>
+    <div data-reveal="">
+      <p style="margin:0 0 24px;font-size:clamp(16px,1.5vw,19px);line-height:1.55;max-width:40ch;color:#3a3833">Escribinos y te reservamos un lugar en el horario que te quede cómodo. Vení con ropa deportiva, el resto lo ponemos nosotros.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="https://wa.me/5493415632194" style="display:block;background:#0b0b0b;color:#f4f1ec;padding:19px 28px;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase" style-hover="background:#E2231A;color:#fff">WhatsApp</a>
+        <a href="tel:+5493415632194" style="display:block;border:1px solid rgba(11,11,11,.25);color:#0b0b0b;padding:19px 28px;font-family:'Big Shoulders Display','Oswald',sans-serif;font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase" style-hover="border-color:#0b0b0b">341 563-2194</a>
+      </div>
+      <p style="margin:26px 0 0;font-family:'Chivo Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6b6862">Rueda 2553 · Rosario · alanisbox@hotmail.com</p>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mostrarPrecios&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;mostrarLinaje&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      mostrarPrecios: this.props.mostrarPrecios ?? true,
+      mostrarLinaje: this.props.mostrarLinaje ?? true
+    };
+  }
+  componentDidMount() {
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this.io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    const scan = () => {
+      document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+        if (el.dataset.revealed) return;
+        el.dataset.revealed = '1';
+        const d = (i % 4) * 0.07;
+        el.style.transition = 'opacity .75s cubic-bezier(.2,.7,.2,1) ' + d + 's, transform .75s cubic-bezier(.2,.7,.2,1) ' + d + 's';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        this.io.observe(el);
+      });
+    };
+    requestAnimationFrame(scan);
+    this.t = setTimeout(scan, 900);
+  }
+  componentWillUnmount() { clearTimeout(this.t); if (this.io) this.io.disconnect(); }
+}
+
+</script>
+</body>
+</html>

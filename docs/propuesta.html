@@ -1,0 +1,391 @@
+<title>Propuesta Alanis Boxing Club</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Chivo:wght@400;700&family=Chivo+Mono:wght@400;700&display=swap">
+
+<style>
+/* La propuesta usa el sistema del propio sitio: Big Shoulders para títulos,
+   Chivo para leer, Chivo Mono para rótulos. Radio de borde 0 y sombras
+   ninguna — la profundidad son líneas de 1px y contraste. */
+:root{
+  --ground:#f4f1ec;
+  --panel:#eae6df;
+  --ink:#0b0b0b;
+  --muted:#3a3833;
+  --faint:#6b6862;
+  --line:rgba(11,11,11,.18);
+  --line-soft:rgba(11,11,11,.1);
+  --accent:#E2231A;
+  --on-accent:#ffffff;
+
+  --f-tit:'Big Shoulders Display',Impact,'Haettenschweiler',sans-serif;
+  --f-cuerpo:'Chivo',system-ui,-apple-system,sans-serif;
+  --f-mono:'Chivo Mono',ui-monospace,SFMono-Regular,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0b0b0b;
+    --panel:#141414;
+    --ink:#f4f1ec;
+    --muted:#c9c5be;
+    --faint:#8a8781;
+    --line:rgba(244,241,236,.16);
+    --line-soft:rgba(244,241,236,.1);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0b0b0b;
+  --panel:#141414;
+  --ink:#f4f1ec;
+  --muted:#c9c5be;
+  --faint:#8a8781;
+  --line:rgba(244,241,236,.16);
+  --line-soft:rgba(244,241,236,.1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--f-cuerpo);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ol,ul,dl,dd,dt,figure{margin:0}
+ol,ul{padding:0;list-style:none}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.env{max-width:940px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.prosa{max-width:64ch}
+
+/* rótulos monoespaciados: el recurso que ata todo el sistema */
+.rot{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--faint)}
+.rot--ac{color:var(--accent)}
+
+/* ── portada ── */
+.portada{border-bottom:1px solid var(--line);padding:clamp(30px,7vw,64px) 0 clamp(28px,5vw,48px)}
+.marca{display:flex;align-items:center;gap:12px;margin-bottom:clamp(26px,6vw,52px)}
+.marca__c{width:22px;height:22px;background:var(--accent);flex:none}
+.marca__n{font-family:var(--f-tit);font-weight:900;font-size:19px;line-height:1;
+  letter-spacing:.02em;text-transform:uppercase}
+h1{font-family:var(--f-tit);font-weight:900;font-size:clamp(46px,9.5vw,104px);
+  line-height:.86;letter-spacing:-.015em;text-transform:uppercase;text-wrap:balance}
+h1 span{display:block}
+h1 .ac{color:var(--accent)}
+.bajada{margin-top:clamp(18px,3vw,28px);font-size:clamp(16px,2vw,19px);
+  color:var(--muted);max-width:52ch;text-wrap:pretty}
+
+/* ── secciones ── */
+section{padding:clamp(38px,6.5vw,72px) 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-family:var(--f-tit);font-weight:900;font-size:clamp(30px,5vw,52px);
+  line-height:.92;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance;
+  margin-top:10px}
+h3{font-family:var(--f-tit);font-weight:800;font-size:21px;line-height:1;
+  letter-spacing:.02em;text-transform:uppercase}
+section > .prosa{margin-top:clamp(16px,2.4vw,22px)}
+p + p{margin-top:1em}
+strong{font-weight:700;color:var(--ink)}
+
+/* ── el índice de la página: la secuencia es información real ── */
+.bloques{margin-top:clamp(22px,3.4vw,34px);border-top:1px solid var(--line)}
+.bloque{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.bloque__n{font-family:var(--f-mono);font-size:12px;color:var(--faint);
+  font-variant-numeric:tabular-nums}
+.bloque__n--nuevo{color:var(--accent);font-weight:700}
+.bloque__q{font-family:var(--f-tit);font-weight:800;font-size:19px;line-height:1.05;
+  text-transform:uppercase;letter-spacing:.01em}
+.etq{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 8px;white-space:nowrap}
+.etq--cta{background:var(--accent);color:var(--on-accent);font-weight:700}
+.etq--nueva{border:1px solid var(--accent);color:var(--accent);font-weight:700}
+
+/* ── grillas separadas por líneas, no por sombras ── */
+.rejilla{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  margin-top:clamp(22px,3.4vw,32px)}
+.rejilla > *{background:var(--ground);padding:clamp(18px,2.6vw,26px)}
+@media (min-width:680px){ .rejilla--2{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.rejilla h3 + p{margin-top:12px;color:var(--muted);font-size:15px}
+.rejilla .rot{margin-bottom:11px;display:block}
+
+/* ── fases ── */
+.fases{margin-top:clamp(22px,3.4vw,32px);border-top:1px solid var(--line)}
+.fase{padding:22px 0;border-bottom:1px solid var(--line-soft);
+  display:grid;gap:6px 22px}
+@media (min-width:680px){ .fase{grid-template-columns:150px 1fr} }
+.fase__q{color:var(--muted);font-size:15px;max-width:58ch}
+.fase--hoy .fase__q{color:var(--ink)}
+.fase__t{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+
+/* ── lo que necesitamos: la parte accionable ── */
+.pide{margin-top:clamp(22px,3.4vw,32px);border-top:1px solid var(--line)}
+.pide li{display:grid;grid-template-columns:26px 1fr;gap:14px;
+  padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.pide__n{font-family:var(--f-mono);font-size:12px;color:var(--accent);font-weight:700;
+  font-variant-numeric:tabular-nums;padding-top:3px}
+.pide__q{font-family:var(--f-tit);font-weight:800;font-size:19px;line-height:1.05;
+  text-transform:uppercase;letter-spacing:.01em}
+.pide__d{color:var(--muted);font-size:15px;margin-top:7px;max-width:60ch}
+
+/* ── enlace a los wireframes ── */
+.enlace{display:inline-flex;align-items:center;gap:12px;
+  margin-top:clamp(22px,3.4vw,30px);
+  background:var(--accent);color:var(--on-accent);text-decoration:none;
+  font-family:var(--f-tit);font-weight:800;font-size:18px;letter-spacing:.06em;
+  text-transform:uppercase;padding:17px 26px;
+  transition:background .18s,color .18s}
+.enlace:hover{background:var(--ink);color:var(--ground)}
+.enlace svg{flex:none}
+
+.nota{margin-top:clamp(20px,3vw,26px);border-left:2px solid var(--accent);
+  padding-left:15px;font-size:14.5px;color:var(--muted);max-width:58ch}
+
+.pie{padding:clamp(30px,5vw,52px) 0 clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+</style>
+
+<div class="env">
+
+  <header class="portada">
+    <div class="marca">
+      <span class="marca__c" aria-hidden="true"></span>
+      <span class="marca__n">Alanis Boxing Club</span>
+      <span class="rot" style="margin-left:auto">Propuesta de sitio · v1</span>
+    </div>
+    <h1><span>El sitio,</span><span class="ac">antes de hacerlo</span></h1>
+    <p class="bajada">Cómo se va a ver, qué va adentro, en qué orden lo hacemos
+      y qué necesitamos de ustedes para poder publicarlo.</p>
+  </header>
+
+  <section>
+    <p class="rot">Qué problema resuelve</p>
+    <h2>Que la consulta llegue</h2>
+    <div class="prosa">
+      <p>Alguien busca «gimnasio de boxeo en Rosario» un domingo a la noche, o toca
+        el link de la bio de Instagram. Tiene dos minutos y una duda: <em>¿esto es
+        para mí?</em> El sitio tiene un solo trabajo — contestar esa duda y dejar el
+        botón de WhatsApp a mano en todo momento, con la primera clase gratis
+        como excusa para escribir.</p>
+      <p>No es un catálogo ni una tienda. Es una sola página, larga, que se lee de
+        arriba hacia abajo y termina en una conversación.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="rot">Qué se ve</p>
+    <h2>La página, bloque por bloque</h2>
+    <div class="prosa">
+      <p>Trece bloques en una sola página. El menú de arriba no lleva a otras
+        páginas: baja hasta un bloque. Los marcados en rojo son los que
+        <strong>todavía no existen</strong> y proponemos sumar.</p>
+    </div>
+
+    <ol class="bloques">
+      <li class="bloque"><span class="bloque__n">01</span><span class="bloque__q">Barra de arriba</span><span class="etq etq--cta">WhatsApp</span></li>
+      <li class="bloque"><span class="bloque__n">02</span><span class="bloque__q">La primera pantalla</span><span class="etq etq--cta">Reservar</span></li>
+      <li class="bloque"><span class="bloque__n">03</span><span class="bloque__q">Cinta con las modalidades</span><span></span></li>
+      <li class="bloque"><span class="bloque__n">04</span><span class="bloque__q">El rincón · el campeón</span><span></span></li>
+      <li class="bloque"><span class="bloque__n">05</span><span class="bloque__q">Las cuatro clases</span><span></span></li>
+      <li class="bloque"><span class="bloque__n bloque__n--nuevo">06</span><span class="bloque__q">Testimonios</span><span class="etq etq--nueva">Nueva</span></li>
+      <li class="bloque"><span class="bloque__n">07</span><span class="bloque__q">Los planes</span><span></span></li>
+      <li class="bloque"><span class="bloque__n bloque__n--nuevo">08</span><span class="bloque__q">Preguntas frecuentes</span><span class="etq etq--nueva">Nueva</span></li>
+      <li class="bloque"><span class="bloque__n">09</span><span class="bloque__q">Fotos del gimnasio</span><span></span></li>
+      <li class="bloque"><span class="bloque__n">10</span><span class="bloque__q">Contacto</span><span class="etq etq--cta">WhatsApp</span></li>
+      <li class="bloque"><span class="bloque__n bloque__n--nuevo">11</span><span class="bloque__q">Formulario</span><span class="etq etq--nueva">Nueva</span></li>
+      <li class="bloque"><span class="bloque__n bloque__n--nuevo">12</span><span class="bloque__q">Mapa</span><span class="etq etq--nueva">Nueva</span></li>
+      <li class="bloque"><span class="bloque__n bloque__n--nuevo">13</span><span class="bloque__q">Pie de página</span><span class="etq etq--nueva">Nueva</span></li>
+    </ol>
+
+    <a class="enlace" href="https://claude.ai/code/artifact/418fafc4-179f-45a7-b99e-c30fb346eb4c">
+      Ver los wireframes
+      <svg width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M0 7h19M14 1l6 6-6 6" stroke-linecap="square"/>
+      </svg>
+    </a>
+    <p class="nota">Los wireframes son los planos: la página completa en escritorio
+      y en celular, en grises, para discutir la estructura antes de que el color y
+      las fotos se lleven toda la conversación.</p>
+  </section>
+
+  <section>
+    <p class="rot">Lo que proponemos sumar</p>
+    <h2>Cuatro secciones nuevas</h2>
+    <div class="prosa">
+      <p>Estaban en el pedido original y quedaron fuera del primer diseño. Cada una
+        resuelve una objeción concreta en el momento en que aparece.</p>
+    </div>
+
+    <div class="rejilla rejilla--2">
+      <div>
+        <span class="rot">Bloque 06</span>
+        <h3>Testimonios</h3>
+        <p>Van después de ver las clases y antes del precio, que es donde uno se
+          pregunta si esto es para gente como uno. Tres voces alcanzan.</p>
+      </div>
+      <div>
+        <span class="rot">Bloque 08</span>
+        <h3>Preguntas frecuentes</h3>
+        <p>Qué llevar, si hace falta estado físico, desde qué edad, si hay que
+          pelear. Contestarlas evita la consulta que nunca llega a hacerse.</p>
+      </div>
+      <div>
+        <span class="rot">Bloque 11</span>
+        <h3>Formulario</h3>
+        <p>Cuatro campos: nombre, teléfono, qué clase y qué días podés. Al enviarlo
+          abre WhatsApp con el mensaje ya escrito.</p>
+      </div>
+      <div>
+        <span class="rot">Bloque 12</span>
+        <h3>Mapa</h3>
+        <p>Con la dirección confirmada. Es el mismo dato que destraba la ficha de
+          Google, que es lo que más mueve la búsqueda local.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="rot">Cómo se construye</p>
+    <h2>Sin sistema que mantener</h2>
+    <div class="prosa">
+      <p>El sitio es una página escrita a mano, sin plataforma por debajo. Eso
+        significa tres cosas concretas para ustedes: <strong>abre rápido en el
+        celular</strong> aunque haya poca señal, <strong>Google lo lee bien</strong>
+        porque el texto está en la página, y <strong>no hay una cuota mensual de
+        sistema</strong> ni actualizaciones que se rompan solas. Se publica en
+        Cloudflare, que para un sitio de este tamaño no tiene costo.</p>
+      <p>Cambiar un precio, un horario o el teléfono es tocar un renglón. Los datos
+        de contacto viven en un solo lugar: se cambian una vez y se actualizan en
+        los cuatro botones donde aparecen.</p>
+      <p>Dos secciones tienen interruptor: si los precios no llegan a tiempo, o los
+        datos del campeón no se confirman, el sitio se publica igual sin esas dos y
+        se encienden después.</p>
+    </div>
+    <p class="nota">Revisamos también que la página se pueda usar con el teclado,
+      que los textos tengan contraste suficiente para leerse con poca visión, y
+      que quien tenga activado «reducir movimiento» en el celular no vea las
+      animaciones. No es un extra: es parte de que funcione.</p>
+  </section>
+
+  <section>
+    <p class="rot">En qué orden</p>
+    <h2>Las tres etapas</h2>
+
+    <div class="fases">
+      <div class="fase fase--hoy">
+        <div class="fase__t">
+          <h3>Etapa 1</h3><span class="rot rot--ac">Acá estamos</span>
+        </div>
+        <p class="fase__q">Wireframes y arquitectura — esto que están leyendo. Se
+          cierra cuando aprueban la estructura de los trece bloques y nos dicen si
+          las cuatro secciones nuevas van.</p>
+      </div>
+      <div class="fase">
+        <div class="fase__t">
+          <h3>Etapa 2</h3><span class="rot">Construcción</span>
+        </div>
+        <p class="fase__q">Se arma la página entera con el diseño aprobado y las
+          fotos reales del gimnasio. Al final la ven funcionando en una dirección
+          de prueba, desde el celular, antes de que esté pública.</p>
+      </div>
+      <div class="fase">
+        <div class="fase__t">
+          <h3>Etapa 3</h3><span class="rot">Publicación</span>
+        </div>
+        <p class="fase__q">Sale al aire con la dirección definitiva, se conecta la
+          ficha de Google del gimnasio y se prueba que las consultas lleguen bien
+          al WhatsApp que atienden.</p>
+      </div>
+    </div>
+    <p class="nota">Las fechas de cada etapa se acuerdan cuando aprueben la
+      estructura: dependen sobre todo de cuánto tarde en llegar el material de la
+      lista de acá abajo.</p>
+  </section>
+
+  <section>
+    <p class="rot">Lo que depende de ustedes</p>
+    <h2>Cinco cosas que necesitamos</h2>
+    <div class="prosa">
+      <p>La página se puede terminar sin esto. <strong>Publicarse, no.</strong> Es
+        la lista corta y no hay ninguna que podamos resolver desde acá.</p>
+    </div>
+
+    <ol class="pide">
+      <li>
+        <span class="pide__n">01</span>
+        <div>
+          <p class="pide__q">Teléfono, dirección y mail confirmados</p>
+          <p class="pide__d">Los que tenemos hoy los encontramos buscando en
+            internet y no sabemos si son los que usan. Va también el usuario de
+            Instagram. Y una pregunta suelta: el WhatsApp que atiende consultas,
+            ¿quién lo lee y en qué horario?</p>
+        </div>
+      </li>
+      <li>
+        <span class="pide__n">02</span>
+        <div>
+          <p class="pide__q">Los horarios de verdad</p>
+          <p class="pide__d">Días y franjas, por tipo de clase si son distintos.
+            Hoy la página dice «mañana y tarde» porque no sabemos más.</p>
+        </div>
+      </li>
+      <li>
+        <span class="pide__n">03</span>
+        <div>
+          <p class="pide__q">Los precios de los tres planes</p>
+          <p class="pide__d">Dos por semana, libre y personal 1 a 1. Hoy los tres
+            dicen «a confirmar».</p>
+        </div>
+      </li>
+      <li>
+        <span class="pide__n">04</span>
+        <div>
+          <p class="pide__q">Fotos del gimnasio</p>
+          <p class="pide__d">Las que están ahora son de banco de imágenes: no son
+            el club. Sirven las de Instagram, en el tamaño más grande que las
+            tengan. Idealmente: la sala de bolsas, una clase en actividad, el ring
+            y un retrato de Charly.</p>
+        </div>
+      </li>
+      <li>
+        <span class="pide__n">05</span>
+        <div>
+          <p class="pide__q">El visto bueno a los datos del campeón</p>
+          <p class="pide__d">La página afirma que Carlos «Junior» Alanís tiene
+            récord 13–1, medalla de plata en Odesur 2018 y título sudamericano
+            ligero. Lo sacamos de fuentes públicas. Son datos verificables sobre
+            una persona real: que los confirme el club antes de publicarlos.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="nota">Y dos que hacen falta solo si aprueban las secciones nuevas:
+      tres testimonios reales con nombre, y las respuestas a las seis preguntas
+      frecuentes que proponemos.</p>
+  </section>
+
+  <section>
+    <p class="rot">Para que quede claro</p>
+    <h2>Qué no incluye</h2>
+    <div class="prosa">
+      <p>Nada de esto está en el alcance, y ninguno hace falta para que el sitio
+        funcione: <strong>pagos online</strong>, <strong>sistema de turnos o
+        reservas con cupos</strong>, <strong>panel de administración</strong>,
+        <strong>blog</strong> y <strong>tienda</strong>. Si en algún momento
+        aparece la necesidad, se pueden sumar; hoy serían máquina de más para lo
+        que la página tiene que hacer.</p>
+      <p>Tampoco incluye la producción de las fotos ni la redacción de los
+        testimonios: eso viene del club.</p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <p class="rot">Alanis Boxing Club · Propuesta de sitio web · Etapa 1 de 3</p>
+    <p class="nota" style="border-color:var(--line);margin-top:16px">
+      El paso siguiente es una sola decisión: si la estructura de los trece bloques
+      está bien y si las cuatro secciones nuevas van. Con eso arranca la etapa 2.</p>
+  </footer>
+
+</div>

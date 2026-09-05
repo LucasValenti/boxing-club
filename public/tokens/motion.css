@@ -1,0 +1,26 @@
+/* Las cinco animaciones del diseño. ri- viene del prototipo original. */
+@keyframes ri-up   {from{opacity:0;transform:translateY(.5em)} to{opacity:1;transform:none}}
+@keyframes ri-wipe {from{clip-path:inset(0 100% 0 0)}          to{clip-path:inset(0 0 0 0)}}
+@keyframes ri-march{from{transform:translateX(0)}              to{transform:translateX(-50%)}}
+@keyframes ri-pulse{0%,100%{opacity:.5} 50%{opacity:1}}
+@keyframes ri-zoom {from{transform:scale(1.06)}                to{transform:scale(1.14)}}
+
+:root{
+  --curva:cubic-bezier(.2,.7,.2,1);
+  --curva-golpe:cubic-bezier(.6,0,.2,1);
+}
+
+/* Tres de esas animaciones son bucles infinitos (el zoom del hero, la
+   marquesina y el punto que late). Para quien pidió menos movimiento, un
+   bucle infinito no es un detalle: es la diferencia entre poder leer la
+   página o no. Acá se apagan todas, y el contenido queda visible —nunca
+   escondido esperando un reveal que ya no va a ocurrir. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  [data-reveal]{opacity:1 !important;transform:none !important}
+}

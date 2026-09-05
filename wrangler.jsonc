@@ -1,0 +1,18 @@
+{
+  // Publicación en Cloudflare. El sitio no tiene build: son archivos estáticos
+  // y el HTML ya viene escrito, así que lo que sube es lo que sirve.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "alanis-boxing-club",
+  "compatibility_date": "2026-08-01",
+
+  // Sin telemetría de Cloudflare.
+  "send_metrics": false,
+
+  "assets": {
+    "directory": "./public",
+
+    // Una sola página con anclas. No hay rutas: cualquier dirección que no
+    // exista devuelve un 404 de verdad, que es lo que Google espera.
+    "not_found_handling": "404-page"
+  }
+}

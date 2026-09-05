@@ -1,0 +1,4 @@
+/* Las cuatro familias del sistema, desde Google Fonts igual que el diseño
+   original. Oswald es el respaldo de Big Shoulders: si la primera no llega,
+   la página sigue con una condensada y no salta a Arial. */
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Oswald:wght@500;700&family=Chivo:wght@400;700&family=Chivo+Mono:wght@400&display=swap");

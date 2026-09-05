@@ -1,0 +1,8 @@
+/* Alanis Boxing Club — entrada única de estilos. Solo @imports. */
+@import url("./tokens/fonts.css");
+@import url("./tokens/colors.css");
+@import url("./tokens/typography.css");
+@import url("./tokens/layout.css");
+@import url("./tokens/motion.css");
+@import url("./base/reset.css");
+@import url("./sitio/sitio.css");
