@@ -50,14 +50,23 @@ apaga y la página funciona igual.
 Tres, con nombre, cuánto hace que entrenan y —si aceptan— foto. Sirven más los
 concretos («llegué sin poder saltar a la soga») que los elogios.
 
+La sección está construida pero **apagada** (`mostrarTestimonios: false` en
+`public/sitio/datos.js`): las tres tarjetas son ranuras vacías. Se completan con
+las citas reales y se enciende el interruptor.
+
 ### 7. Preguntas frecuentes
-Propuestas, a confirmar y completar con el cliente:
-- ¿Qué llevo a la primera clase?
-- ¿Hace falta estado físico?
-- ¿Desde qué edad?
-- ¿Se pelea o se recibe golpes?
-- ¿Puedo ir sola?
-- ¿Qué pasa si falto?
+Cinco están escritas y publicadas, con respuestas armadas a partir de datos que
+sí están en la spec (60 min sin contacto, de 8 a 17 años, guantes incluidos,
+grupos de hasta 12). **Que las lea el club y las corrija** — están redactadas
+por nosotros, no dictadas por ellos.
+
+Falta la sexta, y no se puede inventar porque es una regla del negocio:
+
+> **¿Qué pasa si falto a una clase?** ¿Se recupera? ¿Hay que avisar? ¿Con
+> cuánta anticipación?
+
+Cuando llegue la respuesta se suma en `public/index.html` (sección `#faq`) y en
+el bloque `FAQPage` del JSON-LD, con el mismo texto en los dos lados.
 
 ### 8. Formulario: a dónde llega
 Hoy la propuesta es que abra WhatsApp con el mensaje ya escrito. Si el cliente

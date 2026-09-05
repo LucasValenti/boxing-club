@@ -16,8 +16,11 @@
 <meta property="og:title" content="Alanis Boxing Club — Boxeo en Rosario">
 <meta property="og:description" content="Primera clase gratis. Principiantes, mujeres, chicos y adultos. Guantes incluidos.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- El titular es lo primero que se ve y lo primero que se mide: su fuente
+     se pide antes que el CSS, no después de leerlo. crossorigin es
+     obligatorio aunque el archivo sea de este mismo dominio — las fuentes
+     siempre se piden en modo CORS, y sin el atributo se descarga dos veces. -->
+<link rel="preload" href="fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 
 <!-- Búsqueda local: es como Google entiende que esto es un gimnasio de
@@ -38,6 +41,28 @@
   },
   "telephone": "+5493415632194",
   "email": "alanisbox@hotmail.com"
+}
+</script>
+
+<!-- Las mismas cinco preguntas que están más abajo en la página. Google
+     puede mostrar el resultado con las preguntas desplegadas; la condición
+     es que el texto de acá sea idéntico al visible, no un resumen. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Qué llevo a la primera clase?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ropa deportiva, zapatillas y agua. Los guantes te los damos nosotros, así que no compres nada antes de probar." } },
+    { "@type": "Question", "name": "¿Hace falta estado físico?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. La clase de principiantes está armada para gente que nunca pisó un gimnasio: se empieza por la guardia y el desplazamiento, al ritmo que te dé el cuerpo." } },
+    { "@type": "Question", "name": "¿Desde qué edad se puede entrenar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde los 8 años. De 8 a 17 va la clase de kids y juvenil, separada por edades; de 18 en adelante, las clases de adultos." } },
+    { "@type": "Question", "name": "¿Se pelea? ¿Voy a recibir golpes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No, salvo que en algún momento lo busques vos. La clase de principiantes es sin contacto y en box fitness se golpea la bolsa, no a una persona. El sparring es opcional y llega mucho después." } },
+    { "@type": "Question", "name": "¿Puedo ir sola?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El entrenamiento es femenino y masculino, y los grupos son de hasta 12 personas: nadie entrena sin que el entrenador lo esté mirando." } }
+  ]
 }
 </script>
 </head>
@@ -121,103 +146,315 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════════════
-     De acá para abajo son cáscaras: marcan orden, ancla y alto aproximado.
-     Cada una se reemplaza por su sección real siguiendo la spec que cita.
-     ══════════════════════════════════════════════════════════════════════ -->
-
 <!-- ── 4. El rincón ──────────────────────────────────────────────────── -->
-<section class="seccion" data-reveal>
-  <div class="pendiente">
-    <p class="pendiente__n">04 — Fase 2</p>
-    <p class="pendiente__que">El rincón<br>Linaje del campeón</p>
-    <p class="pendiente__ref">SECCIONES.md §4 · verificar los datos de Carlos «Junior» Alanís antes de publicar</p>
+<!-- Se apaga con mostrarLinaje: los datos de Junior Alanís están sin
+     confirmar por el club y son afirmaciones verificables sobre una
+     persona real. Sin el visto bueno, esta sección no sale. -->
+<section class="seccion rincon" id="rincon" data-flag="mostrarLinaje">
+  <div class="rincon__texto" data-reveal>
+    <p class="rotulo">El rincón</p>
+    <h2>Acá se formó un<br><span class="acento">campeón sudamericano</span></h2>
+    <p class="parrafo">
+      Charly Alanis dirige el club y es el entrenador que formó a
+      <strong>Carlos «Junior» Alanís</strong>: medalla de plata en los Juegos
+      Odesur 2018 y campeón sudamericano ligero. El mismo trabajo de rincón que
+      llevó a un profesional al título es el que vas a tener desde tu primera
+      clase.
+    </p>
   </div>
+
+  <!-- El número va arriba y el rótulo abajo. Es al revés del orden natural
+       de un dl, así que el markup los invierte y el CSS los deja en su
+       lugar: el lector ve la cifra primero, el lector de pantalla oye el
+       rótulo primero. -->
+  <dl class="stats" data-reveal>
+    <div><dd>13<span class="acento">–</span>1</dd><dt>Récord profesional</dt></div>
+    <div><dd>2018</dd><dt>Plata Odesur</dt></div>
+    <div><dd class="acento">01</dd><dt>Título sudamericano</dt></div>
+  </dl>
 </section>
 
 <!-- ── 5. Las clases ─────────────────────────────────────────────────── -->
-<section class="seccion" id="clases" data-reveal>
-  <div class="seccion__cabeza">
+<section class="seccion" id="clases">
+  <div class="seccion__cabeza" data-reveal>
     <h2>Las clases</h2>
     <p class="seccion__rotulo">Cuatro formas de entrenar</p>
   </div>
-  <div class="pendiente">
-    <p class="pendiente__n">05 — Fase 2</p>
-    <p class="pendiente__que">Cuatro tarjetas</p>
-    <p class="pendiente__ref">SECCIONES.md §5 · en hover la tarjeta se pinta de rojo Y el texto pasa a blanco</p>
+
+  <div class="clases">
+    <article class="clase" data-reveal>
+      <p class="clase__n">01</p>
+      <h3>Boxeo<br>principiantes</h3>
+      <p class="clase__q">Guardia, desplazamiento y golpes básicos. No hace falta
+        experiencia ni estado físico.</p>
+      <p class="clase__meta">60 min · sin contacto</p>
+    </article>
+    <article class="clase" data-reveal>
+      <p class="clase__n">02</p>
+      <h3>Box<br>fitness</h3>
+      <p class="clase__q">Bolsa, soga y circuitos. Toda la técnica del boxeo,
+        cero golpes recibidos.</p>
+      <p class="clase__meta">50 min · todos los niveles</p>
+    </article>
+    <article class="clase" data-reveal>
+      <p class="clase__n">03</p>
+      <h3>Kids y<br>juvenil</h3>
+      <p class="clase__q">De 8 a 17 años. Coordinación, disciplina y juego, con
+        acompañamiento cercano.</p>
+      <p class="clase__meta">55 min · por edades</p>
+    </article>
+    <article class="clase" data-reveal>
+      <p class="clase__n">04</p>
+      <h3>Personal<br>1 a 1</h3>
+      <p class="clase__q">Entrenador dedicado, plan a medida y seguimiento. Con
+        turno reservado.</p>
+      <p class="clase__meta">45 min · con turno</p>
+    </article>
   </div>
 </section>
 
-<!-- ── 6. Testimonios (sección nueva) ────────────────────────────────── -->
-<section class="seccion" id="testimonios" data-reveal>
-  <div class="seccion__cabeza">
+<!-- ── 6. Testimonios ────────────────────────────────────────────────── -->
+<!-- Apagada hasta que lleguen los testimonios reales. Las tres tarjetas son
+     ranuras vacías a propósito: acá no se inventa lo que dijo nadie. -->
+<section class="seccion" id="testimonios" data-flag="mostrarTestimonios">
+  <div class="seccion__cabeza" data-reveal>
     <h2>Los que ya entrenan</h2>
     <p class="seccion__rotulo">Tres voces</p>
   </div>
-  <div class="pendiente pendiente--nueva">
-    <p class="pendiente__n">06 — Sección nueva · falta contenido</p>
-    <p class="pendiente__que">Testimonios</p>
-    <p class="pendiente__ref">Bloqueada: hay que pedirle al cliente tres testimonios reales con nombre y foto</p>
+  <div class="testimonios">
+    <figure class="testimonio" data-reveal>
+      <blockquote><p>Testimonio pendiente.</p></blockquote>
+      <figcaption><span class="testimonio__quien">Nombre</span><span class="testimonio__cuando">Hace cuánto entrena</span></figcaption>
+    </figure>
+    <figure class="testimonio" data-reveal>
+      <blockquote><p>Testimonio pendiente.</p></blockquote>
+      <figcaption><span class="testimonio__quien">Nombre</span><span class="testimonio__cuando">Hace cuánto entrena</span></figcaption>
+    </figure>
+    <figure class="testimonio" data-reveal>
+      <blockquote><p>Testimonio pendiente.</p></blockquote>
+      <figcaption><span class="testimonio__quien">Nombre</span><span class="testimonio__cuando">Hace cuánto entrena</span></figcaption>
+    </figure>
   </div>
 </section>
 
 <!-- ── 7. Los planes ─────────────────────────────────────────────────── -->
-<section class="seccion" id="planes" data-reveal>
-  <div class="seccion__cabeza">
+<!-- Se apaga con mostrarPrecios mientras los montos no estén confirmados. -->
+<section class="seccion" id="planes" data-flag="mostrarPrecios">
+  <div class="seccion__cabeza" data-reveal>
     <h2>Los planes</h2>
     <p class="seccion__rotulo">Sin matrícula · guantes incluidos</p>
   </div>
-  <div class="pendiente">
-    <p class="pendiente__n">07 — Fase 2</p>
-    <p class="pendiente__que">Tres planes</p>
-    <p class="pendiente__ref">SECCIONES.md §6 · los precios dicen «a confirmar» hasta que lleguen los montos</p>
+
+  <!-- Acá el separador sí es un gap de verdad y no una línea de 1px: cada
+       tarjeta tiene su propio borde, y dos bordes pegados se ven sucios. -->
+  <div class="planes">
+    <article class="plan" data-reveal>
+      <h3>2 por semana</h3>
+      <p class="plan__precio">A confirmar<span>valor mensual</span></p>
+    </article>
+    <article class="plan plan--destacado" data-reveal>
+      <h3>Libre</h3>
+      <p class="plan__precio">A confirmar<span>valor mensual</span></p>
+    </article>
+    <article class="plan" data-reveal>
+      <h3>Personal 1 a 1</h3>
+      <p class="plan__precio">A confirmar<span>valor por sesión</span></p>
+    </article>
   </div>
 </section>
 
-<!-- ── 8. FAQ (sección nueva) ────────────────────────────────────────── -->
-<section class="seccion" id="faq" data-reveal>
-  <div class="seccion__cabeza">
+<!-- ── 8. Preguntas frecuentes ───────────────────────────────────────── -->
+<!-- Cinco preguntas, no seis: falta la política de faltas, que es del club
+     y no se inventa. Ver docs/contenido-pendiente.md. -->
+<section class="seccion" id="faq">
+  <div class="seccion__cabeza" data-reveal>
     <h2>Antes de venir</h2>
     <p class="seccion__rotulo">Lo que todos preguntan</p>
   </div>
-  <div class="pendiente pendiente--nueva">
-    <p class="pendiente__n">08 — Sección nueva</p>
-    <p class="pendiente__que">Preguntas frecuentes</p>
-    <p class="pendiente__ref">Seis preguntas en &lt;details&gt; · suma FAQPage al JSON-LD</p>
+
+  <div class="faq" data-reveal>
+    <details class="faq__item">
+      <summary>¿Qué llevo a la primera clase?</summary>
+      <p>Ropa deportiva, zapatillas y agua. Los guantes te los damos nosotros,
+        así que no compres nada antes de probar.</p>
+    </details>
+    <details class="faq__item">
+      <summary>¿Hace falta estado físico?</summary>
+      <p>No. La clase de principiantes está armada para gente que nunca pisó un
+        gimnasio: se empieza por la guardia y el desplazamiento, al ritmo que
+        te dé el cuerpo.</p>
+    </details>
+    <details class="faq__item">
+      <summary>¿Desde qué edad se puede entrenar?</summary>
+      <p>Desde los 8 años. De 8 a 17 va la clase de kids y juvenil, separada por
+        edades; de 18 en adelante, las clases de adultos.</p>
+    </details>
+    <details class="faq__item">
+      <summary>¿Se pelea? ¿Voy a recibir golpes?</summary>
+      <p>No, salvo que en algún momento lo busques vos. La clase de principiantes
+        es sin contacto y en box fitness se golpea la bolsa, no a una persona.
+        El sparring es opcional y llega mucho después.</p>
+    </details>
+    <details class="faq__item">
+      <summary>¿Puedo ir sola?</summary>
+      <p>Sí. El entrenamiento es femenino y masculino, y los grupos son de hasta
+        12 personas: nadie entrena sin que el entrenador lo esté mirando.</p>
+    </details>
   </div>
 </section>
 
 <!-- ── 9. El gimnasio ────────────────────────────────────────────────── -->
-<section class="seccion" id="gimnasio" data-reveal>
-  <div class="seccion__cabeza">
+<section class="seccion" id="gimnasio">
+  <div class="seccion__cabeza" data-reveal>
     <h2>El gimnasio</h2>
     <p class="seccion__rotulo">Fotos de referencia</p>
   </div>
-  <div class="pendiente">
-    <p class="pendiente__n">09 — Fase 2</p>
-    <p class="pendiente__que">Galería con scroll</p>
-    <p class="pendiente__ref">SECCIONES.md §7 · el color al pasar el mouse necesita equivalente táctil</p>
+
+  <!-- Tira que se arrastra, no mosaico: en el celular se pasa con el dedo y
+       en escritorio se ve que sigue. ⚠ Las cinco fotos son de banco de
+       imágenes hasta que lleguen las del club. -->
+  <div class="tira" data-reveal tabindex="0" role="group" aria-label="Fotos del gimnasio, se desplaza de a una">
+    <figure class="tira__foto">
+      <img src="https://images.unsplash.com/photo-1754630591156-ef00f2e0d888?w=1200&q=70&auto=format&fit=crop"
+           alt="Sala de bolsas del gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+      <figcaption class="tira__pie tira__pie--rojo">Sala de bolsas</figcaption>
+    </figure>
+    <figure class="tira__foto">
+      <img src="https://images.unsplash.com/photo-1636581563867-1ecab574858f?w=1200&q=70&auto=format&fit=crop"
+           alt="Clase golpeando la bolsa" loading="lazy" decoding="async" width="1200" height="1500">
+      <figcaption class="tira__pie">Clase de bolsa</figcaption>
+    </figure>
+    <figure class="tira__foto">
+      <img src="https://images.unsplash.com/photo-1716307046875-4c4ba2f43cab?w=1200&q=70&auto=format&fit=crop"
+           alt="El ring del club" loading="lazy" decoding="async" width="1200" height="1500">
+      <figcaption class="tira__pie">El ring</figcaption>
+    </figure>
+    <figure class="tira__foto">
+      <img src="https://images.unsplash.com/photo-1636302925863-6ad504baaf3c?w=1200&q=70&auto=format&fit=crop"
+           alt="Entrenamiento en el gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+    </figure>
+    <figure class="tira__foto">
+      <img src="https://images.unsplash.com/photo-1633394782368-6e7260566004?w=1200&q=70&auto=format&fit=crop"
+           alt="Guantes y equipo del club" loading="lazy" decoding="async" width="1200" height="1500">
+    </figure>
   </div>
 </section>
 
-<!-- ── 10-12. Contacto, mapa y formulario ────────────────────────────── -->
-<section class="seccion" id="contacto" data-reveal>
-  <div class="pendiente">
-    <p class="pendiente__n">10, 11 y 12 — Fase 2</p>
-    <p class="pendiente__que">Contacto<br>Mapa · Formulario</p>
-    <p class="pendiente__ref">SECCIONES.md §8 · invierte a fondo hueso · mapa bloqueado hasta confirmar la dirección</p>
-  </div>
-</section>
+<!-- ══ 10 a 12. La banda clara ═══════════════════════════════════════════
+     El corte de negro a hueso es el que avisa que acá se actúa. Contacto,
+     formulario y mapa comparten fondo: son un solo momento de la página. -->
+<div class="banda-clara" id="contacto">
+
+  <!-- ── 10. Contacto ────────────────────────────────────────────────── -->
+  <section class="contacto">
+    <h2 class="contacto__titulo" data-reveal>Tu primera<br>clase es<br><span class="acento">gratis</span></h2>
+    <div class="contacto__cuerpo" data-reveal>
+      <p class="contacto__q">Escribinos y te reservamos un lugar en el horario que
+        te quede cómodo. Vení con ropa deportiva, el resto lo ponemos nosotros.</p>
+      <div class="botones">
+        <a class="btn btn--negro" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos por WhatsApp</a>
+        <a class="btn btn--linea-clara" href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a>
+      </div>
+      <p class="contacto__datos">
+        <span data-negocio="direccion">Rueda 2553</span> ·
+        <span data-negocio="ciudad">Rosario</span> ·
+        <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 11. Formulario ──────────────────────────────────────────────── -->
+  <!-- Cuatro campos y ninguno más. No hay servidor: al enviar se arma el
+       mensaje y se abre WhatsApp con el texto escrito. -->
+  <section class="reserva" aria-labelledby="reserva-titulo">
+    <div class="reserva__cabeza" data-reveal>
+      <h3 id="reserva-titulo">Reservá tu clase</h3>
+      <p class="seccion__rotulo">Cuatro datos y listo</p>
+    </div>
+
+    <form class="reserva__form" data-reserva novalidate data-reveal>
+      <p class="campo">
+        <label for="r-nombre">Nombre</label>
+        <input id="r-nombre" name="nombre" type="text" autocomplete="name" required>
+      </p>
+      <p class="campo">
+        <label for="r-tel">Teléfono</label>
+        <input id="r-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required>
+      </p>
+      <p class="campo">
+        <label for="r-clase">Qué clase te interesa</label>
+        <select id="r-clase" name="clase">
+          <option>Boxeo principiantes</option>
+          <option>Box fitness</option>
+          <option>Kids y juvenil</option>
+          <option>Personal 1 a 1</option>
+          <option>Todavía no sé</option>
+        </select>
+      </p>
+      <p class="campo">
+        <label for="r-dias">Qué días podés</label>
+        <input id="r-dias" name="dias" type="text" placeholder="Lunes y miércoles a la tarde">
+      </p>
+      <p class="reserva__enviar">
+        <button class="btn btn--negro" type="submit">Enviar por WhatsApp</button>
+        <span class="reserva__aviso" data-reserva-aviso role="status"></span>
+      </p>
+      <noscript>
+        <p class="reserva__aviso">El formulario necesita JavaScript para armar el
+          mensaje. Escribinos directo con el botón de arriba.</p>
+      </noscript>
+    </form>
+  </section>
+
+  <!-- ── 12. Mapa ────────────────────────────────────────────────────── -->
+  <!-- El mapa embebido pesa casi tanto como la página entera, y encima la
+       dirección todavía no está confirmada. Va la dirección en texto y el
+       link a Maps; cuando confirmen, entra el iframe con loading="lazy". -->
+  <section class="mapa" aria-labelledby="mapa-titulo">
+    <div data-reveal>
+      <h3 id="mapa-titulo">Cómo llegar</h3>
+      <p class="mapa__dir">
+        <span data-negocio="direccion">Rueda 2553</span>,
+        <span data-negocio="ciudad">Rosario</span>, Santa Fe
+      </p>
+      <a class="btn btn--linea-clara" data-negocio="mapa"
+         href="https://www.google.com/maps/search/?api=1&amp;query=Rueda+2553+Rosario+Santa+Fe"
+         target="_blank" rel="noopener">Abrir en Google Maps</a>
+    </div>
+  </section>
+
+</div>
 
 </main>
 
 <!-- ── 13. Pie ───────────────────────────────────────────────────────── -->
+<!-- No estaba en el diseño original. Hace falta: es donde la gente busca
+     horario y dirección cuando ya decidió venir. -->
 <footer class="pie">
-  <p>Alanis Boxing Club · <span data-negocio="direccion">Rueda 2553</span>, Rosario</p>
-  <p>
-    <a href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a> ·
-    <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
-  </p>
+  <div class="pie__marca">
+    <span class="marca__cuadro" aria-hidden="true"></span>
+    <span class="marca__nombre">Alanis Boxing Club</span>
+  </div>
+
+  <dl class="pie__datos">
+    <div>
+      <dt>Dónde</dt>
+      <dd><span data-negocio="direccion">Rueda 2553</span>, <span data-negocio="ciudad">Rosario</span></dd>
+    </div>
+    <div>
+      <dt>Horarios</dt>
+      <dd data-negocio="horarios">Mañana y tarde</dd>
+    </div>
+    <div>
+      <dt>Escribinos</dt>
+      <dd>
+        <a href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a> ·
+        <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
+      </dd>
+    </div>
+  </dl>
+
+  <p class="pie__legal">&copy; <span data-anio>2026</span> Alanis Boxing Club</p>
 </footer>
 
 <noscript>

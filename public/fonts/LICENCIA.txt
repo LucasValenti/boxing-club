@@ -1,0 +1,21 @@
+Big Shoulders Display, Chivo y Chivo Mono
+SIL Open Font License, Version 1.1
+
+Los tres archivos .woff2 de esta carpeta son el subconjunto latino de las
+familias publicadas en Google Fonts:
+
+  Big Shoulders Display — https://fonts.google.com/specimen/Big+Shoulders+Display
+  Chivo                 — https://fonts.google.com/specimen/Chivo
+  Chivo Mono            — https://fonts.google.com/specimen/Chivo+Mono
+
+Están servidas desde este dominio en vez de desde Google. La OFL 1.1 lo
+permite expresamente: se pueden usar, estudiar, modificar y redistribuir
+libremente, incluso incrustadas en un sitio.
+
+Las dos condiciones que hay que respetar:
+  · no se venden por sí solas;
+  · si se modifican y redistribuyen, no pueden llevar el nombre original
+    («Reserved Font Name»).
+
+Texto completo de la licencia:
+https://openfontlicense.org/open-font-license-official-text/

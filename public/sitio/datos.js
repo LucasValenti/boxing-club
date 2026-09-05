@@ -30,6 +30,20 @@ window.NEGOCIO = {
   instagram: null,   // ⚠ pedir al cliente: ahí están las fotos reales
 };
 
+/* Interruptores de contenido.
+   ────────────────────────────────────────────────────────────────────────
+   Existen porque hay secciones que dependen de datos que el club todavía no
+   confirmó. Apagadas, la sección desaparece del documento y la página se
+   publica igual: el lanzamiento no queda rehén de un dato que falta.
+   ──────────────────────────────────────────────────────────────────────── */
+window.MOSTRAR = {
+  mostrarLinaje: true,       // «El rincón» — los datos de Junior Alanís están
+                             //   sin verificar. Apagalo si no los confirman.
+  mostrarPrecios: true,      // «Los planes» — hoy dicen «A confirmar».
+  mostrarTestimonios: false, // Apagada: las tres tarjetas son ranuras vacías.
+                             //   Se enciende cuando lleguen los reales.
+};
+
 /* wa.me con el mensaje ya cargado. */
 window.linkWhatsApp = function (texto) {
   var n = window.NEGOCIO;

@@ -129,6 +129,14 @@ color, gana contraste solo»*. Medido, pierde:
 `--sobre-rojo-mudo`. Los tokens ya existen en `tokens/colors.css`. No cambia el
 layout ni la idea del gesto: solo los colores de ese estado.
 
+### Sobre el rojo no hay medias tintas
+
+El blanco sobre `#E2231A` da **4.68:1**: pasa el mínimo de 4.5, pero apenas. No
+queda margen para bajarle opacidad — un blanco al 82%, que es lo que se probó
+primero para el sufijo del plan destacado, ya cae por debajo y axe lo marcó. Por
+eso no existe un token de «blanco velado»: sobre rojo todo el texto va en blanco
+pleno, y la jerarquía la hacen el tamaño y el peso.
+
 ### El rojo como texto es solo para tamaño grande
 
 `#E2231A` sobre `#0b0b0b` da **4.21:1**: alcanza para el H1 y los títulos, no
@@ -163,7 +171,7 @@ en una conexión móvil promedio.
 | | |
 |---|---|
 | HTML + CSS + JS | ~25 KB — es todo texto propio |
-| Fuentes | 4 familias con `display=swap` y `preconnect`. **Conviene autohospedarlas — ver abajo** |
+| Fuentes | 3 archivos variables, servidos desde este dominio. 80 KB en total |
 | Foto del hero | el LCP. `fetchpriority="high"`, medidas explícitas, nunca lazy |
 | Resto de las fotos | `loading="lazy"`, WebP, con `width`/`height` para que no salte el layout |
 
@@ -171,22 +179,27 @@ Las fotos reales del cliente se procesan con `sharp` antes de entrar al repo. En
 GEA el mismo paso llevó la carga de 7 MB a 762 KB; acá la ganancia es del mismo
 orden.
 
-### Las fuentes deberían estar en el repo, no en Google
+### Las fuentes están en el repo, no en Google
 
 Probando el esqueleto en una red que bloquea Google Fonts se vio el problema
-completo: sin el CSS de Google no hay `@font-face`, el H1 cae a una sans ancha y
-«Ponete los guantes» —dos líneas en el diseño— se desarma en tres. El titular es
-la página entera, y depende de un tercero que puede tardar o no estar.
+completo: sin el CSS de Google no hay `@font-face`, el H1 caía a una sans ancha y
+«Ponete los guantes» —dos líneas en el diseño— se desarmaba en tres. El titular
+es la página entera y no puede depender de un tercero que puede tardar o no
+estar.
 
-Autohospedarlas arregla las dos cosas: saca una conexión a otro dominio del
-camino crítico (que es justo lo que castiga el LCP) y hace que el diseño no
-dependa de nadie. Las cuatro familias son de licencia libre (SIL OFL), así que
-se pueden guardar en el repo sin problema.
+Ahora las tres familias viven en `public/fonts/`. Son **variables**: un archivo
+cubre todo el rango de pesos, así que el 800 y el 900 de Big Shoulders salen del
+mismo `.woff2`. Con el subconjunto latino —todo lo que necesita el castellano—
+son tres archivos y 80 KB. Licencia SIL OFL, que permite redistribuirlas;
+el texto está en `public/fonts/LICENCIA.txt`.
 
-Cómo: bajar los `.woff2` del subconjunto latino a `public/fonts/`, escribir los
-`@font-face` en `tokens/fonts.css` con `font-display:swap`, y precargar solo el
-de Big Shoulders 900 —el del H1—. Son unos 8 archivos y menos de 100 KB en
-total. **Es la primera tarea de la fase 2.**
+El de Big Shoulders va con `<link rel="preload">`: se pide antes que el CSS, no
+después de leerlo. `crossorigin` es obligatorio aunque el archivo sea del mismo
+dominio —las fuentes siempre se piden en modo CORS— y sin ese atributo se
+descarga dos veces.
+
+Queda una sola conexión afuera: la foto del hero, que se va cuando entren las
+fotos reales del club.
 
 ## Búsqueda local
 
@@ -225,6 +238,12 @@ sirve en un hook antes de publicar.
 
 ## Estado
 
-Portados: header, hero y marquesina. Las otras diez secciones son cáscaras
-rotuladas en `index.html` que citan su parte de `SECCIONES.md`. La fase 2 es
-reemplazarlas de arriba hacia abajo.
+Las trece secciones están construidas. Lo que falta no es código:
+
+- Las **fotos** son de banco de imágenes hasta que lleguen las del club.
+- Los **precios** dicen «A confirmar».
+- **Testimonios** está apagada: las tarjetas son ranuras vacías y no se
+  inventan testimonios.
+- El **FAQ** tiene cinco preguntas de las seis propuestas. Falta la política de
+  faltas, que es del club.
+- El **mapa** es dirección y link a Maps hasta que confirmen la dirección.

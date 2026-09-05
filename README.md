@@ -3,9 +3,9 @@
 Landing page del gimnasio de boxeo Alanis Boxing Club, en Rosario. HTML + CSS +
 JavaScript, sin build: se abre y se edita en VS Code.
 
-**Estado:** etapa 1 de 3. Están los wireframes, la arquitectura y el esqueleto
-del sitio. Faltan diez de las trece secciones y todo el contenido real —
-ver `docs/contenido-pendiente.md`.
+**Estado:** etapa 2 de 3. Las trece secciones están construidas y la página
+funciona de punta a punta. Lo que falta es contenido del club: fotos, precios,
+horarios y datos de contacto confirmados — ver `docs/contenido-pendiente.md`.
 
 ## Cómo levantarlo
 
@@ -33,21 +33,25 @@ configuración y herramientas.
 
 ### El sitio
 
-- `public/index.html` — la página entera. El contenido está en el HTML, no lo
-  arma un programa: es lo que hace que Google la lea y que abra rápido.
-  Hoy tiene el header, la primera pantalla y la cinta ya hechos; las otras diez
-  secciones son cáscaras rotuladas que citan su parte de `docs/diseno/SECCIONES.md`.
+- `public/index.html` — la página entera, las trece secciones. El contenido
+  está en el HTML, no lo arma un programa: es lo que hace que Google la lea y
+  que abra rápido. Adentro también van los dos bloques de datos estructurados
+  (el del gimnasio y el de las preguntas frecuentes).
 - `public/styles.css` — solo `@import`s. Un archivo nuevo se agrega acá.
 - `public/tokens/` — `colors.css`, `typography.css`, `layout.css`, `motion.css`
   y `fonts.css`: la paleta, la escala tipográfica, los espaciados y las cinco
   animaciones. Los valores son los del diseño, sin redondear.
+- `public/fonts/` — las tres tipografías, servidas desde acá y no desde Google.
+  Son variables: un archivo por familia cubre todos los pesos. 80 KB en total.
 - `public/base/reset.css` — normalización mínima y el foco visible.
 - `public/sitio/datos.js` — **el archivo que más vas a tocar.** La constante
-  `NEGOCIO`: teléfono, WhatsApp, dirección, email y horarios. Es el único lugar
-  del sitio donde viven esos datos.
+  `NEGOCIO` (teléfono, WhatsApp, dirección, email y horarios: el único lugar del
+  sitio donde viven esos datos) y `MOSTRAR`, los interruptores que encienden y
+  apagan secciones enteras.
 - `public/sitio/sitio.css` — los estilos de las secciones, en orden vertical.
-- `public/sitio/app.js` — las tres cosas que hace el JavaScript: estampar los
-  datos de contacto, revelar al hacer scroll y abrir el menú en el celular.
+- `public/sitio/app.js` — todo el JavaScript del sitio: los interruptores de
+  sección, los datos de contacto, el revelado al hacer scroll, el menú del
+  celular y el formulario que arma el mensaje de WhatsApp.
 - `public/img/` — fotos del gimnasio (todavía vacía).
 
 ### Documentación
@@ -70,7 +74,8 @@ configuración y herramientas.
 | Querés… | Archivo |
 | --- | --- |
 | Cambiar el teléfono, la dirección o los horarios | `public/sitio/datos.js` (`NEGOCIO`) |
-| Construir una de las secciones que faltan | `public/index.html` + `public/sitio/sitio.css` |
+| Encender o apagar una sección entera | `public/sitio/datos.js` (`MOSTRAR`) |
+| Cambiar textos, precios o preguntas | `public/index.html` |
 | Cambiar colores o tipografías | `public/tokens/colors.css`, `typography.css` |
 | Ajustar una animación | `public/tokens/motion.css` |
 | Saber cómo va una sección | `docs/diseno/SECCIONES.md` |

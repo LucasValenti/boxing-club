@@ -26,7 +26,11 @@
   /* Textos cuando el fondo se pone rojo (hover de tarjeta, plan destacado).
      El handoff decía que el texto no cambiaba y "ganaba contraste solo".
      Medido, es al revés: --gris-texto sobre rojo da 2.72:1 y --gris-mudo
-     1.31:1. Sobre rojo el texto pasa a blanco o a un blanco velado. */
+     1.31:1. Sobre rojo el texto pasa a blanco.
+
+     Y va blanco pleno, sin versión velada: el blanco puro sobre este rojo
+     da 4.68:1, apenas por encima del mínimo de 4.5. No queda margen para
+     bajarle opacidad —un blanco al 82% ya no pasa—, así que sobre rojo la
+     jerarquía la hacen el tamaño y el peso, no el color. */
   --sobre-rojo:var(--blanco);            /* 4.68:1 */
-  --sobre-rojo-mudo:rgba(255,255,255,.82);
 }

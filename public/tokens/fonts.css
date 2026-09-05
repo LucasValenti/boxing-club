@@ -1,4 +1,46 @@
-/* Las cuatro familias del sistema, desde Google Fonts igual que el diseño
-   original. Oswald es el respaldo de Big Shoulders: si la primera no llega,
-   la página sigue con una condensada y no salta a Arial. */
-@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Oswald:wght@500;700&family=Chivo:wght@400;700&family=Chivo+Mono:wght@400&display=swap");
+/* Las tres familias del sistema, servidas desde este mismo dominio.
+   ────────────────────────────────────────────────────────────────────────
+   Antes venían de Google Fonts. En una red que lo bloquea —hay bastantes—
+   el titular caía a una sans ancha y «Ponete los guantes», que son dos
+   líneas, se desarmaba en tres. Además era una conexión a otro dominio en
+   el camino crítico, justo lo que castiga la métrica de carga.
+
+   Las tres son variables: un archivo cubre todos los pesos, por eso hay
+   tres archivos y no ocho. Subconjunto latino, que es todo lo que necesita
+   el castellano. 80 KB en total.
+
+   Licencia SIL Open Font License 1.1 — ver public/fonts/LICENCIA.txt.
+   ──────────────────────────────────────────────────────────────────────── */
+
+@font-face{
+  font-family:'Big Shoulders Display';
+  src:url('../fonts/big-shoulders-display-latin.woff2') format('woff2');
+  font-weight:100 900;      /* variable: el 800 y el 900 salen del mismo archivo */
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+                U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,
+                U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face{
+  font-family:'Chivo';
+  src:url('../fonts/chivo-latin.woff2') format('woff2');
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+                U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,
+                U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face{
+  font-family:'Chivo Mono';
+  src:url('../fonts/chivo-mono-latin.woff2') format('woff2');
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+                U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,
+                U+2212,U+2215,U+FEFF,U+FFFD;
+}

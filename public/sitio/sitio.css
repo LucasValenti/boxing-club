@@ -116,29 +116,214 @@
 .seccion__rotulo{font-family:var(--f-mono);font-size:var(--t-rotulo);
   letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
 
-/* ── Cáscaras de las secciones todavía no portadas ───────────────────── */
-/* Marcan el lugar, el orden y el alto aproximado de cada sección que falta.
-   No es diseño: es andamio, y sale cuando entra la sección de verdad. */
-.pendiente{border:1px dashed var(--linea-fuerte);padding:clamp(28px,5vw,64px);
-  display:grid;gap:12px;place-items:start;min-height:clamp(180px,26vw,300px);
-  align-content:center}
-/* En rojo daría 4.21:1 a 10px: es justo lo que la regla del sitio prohíbe,
-   y axe lo marcó. El acento acá lo pone el borde, no el texto. */
-.pendiente__n{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
-  letter-spacing:.2em;color:var(--gris-mudo);text-transform:uppercase}
-.pendiente__que{font-family:var(--f-titulo);font-weight:800;
-  font-size:var(--t-h3-clase);line-height:.95;text-transform:uppercase}
-.pendiente__ref{font-family:var(--f-mono);font-size:var(--t-rotulo);
-  color:var(--gris-mudo);letter-spacing:.06em}
-.pendiente--nueva{border-color:var(--rojo)}
-.pendiente--nueva .pendiente__n{color:var(--hueso)}
-
-/* ── Pie ─────────────────────────────────────────────────────────────── */
-.pie{padding:clamp(36px,5vw,64px) var(--pad-x);display:flex;flex-wrap:wrap;
-  gap:16px 32px;justify-content:space-between;align-items:baseline;
-  font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.14em;
+/* ══ Piezas compartidas ═════════════════════════════════════════════════ */
+.rotulo{font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.2em;
   color:var(--gris-mudo);text-transform:uppercase}
-.pie a:hover{color:var(--rojo)}
+.parrafo{color:var(--gris-texto);line-height:1.6;text-wrap:pretty;max-width:52ch}
+.parrafo strong{color:var(--hueso);font-weight:700}
+/* El rojo como texto solo a partir de 24px: sobre negro da 4.21:1 y a tamaño
+   chico queda fuera de norma. Todos los usos de .acento son titulares. */
+.acento{color:var(--rojo)}
+
+/* ── 4. El rincón ────────────────────────────────────────────────────── */
+.rincon{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+  gap:clamp(28px,4vw,64px);align-items:start}
+.rincon h2{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-h2);
+  line-height:.9;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance;
+  margin:clamp(12px,1.6vw,18px) 0 clamp(16px,2vw,24px)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+.stats > div{background:var(--negro);padding:22px 18px;
+  display:flex;flex-direction:column}
+.stats dd{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-stat);
+  line-height:.86;text-transform:uppercase;margin:0}
+.stats dt{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);letter-spacing:.16em;
+  color:var(--gris-mudo);text-transform:uppercase;margin-top:12px}
+
+/* ── 5. Las clases ───────────────────────────────────────────────────── */
+.clases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+.clase{background:var(--negro);padding:var(--pad-tarjeta);
+  transition:background .25s var(--curva)}
+.clase__n{font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.2em;
+  color:var(--gris-mudo);text-transform:uppercase}
+/* El margen grande es lo que empuja el título hacia abajo y arma el aire
+   característico de la tarjeta. No es un descuido. */
+.clase h3{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-h3-clase);
+  line-height:.95;text-transform:uppercase;margin-top:clamp(60px,9vw,110px)}
+.clase__q{color:var(--gris-texto);font-size:15px;line-height:1.6;margin-top:14px;
+  text-wrap:pretty}
+.clase__meta{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);letter-spacing:.16em;
+  color:var(--gris-mudo);text-transform:uppercase;margin-top:18px}
+
+/* Al pasar el mouse la tarjeta entera se pinta de rojo. La spec original
+   decía que el texto no cambiaba porque «ganaba contraste solo»: medido,
+   perdía —el párrafo quedaba en 2.72:1 y la meta en 1.31:1. Sobre rojo el
+   texto pasa a blanco. El gesto es el mismo; ahora se lee. */
+@media (hover:hover){
+  .clase:hover{background:var(--rojo)}
+  .clase:hover h3{color:var(--sobre-rojo)}
+  .clase:hover .clase__q{color:var(--sobre-rojo)}
+  .clase:hover .clase__n,
+  .clase:hover .clase__meta{color:var(--sobre-rojo)}
+}
+
+/* ── 6. Testimonios ──────────────────────────────────────────────────── */
+.testimonios{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+.testimonio{background:var(--negro);padding:var(--pad-tarjeta);margin:0;
+  display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.testimonio blockquote{margin:0}
+.testimonio blockquote p{color:var(--hueso);font-size:17px;line-height:1.55;
+  text-wrap:pretty}
+.testimonio figcaption{display:flex;flex-direction:column;gap:5px}
+.testimonio__quien{font-family:var(--f-titulo);font-weight:800;font-size:20px;
+  text-transform:uppercase;letter-spacing:.02em}
+.testimonio__cuando{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
+
+/* ── 7. Los planes ───────────────────────────────────────────────────── */
+/* Único lugar con gap de verdad en vez de líneas de 1px: cada tarjeta trae
+   su propio borde y dos bordes pegados se ven sucios. */
+.planes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:var(--gap-planes)}
+.plan{border:1px solid var(--linea-media);padding:clamp(22px,2.6vw,30px)}
+.plan h3{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-h3-plan);
+  letter-spacing:.04em;text-transform:uppercase}
+.plan__precio{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-precio);
+  text-transform:uppercase;line-height:1;margin-top:clamp(18px,2.4vw,26px)}
+/* Mientras el precio diga «A confirmar» el sufijo va debajo, en bloque.
+   Cuando lleguen los montos, el número crece y el sufijo pasa a inline
+   («/mes»). El layout no cambia. */
+.plan__precio span{display:block;margin-top:10px;font-family:var(--f-mono);
+  font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--gris-mudo);
+  text-transform:uppercase}
+.plan--destacado{background:var(--rojo);border-color:var(--rojo)}
+.plan--destacado h3,
+.plan--destacado .plan__precio{color:var(--sobre-rojo)}
+.plan--destacado .plan__precio span{color:var(--sobre-rojo)}
+
+/* ── 8. Preguntas frecuentes ─────────────────────────────────────────── */
+.faq{display:grid;gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+.faq__item{background:var(--negro)}
+.faq__item summary{display:flex;justify-content:space-between;align-items:center;
+  gap:20px;list-style:none;cursor:pointer;padding:clamp(18px,2.2vw,24px) var(--pad-tarjeta);
+  font-family:var(--f-titulo);font-weight:800;font-size:clamp(19px,2vw,24px);
+  line-height:1.1;text-transform:uppercase;letter-spacing:.01em;
+  transition:color .2s}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary:hover{color:var(--rojo)}
+/* El signo se dibuja con dos líneas y rota: sin librería de íconos y sin
+   glifo que dependa de la fuente. */
+.faq__item summary::after{content:"";flex:none;width:14px;height:14px;
+  background:
+    linear-gradient(var(--gris-mudo),var(--gris-mudo)) center/100% 1px no-repeat,
+    linear-gradient(var(--gris-mudo),var(--gris-mudo)) center/1px 100% no-repeat;
+  transition:transform .25s var(--curva)}
+.faq__item[open] summary::after{transform:rotate(45deg)}
+.faq__item > p{color:var(--gris-texto);line-height:1.65;text-wrap:pretty;
+  max-width:62ch;padding:0 var(--pad-tarjeta) clamp(22px,2.6vw,28px)}
+
+/* ── 9. El gimnasio ──────────────────────────────────────────────────── */
+/* tabindex="0" en el HTML: con el dedo se arrastra y con el mouse también,
+   pero con el teclado no había manera de mover la tira. Ahora se enfoca y
+   las flechas la desplazan. */
+.tira{display:flex;gap:clamp(8px,1.2vw,14px);overflow-x:auto;padding-bottom:14px;
+  scroll-snap-type:x mandatory;scrollbar-width:thin}
+.tira:focus-visible{outline:2px solid var(--rojo);outline-offset:4px}
+.tira__foto{position:relative;flex:0 0 clamp(230px,30vw,400px);aspect-ratio:4/5;
+  overflow:hidden;background:var(--panel);scroll-snap-align:start;margin:0}
+.tira__foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.08);
+  transition:filter .5s,transform .7s var(--curva)}
+.tira__pie{position:absolute;left:0;bottom:0;background:var(--negro);
+  font-family:var(--f-mono);font-size:var(--t-rotulo-chico);letter-spacing:.16em;
+  text-transform:uppercase;padding:7px 10px}
+.tira__pie--rojo{background:var(--rojo);color:var(--sobre-rojo)}
+
+/* La foto recupera el color al pasar el mouse. Con el dedo ese gesto no
+   existe, así que donde no hay mouse las fotos van en color de entrada:
+   nadie se queda sin ver el gimnasio por no tener con qué apuntar. */
+@media (hover:hover){
+  .tira__foto:hover img{filter:grayscale(0) contrast(1);transform:scale(1.05)}
+}
+@media (hover:none){
+  .tira__foto img{filter:none}
+}
+
+/* ══ 10 a 12. La banda clara ═══════════════════════════════════════════ */
+.banda-clara{background:var(--hueso);color:var(--negro)}
+.banda-clara .seccion__rotulo,
+.banda-clara .rotulo{color:var(--gris-meta)}
+.banda-clara h3{font-family:var(--f-titulo);font-weight:900;
+  font-size:clamp(26px,3.2vw,40px);line-height:.95;text-transform:uppercase;
+  letter-spacing:-.005em}
+
+/* ── 10. Contacto ────────────────────────────────────────────────────── */
+.contacto{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+  gap:clamp(24px,4vw,56px);align-items:center;
+  padding:clamp(48px,7vw,104px) var(--pad-x)}
+.contacto__titulo{font-family:var(--f-titulo);font-weight:900;
+  font-size:var(--t-h2-contacto);line-height:.85;text-transform:uppercase;
+  letter-spacing:-.01em;text-wrap:balance}
+.contacto__cuerpo{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,26px);
+  align-items:flex-start}
+.contacto__q{color:var(--gris-sobre-claro);line-height:1.6;max-width:40ch;
+  text-wrap:pretty}
+.contacto__datos{font-family:var(--f-mono);font-size:var(--t-rotulo);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gris-meta)}
+.contacto__datos a:hover{color:var(--rojo)}
+
+/* ── 11. Formulario ──────────────────────────────────────────────────── */
+.reserva{padding:0 var(--pad-x) clamp(48px,7vw,88px);
+  border-top:1px solid var(--linea-clara)}
+.reserva__cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;
+  align-items:baseline;gap:16px;padding-top:clamp(38px,5vw,64px);
+  margin-bottom:clamp(24px,3vw,34px)}
+.reserva__form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:clamp(14px,2vw,20px);max-width:820px}
+.campo{display:flex;flex-direction:column;gap:8px;margin:0}
+.campo label{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gris-meta)}
+.campo input,
+.campo select{font-family:var(--f-cuerpo);font-size:16px;color:var(--negro);
+  background:transparent;border:1px solid var(--linea-clara);border-radius:0;
+  padding:15px 16px;transition:border-color .2s}
+.campo input:hover,
+.campo select:hover{border-color:rgba(11,11,11,.45)}
+.campo input:focus-visible,
+.campo select:focus-visible{border-color:var(--negro);outline-offset:1px}
+.campo input::placeholder{color:var(--gris-meta);opacity:1}
+/* Un campo en rojo con el mensaje al lado. El rojo acá es borde, no texto:
+   el aviso se lee en negro y no depende del color para entenderse. */
+.campo input[aria-invalid="true"]{border-color:var(--rojo);border-width:2px}
+.reserva__enviar{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;
+  gap:16px;margin:clamp(6px,1vw,12px) 0 0}
+.reserva__aviso{font-family:var(--f-mono);font-size:var(--t-rotulo);
+  letter-spacing:.1em;color:var(--gris-sobre-claro);max-width:38ch;line-height:1.5}
+
+/* ── 12. Mapa ────────────────────────────────────────────────────────── */
+.mapa{padding:clamp(38px,5vw,64px) var(--pad-x) clamp(48px,7vw,88px);
+  border-top:1px solid var(--linea-clara)}
+.mapa__dir{font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gris-meta);
+  margin:clamp(12px,1.6vw,16px) 0 clamp(20px,2.6vw,26px)}
+
+/* ── 13. Pie ─────────────────────────────────────────────────────────── */
+.pie{padding:clamp(38px,5vw,64px) var(--pad-x) clamp(44px,6vw,72px);
+  display:grid;gap:clamp(26px,4vw,44px);
+  border-top:1px solid var(--linea-tenue)}
+.pie__marca{display:flex;align-items:center;gap:12px}
+.pie__datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+.pie__datos > div{background:var(--negro);padding:20px 18px}
+.pie__datos dt{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
+.pie__datos dd{margin:10px 0 0;color:var(--gris-texto);font-size:15px;line-height:1.55}
+.pie__datos a:hover{color:var(--rojo)}
+.pie__legal{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
 
 /* ── Angosto ─────────────────────────────────────────────────────────── */
 @media (max-width:640px){
@@ -156,4 +341,30 @@
   /* En un teclado táctil, 19px de padding en el CTA deja el botón por debajo
      de los 44px que pide la norma cuando el texto es corto. */
   .btn{width:100%;text-align:center}
+}
+
+/* Lo que el diseño no resolvía para pantallas angostas. */
+@media (max-width:640px){
+  /* El titular de contacto ocupaba tres líneas enormes y empujaba los
+     botones fuera de la primera pantalla del bloque. */
+  .contacto{gap:clamp(20px,5vw,28px)}
+  .contacto__cuerpo{align-items:stretch}
+  .contacto__datos{line-height:1.9}
+  /* El formulario en una sola columna: dos campos de 160px no se completan. */
+  .reserva__form{grid-template-columns:1fr}
+  .reserva__enviar{flex-direction:column;align-items:stretch;gap:12px}
+  .reserva__aviso{text-align:center}
+  /* Las clases y los planes ya se apilan solos por el minmax(min(100%,…)). */
+  .clase h3{margin-top:clamp(36px,12vw,60px)}
+}
+
+@media (max-width:520px){
+  /* Apilados, el plan destacado va primero: en escritorio va al medio, que
+     es donde se mira, pero en una columna «al medio» es «segundo» y se lo
+     pasa de largo. El orden del HTML se queda como está por el escritorio;
+     acá lo reordena el layout. */
+  .plan--destacado{order:-1}
+  /* Los tres datos del hero en dos columnas dejaban al tercero solo en una
+     fila. Apilados se leen de un tirón. */
+  .hero__datos{grid-template-columns:1fr}
 }
