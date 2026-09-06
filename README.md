@@ -58,6 +58,9 @@ configuración y herramientas.
 
 - `docs/arquitectura.md` — por qué el sitio está hecho así: el stack, las tres
   decisiones que lo definen, accesibilidad, peso y búsqueda local.
+- `docs/auditoria-tecnica.md` — la auditoría técnica sobre lo construido: los
+  doce hallazgos abiertos, la corrección de cada uno y en qué orden conviene
+  hacerlos. Empezá por el plan de trabajo del final.
 - `docs/contenido-pendiente.md` — la lista de lo que hay que pedirle al cliente.
   **Empezá por acá si volvés después de un tiempo.**
 - `docs/propuesta.html` — la presentación para el cliente.
