@@ -6,6 +6,27 @@
   --pad-tarjeta:clamp(22px,2.6vw,34px);
   --gap-planes:clamp(14px,2vw,22px);
   --ancho-max:1400px;
+
+  /* Alto del header. Lo necesita la primera pantalla para medir «lo que
+     entra sin scrollear»: el header es sticky, así que ocupa lugar en el
+     flujo y hay que descontarlo o el hero termina un poco abajo del borde.
+
+     Este valor es solo el arranque: app.js mide el header de verdad y lo
+     reescribe, porque el alto depende de la tipografía —que carga después—
+     y del ancho de pantalla. Si el JS no corre, 56px es el alto medido en
+     mobile y el error en escritorio es de unos 10px: nadie lo nota. */
+  --alto-header:56px;
+
+  /* Una pantalla, descontando el header. svh y no vh: en el celular vh mide
+     la pantalla CON la barra del navegador escondida, así que una sección
+     de 100vh queda más alta que lo que se ve y siempre sobra un pedazo
+     abajo. svh mide la pantalla con la barra puesta, que es el caso malo. */
+  --pantalla:calc(100svh - var(--alto-header));
+}
+
+/* Navegadores sin svh (Safari < 15.4). Ahí vh es lo mejor que hay. */
+@supports not (height:1svh){
+  :root{--pantalla:calc(100vh - var(--alto-header))}
 }
 
 /* Las grillas se separan con líneas de 1px, no con gap: el contenedor pinta

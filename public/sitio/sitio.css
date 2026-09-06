@@ -29,9 +29,18 @@
   font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.16em;
   text-transform:uppercase}
 .nav a:hover{color:var(--rojo)}
-.nav__cta{background:var(--rojo);color:var(--blanco);padding:11px 18px;
-  font-weight:700;letter-spacing:.14em;transition:background .2s,color .2s}
-.nav__cta:hover{background:var(--hueso);color:var(--negro)}
+/* El CTA del header lleva el mismo relleno que los .btn: es el mismo gesto
+   y tiene que sentirse igual, aunque no comparta clase. */
+.nav__cta{position:relative;isolation:isolate;overflow:hidden;display:inline-block;
+  background:var(--rojo);color:var(--blanco);padding:11px 18px;
+  font-weight:700;letter-spacing:.14em;transition:color .25s var(--curva)}
+.nav__cta::before{content:"";position:absolute;z-index:-1;inset:0;
+  background:var(--hueso);transform:scaleX(0);transform-origin:right;
+  transition:transform .35s var(--curva)}
+.nav__cta:hover::before,
+.nav__cta:focus-visible::before{transform:scaleX(1);transform-origin:left}
+.nav__cta:hover,.nav__cta:focus-visible{color:var(--negro)}
+.nav__cta:focus-visible{outline-color:var(--hueso)}
 
 /* El botón del menú solo existe en pantallas angostas. */
 .menu-boton{display:none;font-family:var(--f-mono);font-size:var(--t-rotulo);
@@ -39,12 +48,25 @@
 .menu-panel{display:none}
 
 /* ── 2. Hero ─────────────────────────────────────────────────────────── */
-.hero{position:relative;min-height:min(90vh,800px);display:flex;
+/* La primera pantalla es el hero MÁS la marquesina: juntos miden exacto lo
+   que se ve sin scrollear. El envoltorio es flex en columna y el hero se
+   queda con lo que sobre (flex:1), así que la marquesina calza contra el
+   borde de abajo sin que nadie tenga que saber cuánto mide.
+   Es la única forma de que esto no dependa de un número mágico: la
+   marquesina cambia de alto con el ancho de pantalla y con la tipografía. */
+.primera-pantalla{display:flex;flex-direction:column;min-height:var(--pantalla)}
+/* El respiro de arriba también mira el alto, por lo mismo que el titular:
+   110px de aire en una pantalla de 900 es aire que le falta al contenido. */
+.hero{position:relative;flex:1;display:flex;
   align-items:flex-end;overflow:hidden;
-  padding:clamp(72px,10vw,120px) var(--pad-x) clamp(26px,3.5vw,48px)}
+  padding:min(clamp(56px,8vw,110px),7svh) var(--pad-x) clamp(26px,3.5vw,48px)}
 .hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:58% 34%;filter:grayscale(1) contrast(1.14) brightness(.82);
-  animation:ri-zoom 28s ease-in-out infinite alternate}
+  animation:ri-panear 34s ease-in-out infinite alternate}
+/* La foto no tiene animación de entrada y es a propósito: es el elemento
+   que mide el LCP, y Chrome no cuenta como pintado nada que arranque en
+   opacity:0. Medio segundo de aparición acá es medio segundo peor en la
+   métrica que ya viene justa. El movimiento del hero lo hace el titular. */
 /* Dos velos: el diagonal apoya el texto de la izquierda, el de abajo funde
    el hero con la sección siguiente. Son los únicos gradientes del sitio.
 
@@ -82,10 +104,32 @@
   line-height:.82;letter-spacing:-.015em;text-transform:uppercase;
   text-wrap:balance;margin:clamp(14px,2vw,26px) 0 clamp(18px,2.4vw,30px)}
 /* La animación firma: cada línea se descubre de izquierda a derecha, como
-   un golpe. Las dos líneas entran con un cuarto de segundo de diferencia. */
-.hero h1 span{display:block;animation:ri-wipe .8s var(--curva-golpe) both}
-.hero h1 span:nth-child(1){animation-delay:.1s}
-.hero h1 span:nth-child(2){color:var(--rojo);animation-delay:.25s}
+   un golpe, y ahora una barra de color viaja pegada al borde del recorte.
+   Las dos líneas entran con un quinto de segundo de diferencia.
+
+   La barra no hay que sincronizarla con nada: es un ::after adentro del
+   span, así que el mismo clip-path que descubre el texto la recorta a ella.
+   Lo único que hace ri-barra es apoyarla a la izquierda mientras entra y a
+   la derecha mientras sale, para que se vaya en vez de encogerse al medio.
+   El inset horizontal negativo tapa la última letra por completo: sin eso
+   asoma el borde del glifo por delante de la barra. */
+/* width:fit-content y no el ancho completo del bloque: sin eso el span mide
+   todo el ancho del titular y la barra —que va a inset:0— barre también el
+   vacío que queda a la derecha de la palabra. Sobre la foto eso era un
+   rectángulo rojo enorme cruzando la pantalla en vez de un sello sobre la
+   palabra. Ajustado al texto, la barra descubre exactamente lo que hay. */
+.hero h1 span{display:block;width:fit-content;position:relative;
+  animation:ri-wipe .85s var(--curva-golpe) both}
+.hero h1 span::after{content:"";position:absolute;inset:0 -.05em;
+  background:var(--rojo);animation:ri-barra .85s var(--curva-golpe) both}
+.hero h1 span:nth-child(1),
+.hero h1 span:nth-child(1)::after{animation-delay:.15s}
+/* La segunda línea ya es roja: si su barra también fuera roja no se vería
+   pasar. Va en hueso, que además invierte el golpe de la primera. */
+.hero h1 span:nth-child(2){color:var(--rojo)}
+.hero h1 span:nth-child(2),
+.hero h1 span:nth-child(2)::after{animation-delay:.35s}
+.hero h1 span:nth-child(2)::after{background:var(--hueso)}
 
 .hero__texto{font-size:var(--t-parrafo-hero);line-height:1.55;max-width:46ch;
   color:var(--gris-texto);text-wrap:pretty;animation:ri-up .7s var(--curva) .45s both}
@@ -93,41 +137,104 @@
 
 .botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(22px,3vw,34px);
   animation:ri-up .7s var(--curva) .55s both}
-.btn{display:inline-block;font-family:var(--f-titulo);font-weight:800;
+/* El botón se rellena con un bloque de color que entra desde la izquierda:
+   el mismo gesto que la barra del titular, en chico. No es un degradé
+   —están prohibidos en este sistema—, es un rectángulo sólido que escala.
+
+   El bloque vive en un ::before con z-index:-1 y el botón lleva
+   isolation:isolate. Dentro de un contexto de apilamiento el orden de
+   pintado es: primero el fondo del propio elemento, después los hijos de
+   z-index negativo, después el texto. Así que el bloque queda ARRIBA del
+   fondo del botón y DEBAJO del texto, sin tener que envolver el texto en un
+   span que no existe en el HTML. El isolation es lo que impide que el
+   z-index:-1 se escape y se vaya detrás de la sección entera. */
+.btn{position:relative;isolation:isolate;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  min-height:56px;padding:16px 28px;
+  font-family:var(--f-titulo);font-weight:800;
   font-size:var(--t-boton);letter-spacing:.06em;text-transform:uppercase;
-  padding:19px 30px;transition:background .2s,color .2s,border-color .2s}
-.btn--rojo{background:var(--rojo);color:var(--blanco)}
-.btn--rojo:hover{background:var(--hueso);color:var(--negro)}
-.btn--linea{border:1px solid var(--linea-fuerte)}
-.btn--linea:hover{border-color:var(--hueso);background:rgba(244,241,236,.06)}
-.btn--negro{background:var(--negro);color:var(--hueso)}
-.btn--negro:hover{background:var(--rojo);color:var(--blanco)}
-.btn--linea-clara{border:1px solid var(--linea-clara)}
-.btn--linea-clara:hover{border-color:var(--negro)}
+  transition:color .25s var(--curva),border-color .25s var(--curva)}
+.btn::before{content:"";position:absolute;z-index:-1;inset:0;
+  background:var(--relleno);transform:scaleX(0);transform-origin:right;
+  transition:transform .4s var(--curva)}
+/* La flecha se dibuja recortando un bloque de currentColor: sin fuente de
+   íconos, sin SVG, y cambia de color sola junto con el texto. Es el mismo
+   recurso que el signo de las preguntas frecuentes. */
+.btn::after{content:"";flex:none;width:.85em;height:.85em;background:currentColor;
+  clip-path:polygon(0 42%,60% 42%,60% 16%,100% 50%,60% 84%,60% 58%,0 58%);
+  transition:transform .25s var(--curva)}
+.btn:hover::before,
+.btn:focus-visible::before{transform:scaleX(1);transform-origin:left}
+.btn:hover::after,
+.btn:focus-visible::after{transform:translateX(.3em)}
+/* El hundido al apretar es el único acuse de recibo que hay en un celular,
+   donde el hover no existe. */
+.btn:active{transform:translateY(1px)}
+
+.btn--rojo{--relleno:var(--hueso);background:var(--rojo);color:var(--blanco)}
+.btn--rojo:hover,.btn--rojo:focus-visible{color:var(--negro)}
+/* Un anillo de foco rojo sobre un botón rojo no se ve. En este va en hueso. */
+.btn--rojo:focus-visible{outline-color:var(--hueso)}
+.btn--linea{--relleno:var(--hueso);border:1px solid var(--linea-fuerte)}
+.btn--linea:hover,.btn--linea:focus-visible{color:var(--negro);border-color:var(--hueso)}
+.btn--negro{--relleno:var(--rojo);background:var(--negro);color:var(--hueso)}
+.btn--negro:hover,.btn--negro:focus-visible{color:var(--blanco)}
+.btn--linea-clara{--relleno:var(--negro);border:1px solid var(--linea-clara)}
+.btn--linea-clara:hover,.btn--linea-clara:focus-visible{color:var(--hueso);border-color:var(--negro)}
 
 .hero__datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:1px;background:rgba(244,241,236,.2);border:1px solid rgba(244,241,236,.2);
   margin-top:clamp(26px,3.4vw,44px);animation:ri-up .7s var(--curva) .65s both}
-.hero__datos > div{background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px}
+/* Además del bloque entero, cada celda entra por su cuenta y escalonada:
+   así se leen de a una en vez de aparecer las tres como un cartel.
+   La animación del contenedor se queda igual y no es redundante — es la que
+   evita que se vea el rectángulo claro del fondo (el que pinta las líneas
+   de 1px) mientras las celdas todavía no taparon nada. */
+.hero__datos > div{background:rgba(11,11,11,.55);backdrop-filter:blur(6px);padding:16px 18px;
+  animation:ri-celda .55s var(--curva) both}
+.hero__datos > div:nth-child(1){animation-delay:.70s}
+.hero__datos > div:nth-child(2){animation-delay:.80s}
+.hero__datos > div:nth-child(3){animation-delay:.90s}
 .hero__datos dt{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
   letter-spacing:.16em;color:var(--gris-mudo);text-transform:uppercase}
 .hero__datos dd{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-dato);
   text-transform:uppercase;line-height:1;margin-top:8px}
 
 /* ── 3. Marquesina ───────────────────────────────────────────────────── */
+/* Sin margen arriba: ahora la marquesina es el piso de la primera pantalla
+   y va pegada al hero. El margen la despegaba y hacía que sobrara aire
+   justo donde el hero tiene que llegar al borde. */
 .marquesina{border-top:1px solid var(--linea-tenue);
   border-bottom:1px solid var(--linea-tenue);padding:14px 0;overflow:hidden;
-  margin-top:clamp(20px,3vw,40px)}
+  flex:none}
 .marquesina__cinta{display:flex;width:max-content;animation:ri-march 26s linear infinite}
 /* La cadena va duplicada exacta en el HTML: eso es lo que hace que el loop
    no tenga costura. Si sacás una copia, la marquesina salta. */
+/* line-height:1 y no el 1.6 que hereda del body: con 54px de tipografía esa
+   herencia sumaba 32px de aire invisible arriba y abajo de la cinta, y la
+   marquesina medía 116px cuando su contenido mide 54. En la primera
+   pantalla ese aire se lo estaba sacando al hero. */
 .marquesina__cinta > span{font-family:var(--f-titulo);font-weight:800;
-  font-size:clamp(30px,4vw,54px);text-transform:uppercase;white-space:nowrap;
-  padding-right:.4em}
+  font-size:clamp(30px,4vw,54px);line-height:1;text-transform:uppercase;
+  white-space:nowrap;padding-right:.4em}
 .marquesina i{color:var(--rojo);font-style:normal}
 
 /* ── Encabezado de sección (se repite en Clases, Planes y Gimnasio) ──── */
-.seccion{padding:var(--pad-y) var(--pad-x);border-bottom:1px solid var(--linea-tenue)}
+/* Cada sección ocupa por lo menos una pantalla, con el contenido centrado
+   en vertical. «Por lo menos»: las que traen mucho adentro —las clases en
+   el celular son cuatro tarjetas apiladas, las preguntas son cinco— pasan
+   de largo la pantalla, que es lo correcto. Apretarlas para que entren
+   sería achicar la letra hasta que no se lea.
+
+   Es grid y no flex por «El rincón», que ya es un grid de dos columnas: con
+   align-content el centrado sale igual en los dos casos y no hace falta
+   meter un div de más adentro de cada sección.
+
+   El desborde no rompe el centrado: align-content solo reparte el espacio
+   que sobra, y cuando el contenido es más alto que min-height no sobra
+   nada. Nunca queda un pedazo arriba fuera de alcance. */
+.seccion{min-height:var(--pantalla);display:grid;align-content:center;
+  padding:var(--pad-y) var(--pad-x);border-bottom:1px solid var(--linea-tenue)}
 .seccion__cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;
   align-items:baseline;gap:16px;margin-bottom:clamp(28px,4vw,54px)}
 .seccion__cabeza h2{font-family:var(--f-titulo);font-weight:900;font-size:var(--t-h2);
@@ -253,12 +360,37 @@
 /* tabindex="0" en el HTML: con el dedo se arrastra y con el mouse también,
    pero con el teclado no había manera de mover la tira. Ahora se enfoca y
    las flechas la desplazan. */
-.tira{display:flex;gap:clamp(8px,1.2vw,14px);overflow-x:auto;padding-bottom:14px;
-  scroll-snap-type:x mandatory;scrollbar-width:thin}
+/* La sección de la tira lleva menos aire arriba y abajo que las demás. Es
+   la única cuyo contenido tiene un alto propio grande —una pieza de 420px
+   de ancho mide 525 de alto— y con el padding normal se pasaba de la
+   pantalla justo en escritorio. Se achica el margen interno y no la pieza:
+   entre «respira igual que las otras» y «se ve el gimnasio», gana la foto.
+   Por afuera la sección sigue midiendo una pantalla, que es lo que se ve. */
+.seccion--tira{--pad-y:clamp(40px,5vw,58px)}
+
+/* La tira se sale del padding de la sección para llegar al borde de la
+   pantalla: con el padding puesto, una pieza de 280px en un celular de 390
+   deja dos franjas muertas y todo se ve más chico de lo que es. El
+   scroll-padding devuelve ese margen al frenar, así que la primera pieza
+   queda alineada con el título de la sección y no pegada al vidrio.
+
+   La barra de scroll se esconde: abajo hay una barra de avance propia, que
+   dice lo mismo y no cambia de aspecto según el sistema operativo. */
+.tira{display:flex;gap:clamp(8px,1.2vw,14px);overflow-x:auto;
+  margin-inline:calc(var(--pad-x) * -1);padding-inline:var(--pad-x);
+  scroll-padding-inline:var(--pad-x);
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none}
+.tira::-webkit-scrollbar{display:none}
 .tira:focus-visible{outline:2px solid var(--rojo);outline-offset:4px}
-.tira__foto{position:relative;flex:0 0 clamp(230px,30vw,400px);aspect-ratio:4/5;
+
+/* Foto y video comparten recuadro: mismo tamaño, misma proporción, mismo
+   blanco y negro. Un video se nota por el rótulo y el botón, no por romper
+   la fila. */
+.tira__item{position:relative;flex:0 0 clamp(280px,78vw,420px);aspect-ratio:4/5;
   overflow:hidden;background:var(--panel);scroll-snap-align:start;margin:0}
-.tira__foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+.tira__item img,
+.tira__item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   filter:grayscale(1) contrast(1.08);
   transition:filter .5s,transform .7s var(--curva)}
 .tira__pie{position:absolute;left:0;bottom:0;background:var(--negro);
@@ -267,14 +399,66 @@
 .tira__pie--rojo{background:var(--rojo);color:var(--sobre-rojo)}
 
 /* La foto recupera el color al pasar el mouse. Con el dedo ese gesto no
-   existe, así que donde no hay mouse las fotos van en color de entrada:
+   existe, así que donde no hay mouse las piezas van en color de entrada:
    nadie se queda sin ver el gimnasio por no tener con qué apuntar. */
 @media (hover:hover){
-  .tira__foto:hover img{filter:grayscale(0) contrast(1);transform:scale(1.05)}
+  .tira__item:hover img,
+  .tira__item:hover video{filter:grayscale(0) contrast(1);transform:scale(1.05)}
 }
 @media (hover:none){
-  .tira__foto img{filter:none}
+  .tira__item img,
+  .tira__item video{filter:none}
 }
+
+/* ── Las piezas de video ─────────────────────────────────────────────────
+   El rótulo avisa que eso se mueve antes de que se mueva. */
+.tira__marca{position:absolute;z-index:2;top:0;left:0;background:var(--rojo);
+  color:var(--sobre-rojo);font-family:var(--f-mono);font-size:var(--t-rotulo-chico);
+  letter-spacing:.16em;text-transform:uppercase;padding:7px 10px;
+  display:flex;align-items:center;gap:7px}
+.tira__marca::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:currentColor;animation:ri-pulse 2s infinite}
+
+/* Poder frenarlo no es opcional: un video en bucle es movimiento que
+   arranca solo y dura más de cinco segundos, y la norma pide una manera de
+   pararlo (WCAG 2.2.2 «Pause, Stop, Hide»). Por eso el botón está siempre y
+   no solo donde hay mouse, y mide 44px de lado, que es el mínimo táctil. */
+.tira__play{position:absolute;z-index:2;top:0;right:0;width:44px;height:44px;
+  display:grid;place-items:center;background:rgba(11,11,11,.72);
+  color:var(--hueso);transition:background .2s,color .2s}
+.tira__play:hover{background:var(--rojo);color:var(--sobre-rojo)}
+.tira__play::before{content:"";width:13px;height:14px}
+/* Andando se ve el signo de pausa, frenado el triángulo. Las dos barras de
+   la pausa son dos fondos sólidos, no un recorte: un clip-path no puede
+   hacer dos rectángulos separados sin costura. El triángulo sí es recorte.
+   Mismo recurso que el signo de las preguntas frecuentes: sin íconos. */
+.tira__play[data-estado="anda"]::before{
+  background:linear-gradient(currentColor,currentColor) left /34% 100% no-repeat,
+             linear-gradient(currentColor,currentColor) right/34% 100% no-repeat}
+.tira__play[data-estado="quieto"]::before{background:currentColor;
+  clip-path:polygon(8% 0,100% 50%,8% 100%)}
+
+/* ── Los controles de la tira ──────────────────────────────────────────── */
+.tira-control{display:flex;align-items:center;gap:18px;margin-top:18px}
+/* La barra sale del scroll real, no de un contador de pasos: si alguien
+   arrastra con el dedo, la barra lo sigue igual. */
+.tira-barra{flex:1;height:2px;background:var(--linea-tenue);overflow:hidden}
+/* El relleno mide lo que se ve de la tira y se corre de punta a punta: el
+   ancho dice cuánto entra en pantalla y la posición dice dónde estás. Una
+   barra que solo crece termina llena y ahí ya no distingue «llegaste al
+   final» de «entra todo junto». */
+.tira-barra span{display:block;height:100%;width:var(--avance,18%);
+  background:var(--rojo);transition:width .18s linear,transform .18s linear}
+.tira-flechas{display:flex;gap:1px;background:var(--linea-tenue);flex:none}
+.tira-flechas button{width:48px;height:48px;display:grid;place-items:center;
+  background:var(--negro);color:var(--hueso);transition:background .2s,color .2s}
+.tira-flechas button:hover:not(:disabled){background:var(--rojo);color:var(--sobre-rojo)}
+.tira-flechas button:disabled{color:var(--gris-mudo);cursor:default}
+.tira-flechas button::before{content:"";width:16px;height:16px;background:currentColor;
+  clip-path:polygon(0 42%,60% 42%,60% 16%,100% 50%,60% 84%,60% 58%,0 58%)}
+.tira-flechas button[data-tira-boton="atras"]::before{transform:scaleX(-1)}
+/* Sin JavaScript la tira se sigue arrastrando con el dedo y con el teclado,
+   pero estos botones no harían nada: los agrega app.js, no el HTML. */
 
 /* ══ 10 a 12. La banda clara ═══════════════════════════════════════════ */
 .banda-clara{background:var(--hueso);color:var(--negro)}
@@ -285,8 +469,9 @@
   letter-spacing:-.005em}
 
 /* ── 10. Contacto ────────────────────────────────────────────────────── */
-.contacto{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
-  gap:clamp(24px,4vw,56px);align-items:center;
+.contacto{min-height:var(--pantalla);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+  gap:clamp(24px,4vw,56px);align-items:center;align-content:center;
   padding:clamp(48px,7vw,104px) var(--pad-x)}
 .contacto__titulo{font-family:var(--f-titulo);font-weight:900;
   font-size:var(--t-h2-contacto);line-height:.85;text-transform:uppercase;
@@ -300,7 +485,8 @@
 .contacto__datos a:hover{color:var(--rojo)}
 
 /* ── 11. Formulario ──────────────────────────────────────────────────── */
-.reserva{padding:0 var(--pad-x) clamp(48px,7vw,88px);
+.reserva{min-height:var(--pantalla);display:grid;align-content:center;
+  padding:0 var(--pad-x) clamp(48px,7vw,88px);
   border-top:1px solid var(--linea-clara)}
 .reserva__cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;
   align-items:baseline;gap:16px;padding-top:clamp(38px,5vw,64px);
@@ -328,7 +514,13 @@
   letter-spacing:.1em;color:var(--gris-sobre-claro);max-width:38ch;line-height:1.5}
 
 /* ── 12. Mapa ────────────────────────────────────────────────────────── */
-.mapa{padding:clamp(38px,5vw,64px) var(--pad-x) clamp(48px,7vw,88px);
+/* La única que no ocupa una pantalla entera, y a propósito: adentro hay un
+   título, una dirección y un botón. Estirarla a 100svh son tres líneas
+   flotando en el medio de la nada justo antes del pie, y se lee como si
+   faltara algo. Dos tercios alcanzan para que respire.
+   Cuando entre el mapa embebido pasa a pantalla completa como el resto. */
+.mapa{min-height:calc(var(--pantalla) * .62);display:grid;align-content:center;
+  padding:clamp(38px,5vw,64px) var(--pad-x) clamp(48px,7vw,88px);
   border-top:1px solid var(--linea-clara)}
 .mapa__dir{font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.14em;
   text-transform:uppercase;color:var(--gris-meta);
@@ -362,9 +554,10 @@
     font-weight:800;font-size:var(--t-h3-clase);text-transform:uppercase;line-height:1}
   .menu-panel .nav__cta{margin-top:24px;text-align:center;padding:20px;
     font-family:var(--f-titulo);font-size:var(--t-boton);letter-spacing:.06em}
-  /* En un teclado táctil, 19px de padding en el CTA deja el botón por debajo
-     de los 44px que pide la norma cuando el texto es corto. */
-  .btn{width:100%;text-align:center}
+  /* Ancho completo: en una pantalla angosta un botón a la medida del texto
+     queda perdido y hay que apuntarle. El alto mínimo de 44px ya lo resuelve
+     el min-height que traen todos los .btn. */
+  .btn{width:100%}
 }
 
 /* Lo que el diseño no resolvía para pantallas angostas. */
@@ -396,8 +589,16 @@
      acá lo reordena el layout. */
   .plan--destacado{order:-1}
   /* Los tres datos del hero en dos columnas dejaban al tercero solo en una
-     fila. Apilados se leen de un tirón. */
+     fila. Apilados se leen de un tirón.
+
+     Y apilados en fila, no en bloque: rótulo a la izquierda, valor a la
+     derecha. Con el rótulo arriba cada celda medía 72px y las tres se
+     comían 216px de la primera pantalla —el hero terminaba pasado del
+     borde—. Así miden 48px y entra todo sin achicar nada. */
   .hero__datos{grid-template-columns:1fr}
+  .hero__datos > div{display:flex;justify-content:space-between;
+    align-items:baseline;gap:14px;padding:13px 16px}
+  .hero__datos dd{margin-top:0;font-size:20px;text-align:right}
   /* Las cifras de «El rincón» tienen el mismo problema, y peor: como la
      grilla se separa con líneas de 1px —el contenedor pinta la línea y cada
      celda tapa con el fondo—, la celda que sobra no queda vacía sino

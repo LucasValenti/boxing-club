@@ -144,6 +144,11 @@
 
 <main>
 
+<!-- ══ La primera pantalla ═══════════════════════════════════════════════
+     El hero y la marquesina son una sola unidad de alto: juntos miden
+     exacto lo que entra sin scrollear. Por eso van adentro del mismo
+     envoltorio en vez de sueltos — ver .primera-pantalla en sitio.css. -->
+<div class="primera-pantalla">
 <!-- ── 2. Hero ───────────────────────────────────────────────────────── -->
 <section class="hero" id="top">
   <!-- ⚠ Foto de referencia (Unsplash). Va la del gimnasio, con el mismo
@@ -192,6 +197,8 @@
     <span>Principiantes <i>✳</i> Box fitness <i>✳</i> Kids &amp; juvenil <i>✳</i> Mujeres <i>✳</i> Personal 1 a 1 <i>✳</i> Amateur <i>✳</i> </span>
   </div>
 </div>
+
+</div><!-- /.primera-pantalla -->
 
 <!-- ── 4. El rincón ──────────────────────────────────────────────────── -->
 <!-- La sección donde el club cuenta de dónde viene. El texto de abajo es
@@ -363,38 +370,69 @@
 </section>
 
 <!-- ── 9. El gimnasio ────────────────────────────────────────────────── -->
-<section class="seccion" id="gimnasio">
+<section class="seccion seccion--tira" id="gimnasio">
   <div class="seccion__cabeza" data-reveal>
     <h2>El gimnasio</h2>
-    <p class="seccion__rotulo">Fotos de referencia</p>
+    <p class="seccion__rotulo">Fotos y video de referencia</p>
   </div>
 
   <!-- Tira que se arrastra, no mosaico: en el celular se pasa con el dedo y
-       en escritorio se ve que sigue. ⚠ Las cinco fotos son de banco de
-       imágenes hasta que lleguen las del club, y por eso los alt describen
-       lo que se ve sin afirmar que sea este gimnasio. Con las fotos reales
-       vuelven a ser específicos. -->
-  <div class="tira" data-reveal tabindex="0" role="group" aria-label="Fotos del gimnasio, se desplaza de a una">
-    <figure class="tira__foto">
-      <img src="https://images.unsplash.com/photo-1754630591156-ef00f2e0d888?w=1200&q=70&auto=format&fit=crop"
-           alt="Bolsas de boxeo colgadas en un gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+       en escritorio se ve que sigue. Foto y video conviven en el mismo
+       recuadro; para sumar un video más se copia un <figure> de los que
+       tienen clase tira__item--video y se cambian src y poster.
+
+       ⚠ Todo lo de acá es material de banco hasta que llegue el del club, y
+       por eso los alt describen lo que se ve sin afirmar que sea este
+       gimnasio. Con el material real vuelven a ser específicos.
+       ⚠ Los dos videos son de Mixkit y su licencia NO permite que viajen
+       adentro de una plantilla que se vende. Ver public/video/LICENCIA.txt.
+
+       Los videos van sin autoplay en el HTML: los arranca app.js recién
+       cuando la pieza entra en pantalla, y solo la que se está mirando.
+       El atributo controls está puesto para quien no tenga JavaScript —ahí
+       el video se reproduce a mano—; app.js se lo saca y pone el botón
+       propio, que es el que respeta el diseño. -->
+  <div class="tira" data-tira data-reveal tabindex="0" role="group"
+       aria-label="Fotos y videos del gimnasio, se desplaza de a una">
+
+    <figure class="tira__item tira__item--video">
+      <video src="video/bolsa.mp4" poster="img/bolsa-poster.webp"
+             width="360" height="640" muted loop playsinline preload="none" controls
+             data-video aria-label="Video sin sonido: alguien golpeando una bolsa de boxeo"></video>
       <figcaption class="tira__pie tira__pie--rojo">Sala de bolsas</figcaption>
     </figure>
-    <figure class="tira__foto">
+
+    <figure class="tira__item">
+      <img src="https://images.unsplash.com/photo-1754630591156-ef00f2e0d888?w=1200&q=70&auto=format&fit=crop"
+           alt="Bolsas de boxeo colgadas en un gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+      <figcaption class="tira__pie">Las bolsas</figcaption>
+    </figure>
+
+    <figure class="tira__item">
       <img src="https://images.unsplash.com/photo-1636581563867-1ecab574858f?w=1200&q=70&auto=format&fit=crop"
            alt="Una persona golpeando una bolsa de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
       <figcaption class="tira__pie">Clase de bolsa</figcaption>
     </figure>
-    <figure class="tira__foto">
+
+    <figure class="tira__item tira__item--video">
+      <video src="video/ring.mp4" poster="img/ring-poster.webp"
+             width="640" height="360" muted loop playsinline preload="none" controls
+             data-video aria-label="Video sin sonido: dos personas boxeando en un ring"></video>
+      <figcaption class="tira__pie tira__pie--rojo">Guanteo</figcaption>
+    </figure>
+
+    <figure class="tira__item">
       <img src="https://images.unsplash.com/photo-1716307046875-4c4ba2f43cab?w=1200&q=70&auto=format&fit=crop"
            alt="Un ring de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
       <figcaption class="tira__pie">El ring</figcaption>
     </figure>
-    <figure class="tira__foto">
+
+    <figure class="tira__item">
       <img src="https://images.unsplash.com/photo-1636302925863-6ad504baaf3c?w=1200&q=70&auto=format&fit=crop"
            alt="Entrenamiento de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
     </figure>
-    <figure class="tira__foto">
+
+    <figure class="tira__item">
       <img src="https://images.unsplash.com/photo-1633394782368-6e7260566004?w=1200&q=70&auto=format&fit=crop"
            alt="Guantes de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
     </figure>

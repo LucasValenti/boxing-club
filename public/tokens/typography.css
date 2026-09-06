@@ -5,7 +5,13 @@
   --f-cuerpo:'Chivo',system-ui,-apple-system,sans-serif;
   --f-mono:'Chivo Mono',ui-monospace,SFMono-Regular,monospace;
 
-  --t-h1:clamp(64px,13.5vw,208px);
+  /* El titular es lo único del sitio que además del ancho mira el alto. En
+     una notebook de 900px el clamp por ancho daba 194px, y dos líneas de
+     194px se comían la mitad de la primera pantalla: el hero terminaba
+     pasado del borde y la marquesina quedaba cortada. El min() con svh lo
+     ata a la pantalla que hay. En un monitor alto no cambia nada, porque
+     ahí manda el clamp de siempre. */
+  --t-h1:min(clamp(64px,13.5vw,208px),15svh);
   --t-h2:clamp(40px,6vw,88px);
   --t-h2-contacto:clamp(46px,8vw,120px);
   --t-h3-clase:clamp(28px,3vw,42px);

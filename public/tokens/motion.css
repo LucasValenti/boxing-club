@@ -1,9 +1,39 @@
-/* Las cinco animaciones del diseño. ri- viene del prototipo original. */
+/* Las animaciones del diseño. ri- viene del prototipo original. */
 @keyframes ri-up   {from{opacity:0;transform:translateY(.5em)} to{opacity:1;transform:none}}
 @keyframes ri-wipe {from{clip-path:inset(0 100% 0 0)}          to{clip-path:inset(0 0 0 0)}}
 @keyframes ri-march{from{transform:translateX(0)}              to{transform:translateX(-50%)}}
 @keyframes ri-pulse{0%,100%{opacity:.5} 50%{opacity:1}}
-@keyframes ri-zoom {from{transform:scale(1.06)}                to{transform:scale(1.14)}}
+/* ri-zoom se fue con el hero: lo reemplaza ri-panear, abajo. */
+
+/* La barra que descubre cada línea del titular. Va junto con ri-wipe: el
+   wipe recorta la línea de izquierda a derecha y la barra viaja pegada al
+   borde de ese recorte, así que se ve un bloque de color que pasa y deja el
+   texto atrás. Entra apoyada a la izquierda y sale apoyada a la derecha —el
+   cambio de transform-origin al 50% es lo que hace que no rebote. */
+@keyframes ri-barra{
+  0%  {transform:scaleX(0);transform-origin:left}
+  50% {transform:scaleX(1);transform-origin:left}
+  50.1%{transform:scaleX(1);transform-origin:right}
+  100%{transform:scaleX(0);transform-origin:right}
+}
+
+/* Reemplaza a ri-zoom en el hero: además de acercarse, la foto se corre.
+   Un zoom puro sobre una foto casi simétrica no se percibe; el paneo sí. */
+@keyframes ri-panear{
+  from{transform:scale(1.08) translate3d(-1.5%,1%,0)}
+  to  {transform:scale(1.16) translate3d(1.5%,-1%,0)}
+}
+
+/* Entrada de las celdas del hero, una detrás de otra.
+   Sin clip-path, aunque destapar de abajo hacia arriba quedaba mejor: la
+   grilla del hero se separa con líneas de 1px —el contenedor pinta claro y
+   cada celda tapa con su fondo—, así que una celda recortada deja ver ese
+   claro como un bloque encendido. Es el mismo problema de la celda vacía,
+   pero en el tiempo en vez de en el espacio. */
+@keyframes ri-celda{
+  from{opacity:0;transform:translateY(18px)}
+  to  {opacity:1;transform:none}
+}
 
 :root{
   --curva:cubic-bezier(.2,.7,.2,1);
