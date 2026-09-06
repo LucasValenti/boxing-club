@@ -17,6 +17,11 @@ arreglan en una tarde, y dos de esos tres son los que más mueven la aguja.
 > club todavía no entregó, y de monitoreo sigue faltando la analítica, que
 > pide un token del panel de Cloudflare.
 >
+> Se midió el LCP real contra el sitio ya publicado (§6): 3,6–3,8s bajo un
+> perfil de 4G simulado, por encima del presupuesto de 2,5s. La causa está
+> identificada y no es del código — es la foto de banco de Unsplash, que
+> pesa 545 KB contra los ~145 KB que va a pesar la foto real procesada.
+>
 > Y apareció un bloqueante nuevo que no es de código: **el dominio no está
 > definido**, y el `canonical` que se agregó apunta a un marcador. Un
 > canonical mal apuntado es peor que ninguno, así que hoy el sitio no se
@@ -57,10 +62,10 @@ manual» las contradice, gana la restricción.
 | | Objetivo | Estado |
 |---|---|---|
 | Peso de la primera vista | < 500 KB | ✓ 146,8 KB propios, medidos por `validar.mjs` en cada `npm test` |
-| LCP en 4G | < 2,5 s | la cascada de `@import` está rota (hallazgo 1); falta medirlo en red real |
+| LCP en 4G | < 2,5 s | medido: 3,6–3,8s. La cascada (hallazgo 1) ya no es la causa — es la foto de banco, ver §6 |
 | Accesibilidad | WCAG 2.1 AA | ✓ axe en 5 variantes, más el recorrido con teclado |
 | Sin JavaScript | la página se lee entera | ✓ resuelta la excepción del hallazgo 7 |
-| Cabeceras de seguridad | — | ✓ en `public/_headers` — **falta verificarlas en el primer deploy** |
+| Cabeceras de seguridad | — | ✓ en `public/_headers`, confirmadas en el sitio publicado con `curl` |
 
 ### Los doce hallazgos, por impacto
 
@@ -663,19 +668,45 @@ exactamente el caso que las métricas de campo castigan.
   layout (CLS) sin necesidad de JavaScript.
 - **`loading="lazy"` en las cinco fotos de la tira**, que están bajo el pliegue.
 
-### Lo que falta
+### Medido en el sitio real
 
-En orden: romper la cadena de `@import` (5.1), `defer` en `datos.js` (5.2),
-`preconnect` a Unsplash mientras dure (5.3), y `srcset` cuando entren las fotos
-reales (5.9).
+`herramientas/rendimiento.mjs` mide el LCP contra la URL publicada, con la
+red y la CPU estranguladas al perfil móvil por defecto de Lighthouse (150ms
+de latencia, 1,6 Mbps de bajada, CPU 4x más lenta) — los mismos valores que
+usa la herramienta que Google toma como referencia para Core Web Vitals. El
+LCP se lee con el `PerformanceObserver` real del navegador, no con un
+cronómetro externo.
 
-### Cómo verificarlo
+```
+node herramientas/rendimiento.mjs https://tu-sitio.workers.dev/
+```
 
-El presupuesto no sirve si nadie lo mide. Con el servidor de pruebas ya
-levantado, Playwright puede pesar la primera vista y fallar si se pasa — está en
-la sección 9 como `validar.mjs`. Es preferible a Lighthouse para esto: corre sin
-red, es determinista y entra en un hook antes de publicar.
+Cinco corridas contra el sitio publicado: 6,3s · 3,8s · 3,6s · 3,6s · 3,7s.
+La primera incluye el arranque en frío del navegador y la resolución DNS a
+Unsplash; las cuatro siguientes convergen en **3,6–3,8s** — por encima del
+presupuesto de 2,5s.
 
+El elemento del LCP es la foto del hero, y ahí está la causa: 545 KB
+servidos desde `images.unsplash.com`, un origen externo. A 1,6 Mbps esa sola
+transferencia consume ~2,7s de los 3,7s totales — la foto de banco, que ya
+estaba señalada como temporal en `contenido-pendiente.md`, es hoy el
+principal responsable del incumplimiento del presupuesto.
+
+Para no dejarlo en una intuición: se bajó la misma foto que usa el hero y se
+procesó con el pipeline real del sitio (`imagenes.mjs`, WebP calidad 72,
+1600px de ancho). El archivo resultante pesa 145 KB contra los 545 KB que
+sirve hoy Unsplash — a la misma velocidad de red, la transferencia baja de
+2,7s a 0,7s. Proyectado sobre el LCP medido, eso deja el total en el orden de
+1,7–1,8s: **por debajo del presupuesto**, aunque la cifra exacta depende de
+la foto real que llegue del club, no de esta simulación.
+
+Dicho de otro modo: la cascada de `@import` (hallazgo 1) era el problema
+estructural, y está resuelta. El que queda hoy no es del código — es la
+consecuencia esperada de trabajar todavía con fotos de banco sin procesar.
+Vuelve a correr `rendimiento.mjs` en cuanto entren las fotos del club, para
+confirmar la proyección con el dato real en vez de con la simulación.
+
+---
 ---
 
 ## 7. Accesibilidad y SEO
@@ -733,14 +764,18 @@ recorrido.
 | `FAQPage` con texto idéntico al visible | ✓ y la condición se cumple |
 | Contenido en el HTML servido | ✓ es toda la arquitectura |
 | Un solo `h1` | ✓ |
-| `canonical` | ✗ **hallazgo 3** |
-| `robots.txt` / `sitemap.xml` | ✗ **hallazgo 4** |
-| `og:image` / `og:url` | ✗ **hallazgo 8** |
+| `canonical` | ✓ — apunta al marcador del dominio, ver contenido-pendiente.md §1 |
+| `robots.txt` / `sitemap.xml` | ✓ |
+| `og:url` | ✓ |
+| `og:image` | ✗ **hallazgo 8**, necesita una foto del club |
 
-El más urgente es el `canonical`. Con Workers Assets el sitio también responde en
-`alanis-boxing-club.workers.dev`: dos direcciones con el mismo contenido,
-compitiendo por la misma consulta local. Es el peor resultado posible para el
-requisito 1, y se arregla con una línea.
+El `canonical` ya está, y la razón por la que hacía falta se confirmó en
+producción: el sitio publicado responde igual en
+`alanis-boxing-club.lucas-valenti00.workers.dev` que en el dominio final —
+dos direcciones con el mismo contenido, compitiendo por la misma consulta
+local si no hubiera un canonical que las desempate. Apunta al marcador del
+dominio: hay que corregirlo en cuanto el club confirme el dominio real, o
+el desempate apunta al lugar equivocado.
 
 Sobre el JSON-LD hay una regla que conviene dejar escrita: **el bloque del
 gimnasio no se publica hasta que los datos estén confirmados.** Datos

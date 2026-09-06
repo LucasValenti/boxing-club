@@ -97,7 +97,7 @@ configuración y herramientas.
 npm test
 ```
 
-que levanta el servidor de pruebas, pasa las cuatro y lo baja. Termina con
+que levanta el servidor de pruebas, pasa las cinco y lo baja. Termina con
 código 1 si algo falla, así sirve en un hook y en `predeploy`.
 
 | Prueba | Qué mira | Necesita |
@@ -109,7 +109,7 @@ código 1 si algo falla, así sirve en un hook y en `predeploy`.
 | `auditoria.mjs` | accesibilidad en 320, 390, 768, 1440 y sin movimiento | navegador |
 
 `validar.mjs` no depende de nada: corre en un clon recién bajado, antes de
-`npm install`. Las otras tres necesitan Chromium — `npx playwright install
+`npm install`. Las otras cuatro necesitan Chromium — `npx playwright install
 chromium` la primera vez, o `CHROMIUM=/ruta/al/chrome` para usar uno que ya
 tengas. `auditoria.mjs` deja una captura de cada variante.
 
@@ -121,6 +121,18 @@ npm run imagenes    # herramientas/fotos-crudas/*.jpg → public/img/*.webp
 
 Procesa las fotos del club a WebP en tres anchos (400, 800 y 1600). Los
 originales van en `herramientas/fotos-crudas/`, que no se versiona.
+
+Y otra, contra el sitio ya publicado en vez del servidor local, así que no
+entra en `npm test`:
+
+```
+node herramientas/rendimiento.mjs https://tu-sitio.workers.dev/
+```
+
+Mide el LCP real con la red y la CPU estranguladas al perfil móvil de
+Lighthouse. Sirve para confirmar el presupuesto de rendimiento después de
+cada deploy, sobre todo cuando cambian las fotos — ver
+`docs/auditoria-tecnica.md` §6.
 
 ## Para más adelante
 
