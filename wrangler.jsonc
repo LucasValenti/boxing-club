@@ -2,7 +2,7 @@
   // Publicación en Cloudflare. El sitio no tiene build: son archivos estáticos
   // y el HTML ya viene escrito, así que lo que sube es lo que sirve.
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "alanis-boxing-club",
+  "name": "landing-gimnasio",
   "compatibility_date": "2026-08-01",
 
   // Sin telemetría de Cloudflare.
