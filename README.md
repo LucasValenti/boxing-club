@@ -102,7 +102,7 @@ código 1 si algo falla, así sirve en un hook y en `predeploy`.
 
 | Prueba | Qué mira | Necesita |
 | --- | --- | --- |
-| `validar.mjs` | anclas, `data-negocio`, JSON-LD, `<title>`, peso propio | nada: node pelado |
+| `validar.mjs` | anclas, `data-negocio`, JSON-LD, dominio, terceros y peso | nada: node pelado |
 | `contacto.mjs` | que el contacto salga todo de `NEGOCIO` | navegador |
 | `interaccion.mjs` | teclado, menú del celular y formulario | navegador |
 | `auditoria.mjs` | accesibilidad en 320, 390, 768, 1440 y sin movimiento | navegador |

@@ -18,6 +18,11 @@ const vivo = html.replace(/<!--[\s\S]*?-->/g, '');
 let fallas = 0;
 const ok  = (m) => console.log('  \u2713 ' + m);
 const mal = (m) => { fallas++; console.log('  \u2717 ' + m); };
+/* Un aviso no rompe la suite: marca algo que hay que sacar o completar más
+   adelante, no algo que esté mal hoy. Si avisar fallara, npm test viviría en
+   rojo y dejaría de significar nada. */
+let avisos = 0;
+const avisar = (m) => { avisos++; console.log('  ! ' + m); };
 
 console.log('\nEstructura');
 
@@ -91,6 +96,65 @@ desc.length >= 70 && desc.length <= 165
                              : mal('falta <link rel="canonical">');
 /<html lang="/.test(html) ? ok('lang declarado') : mal('falta lang en <html>');
 
+console.log('\nDominio');
+
+/* El dominio aparece en cuatro lugares, y hasta que el club confirme el suyo
+   es un marcador. Cambiar tres de los cuatro es el error fácil, y un canonical
+   que no coincide con el resto es peor que no tener ninguno: le dice a Google
+   que la página buena es otra. */
+const MARCADOR = 'alanisboxingclub.com.ar';
+const host = (s) => { try { return new URL(s).host; } catch { return null; } };
+const robots = fs.readFileSync(path.join(RAIZ, 'robots.txt'), 'utf8');
+const mapa   = fs.readFileSync(path.join(RAIZ, 'sitemap.xml'), 'utf8');
+const lugares = {
+  'canonical':   host((vivo.match(/rel="canonical" href="([^"]+)"/) || [])[1] || ''),
+  'og:url':      host((vivo.match(/property="og:url" content="([^"]+)"/) || [])[1] || ''),
+  'robots.txt':  host((robots.match(/^Sitemap:\s*(\S+)/m) || [])[1] || ''),
+  'sitemap.xml': host((mapa.match(/<loc>([^<]+)<\/loc>/) || [])[1] || ''),
+};
+const sinDominio = Object.keys(lugares).filter((k) => !lugares[k]);
+const hosts = [...new Set(Object.values(lugares).filter(Boolean))];
+if (sinDominio.length) {
+  mal('falta el dominio en: ' + sinDominio.join(', '));
+} else if (hosts.length > 1) {
+  mal('el dominio no coincide entre los cuatro lugares: ' +
+      Object.entries(lugares).map(([k, v]) => k + '=' + v).join(', '));
+} else {
+  ok('el mismo dominio en los cuatro lugares (' + hosts[0] + ')');
+  if (hosts[0] === MARCADOR) {
+    avisar('pero es el marcador, no un dominio real \u2014 bloquea publicar, ver contenido-pendiente.md §1');
+  }
+}
+
+console.log('\nTerceros');
+
+/* Mientras las fotos sean de banco hay un host ajeno sirviendo el LCP, y tres
+   lugares que tienen que estar de acuerdo: el <img>, el preconnect y la CSP.
+   Cuando entren las fotos del club hay que sacar los tres. Esto avisa cuál
+   quedó colgado, que es justo lo que nadie se acuerda de revisar. */
+const cabeceras = fs.readFileSync(path.join(RAIZ, '_headers'), 'utf8');
+const csp = (cabeceras.match(/Content-Security-Policy:\s*(.+)/) || [])[1] || '';
+const dedup = (re, s) => [...new Set([...s.matchAll(re)].map((m) => m[1]))];
+const recursos      = dedup(/<(?:img|iframe)\b[^>]*\bsrc="https:\/\/([^/"]+)/g, vivo);
+const permitidos    = dedup(/https:\/\/([^\s;]+)/g, csp);
+const conPreconnect = dedup(/rel="preconnect" href="https:\/\/([^/"]+)"/g, vivo);
+
+if (!recursos.length) ok('ningún recurso de terceros: todo se sirve desde este dominio');
+for (const h of recursos) {
+  permitidos.includes(h)
+    ? ok(h + ': permitido en la CSP')
+    : mal(h + ': lo pide el HTML y la CSP no lo permite \u2014 se bloquea en silencio');
+  conPreconnect.includes(h)
+    ? ok(h + ': con preconnect')
+    : avisar(h + ': sin preconnect, y sirve contenido del camino crítico');
+}
+for (const h of permitidos.filter((x) => !recursos.includes(x))) {
+  avisar('la CSP permite ' + h + ' y ya no lo usa nadie: se puede sacar');
+}
+for (const h of conPreconnect.filter((x) => !recursos.includes(x))) {
+  avisar('hay preconnect a ' + h + ' y ya no lo usa nadie: se puede sacar');
+}
+
 console.log('\nPeso propio');
 
 /* El presupuesto es lo que se sirve desde este dominio. Las fotos externas
@@ -118,5 +182,6 @@ total <= PRESUPUESTO
   ? ok(`dentro del presupuesto de ${PRESUPUESTO / 1024} KB`)
   : mal(`se pasó del presupuesto de ${PRESUPUESTO / 1024} KB`);
 
-console.log(fallas ? `\n${fallas} problema(s).\n` : '\nTodo en orden.\n');
+const resumen = fallas ? fallas + ' problema(s)' : 'Todo en orden';
+console.log('\n' + resumen + (avisos ? ', ' + avisos + ' aviso(s)' : '') + '.\n');
 process.exit(fallas ? 1 : 0);

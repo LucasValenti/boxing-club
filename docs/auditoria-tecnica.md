@@ -836,7 +836,9 @@ quedó escrito a mano en el HTML. **Es una prueba que custodia una decisión de
 arquitectura, no una función.** Esa es la clase de prueba que sobrevive a un
 refactor, y hay muy pocos proyectos de este tamaño que la tengan.
 
-### Lo que falta
+### Lo que faltaba, y ya está
+
+Todo lo de esta tabla está construido y corriendo en `npm test`.
 
 | Prueba | Qué atrapa | Por qué importa acá |
 |---|---|---|
@@ -847,6 +849,24 @@ refactor, y hay muy pocos proyectos de este tamaño que la tengan.
 | **Formulario** | validación vacía, foco, texto del mensaje | es el único flujo interactivo del sitio |
 | **Teclado** | orden de tabulación, trampa de foco en el menú | axe no recorre, solo inspecciona |
 | **Interruptores** | apagar una sección y que desaparezca de verdad | es el mecanismo del que depende publicar incompleto |
+
+Dos de esas comprobaciones no son de calidad sino de **coherencia**, y son las
+que más van a servir con el tiempo. Están en la misma línea que `contacto.mjs`:
+custodian una decisión, no una función.
+
+- **El dominio vive en cuatro lugares** —`canonical`, `og:url`, `robots.txt` y
+  `sitemap.xml`— y cambiar tres de los cuatro es el error fácil. `validar.mjs`
+  falla si no coinciden entre sí, y avisa mientras siga siendo el marcador.
+- **Un host de terceros vive en tres** —el `<img>`, el `preconnect` y la CSP—.
+  Falla si el HTML pide algo que la CSP no permite, porque eso se bloquea en
+  silencio, y avisa si quedó un `preconnect` o una excepción de la CSP que ya
+  no usa nadie. Es el recordatorio automático de limpiar Unsplash el día que
+  entren las fotos del club.
+
+La diferencia entre fallar y avisar es deliberada. Si el marcador del dominio
+hiciera fallar `npm test`, la suite viviría en rojo y dejaría de significar
+nada; y una suite que siempre está en rojo es exactamente igual de útil que no
+tener ninguna.
 
 ### Un solo comando
 
