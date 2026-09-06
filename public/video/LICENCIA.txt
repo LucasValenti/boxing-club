@@ -1,0 +1,25 @@
+Videos de referencia — Mixkit
+=============================
+
+Los dos clips de esta carpeta son de banco, igual que las fotos de Unsplash:
+están para que la plantilla se vea completa, no para publicarse tal cual.
+Se reemplazan por video del club.
+
+  bolsa.mp4   360x640, 10s   "Low view of a boxer punching a boxing bag"
+              https://mixkit.co/free-stock-video/low-view-of-a-boxer-punching-a-boxing-bag-40276/
+
+  ring.mp4    640x360, 7s    "Boxers during an amateur fight"
+              https://mixkit.co/free-stock-video/boxers-during-an-amateur-fight-40954/
+
+Licencia: Mixkit Free License. Uso comercial permitido, sin atribución
+obligatoria y sin registro. No se pueden redistribuir los archivos como
+stock ni usarlos como parte central de un producto que se venda como
+plantilla.  https://mixkit.co/license/#videoFree
+
+  ⚠ Esa última cláusula importa acá: si esta landing se vende como plantilla
+  a varios gimnasios, los clips NO pueden viajar adentro. Son para la demo.
+  Cada club pone los suyos, o se compran con licencia.
+
+Se bajaron en 360p a propósito. Las versiones de 720p pesan entre 2,5 y 7 MB
+y en esta máquina no hay ffmpeg para recomprimirlas; 360p en un recuadro de
+~300 px se ve bien y el video entero pesa menos que una foto del hero.

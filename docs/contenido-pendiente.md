@@ -52,26 +52,46 @@ Los tres planes dicen «A confirmar». Cuando lleguen los montos, el precio vuel
 a su tamaño grande y el sufijo pasa a ser inline (`/mes`, `/sesión`). El layout
 no cambia.
 
-### 5. Fotos del gimnasio
-Todas las imágenes actuales son de Unsplash: no son el gimnasio. El cliente las
-tiene en Instagram. **Qué pedir:** la sala de bolsas, una clase en actividad, el
-ring, y un retrato de Charly. Horizontales y verticales, lo más grandes que las
-tenga. Se procesan a WebP y se tratan en blanco y negro.
+### 5. Fotos y video del gimnasio
+Todas las imágenes actuales son de Unsplash y los dos videos son de Mixkit: no
+son el gimnasio. **Qué pedir:** la sala de bolsas, una clase en actividad, el
+ring, y un retrato del entrenador. Horizontales y verticales, lo más grandes que
+las tenga. Se procesan a WebP con `npm run imagenes` y se tratan en blanco y
+negro.
 
-### 6. Verificar los datos del campeón
-La sección «El rincón» afirma que Carlos «Junior» Alanís tiene récord 13–1,
-medalla de plata en Odesur 2018 y título sudamericano ligero. Salió de fuentes
-públicas. **Son afirmaciones verificables sobre una persona real: que las
-apruebe el gimnasio antes de publicarlas.**
+Del video alcanza con dos clips cortos —de 6 a 12 segundos, sin sonido, que es
+como se reproducen— grabados con el celular en horizontal o en vertical, da
+igual: la tira los recorta al mismo recuadro. Reemplazan a `public/video/*.mp4`
+con el mismo nombre y hay que regenerar el póster, que es el primer cuadro.
 
-**Ya está apagada** (`mostrarLinaje: false` en `public/sitio/datos.js`): el
-default seguro es no publicar una afirmación sobre alguien identificable que
-nadie confirmó. La página funciona igual sin la sección. Se enciende el día que
-el club diga que sí.
+### 6. ⚠ La licencia de los videos bloquea revender la plantilla
+Los dos clips de `public/video/` son de Mixkit. Su licencia permite uso
+comercial sin atribución, **pero prohíbe expresamente que el material sea parte
+central de un producto que se vende como plantilla.** Vender esta landing a
+varios gimnasios con esos archivos adentro cae justo en esa cláusula.
+
+No bloquea publicar el sitio de un club, ni mostrar la demo. Bloquea entregar el
+repo con los `.mp4` puestos como producto. **Las tres salidas:** que cada club
+ponga su propio video (que es lo que queremos igual), sacar los clips antes de
+entregar, o comprar material con licencia de redistribución.
+
+Con las fotos de Unsplash pasa algo parecido pero más flojo: su licencia sí
+permite uso comercial, aunque tampoco redistribuirlas «para un servicio
+similar». Con material propio del club el problema desaparece entero.
+
+### 7. Datos verificables sobre personas reales
+Si el club quiere que «El rincón» nombre a alguien —un boxeador que formó, un
+título, un récord— eso deja de ser texto de relleno y pasa a ser una afirmación
+sobre una persona identificable. **Que las apruebe el club antes de
+publicarlas**, con la fuente a mano.
+
+Hoy la sección está encendida con texto genérico que no afirma nada
+verificable, justamente para no depender de esto. El default seguro es no
+publicar sobre alguien lo que nadie confirmó.
 
 ## Necesario para las secciones nuevas
 
-### 7. Testimonios
+### 8. Testimonios
 Tres, con nombre, cuánto hace que entrenan y —si aceptan— foto. Sirven más los
 concretos («llegué sin poder saltar a la soga») que los elogios.
 
@@ -82,7 +102,7 @@ navegador: con solo el flag, las tres «Testimonio pendiente» viajaban igual en
 el HTML servido y se veían sin JavaScript. Se descomenta, se completan las
 citas reales y se enciende el interruptor.
 
-### 8. Preguntas frecuentes
+### 9. Preguntas frecuentes
 Cinco están escritas y publicadas, con respuestas armadas a partir de datos que
 sí están en la spec (60 min sin contacto, de 8 a 17 años, guantes incluidos,
 grupos de hasta 12). **Que las lea el club y las corrija** — están redactadas
@@ -96,7 +116,7 @@ Falta la sexta, y no se puede inventar porque es una regla del negocio:
 Cuando llegue la respuesta se suma en `public/index.html` (sección `#faq`) y en
 el bloque `FAQPage` del JSON-LD, con el mismo texto en los dos lados.
 
-### 9. Formulario: a dónde llega
+### 10. Formulario: a dónde llega
 Hoy la propuesta es que abra WhatsApp con el mensaje ya escrito. Si el cliente
 prefiere que además le caiga por mail o a una planilla, hay que saberlo antes de
 construirlo: cambia la arquitectura (ver `arquitectura.md`).
