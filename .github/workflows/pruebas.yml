@@ -1,0 +1,37 @@
+# Las mismas cuatro pruebas que corren en local con `npm test`, en cada push.
+# Mueve la auditoría de «cuando me acuerdo» a «siempre».
+name: Pruebas
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # Solo Chromium: las pruebas no usan Firefox ni WebKit, y bajar los tres
+      # triplica el tiempo del job sin cubrir nada más.
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm test
+        env:
+          CAPTURAS: capturas
+
+      # Una violación de axe sin la captura obliga a reproducirla a mano.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capturas
+          path: capturas/
+          retention-days: 7

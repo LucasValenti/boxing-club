@@ -9,12 +9,13 @@ se sostienen, qué falta, y en qué orden conviene arreglarlo.
 tocarla. Los doce hallazgos que siguen son de terminación, no de diseño. Tres se
 arreglan en una tarde, y dos de esos tres son los que más mueven la aguja.
 
-> **Estado al 6 de septiembre de 2026 — diez de los doce cerrados.** Se
-> aplicaron las tandas 1 y 3, y `npm test` pasa en verde: validación,
-> contacto, interacción (teclado, menú y formulario) y axe en cinco
-> variantes. Quedan abiertos el **8** (falta `og:image`, que necesita una
-> foto del club) y parte del **12** (no hay CI ni analítica). La tanda 2
-> entera depende de contenido que el club todavía no entregó.
+> **Estado al 6 de septiembre de 2026 — once de los doce cerrados.** Se
+> aplicaron las tandas 1 y 3, y `npm test` pasa en verde —validación,
+> contacto, interacción y axe en cinco variantes— tanto en local como en CI,
+> en cada push. El único hallazgo abierto es el **8**: falta `og:image`, que
+> necesita una foto del club. La tanda 2 entera depende de contenido que el
+> club todavía no entregó, y de monitoreo sigue faltando la analítica, que
+> pide un token del panel de Cloudflare.
 >
 > Y apareció un bloqueante nuevo que no es de código: **el dominio no está
 > definido**, y el `canonical` que se agregó apunta a un marcador. Un
@@ -76,7 +77,7 @@ manual» las contradice, gana la restricción.
 | 9 | `sharp` está instalado pero no hay herramienta de imágenes | Mantenimiento | Medio | ✓ herramienta escrita |
 | 10 | `datos.js` sin `defer` bloquea el parser | Rendimiento | Bajo | ✓ cerrado |
 | 11 | `window.open` puede bloquearse y el aviso miente | UX | Bajo | ✓ cerrado |
-| 12 | Pruebas sin CI, sin validar HTML ni JSON-LD, servidor manual | Calidad | Medio | parcial — falta CI |
+| 12 | Pruebas sin CI, sin validar HTML ni JSON-LD, servidor manual | Calidad | Medio | ✓ cerrado |
 
 ### Riesgos, dependencias y cuellos de botella
 
@@ -933,10 +934,12 @@ npx wrangler deployments list          # ver qué se publicó y cuándo
 npx wrangler rollback <id-anterior>    # volver, en segundos
 ```
 
-**3. CI, si el repo va a GitHub.** Un workflow que corra `npm test` en cada push
-mueve la auditoría de «cuando me acuerdo» a «siempre». Con Playwright ya
-instalado son quince líneas. Si el repo se queda local, el mismo efecto se
-consigue con un hook de `pre-push`.
+**3. CI.** ✓ Hecho: `.github/workflows/pruebas.yml` corre `npm test` en cada
+push y en cada pull request, y cuando algo falla sube las capturas de axe como
+artefacto —una violación sin la captura obliga a reproducirla a mano—. Mueve la
+auditoría de «cuando me acuerdo» a «siempre». Instala solo Chromium: las
+pruebas no usan Firefox ni WebKit, y bajar los tres triplica el job sin cubrir
+nada más.
 
 **4. Monitoreo.** Hoy no hay nada: si el sitio se cae o el LCP se degrada, se
 descubre porque alguien avisa. Dos piezas, ambas gratis:
@@ -1044,6 +1047,7 @@ Tres tandas. La primera es medio día y se lleva casi todo el beneficio.
 15. ✗ Cloudflare Web Analytics, con su origen en la CSP
 16. ✓ La prueba de teclado de punta a punta
 17. ✓ El fallback de `window.open` (5.8)
+18. ✓ CI en GitHub Actions, con las capturas como artefacto
 
 ---
 
