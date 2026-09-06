@@ -46,15 +46,34 @@
   object-position:58% 34%;filter:grayscale(1) contrast(1.14) brightness(.82);
   animation:ri-zoom 28s ease-in-out infinite alternate}
 /* Dos velos: el diagonal apoya el texto de la izquierda, el de abajo funde
-   el hero con la sección siguiente. Son los únicos gradientes del sitio. */
-.hero::before,.hero::after{content:"";position:absolute;inset:0;pointer-events:none}
+   el hero con la sección siguiente. Son los únicos gradientes del sitio.
+
+   El z-index:1 de los velos es lo que los mantiene arriba de la foto, y no
+   se puede sacar. Sin él manda el orden de pintado —::before se pinta antes
+   que el primer hijo— y el velo diagonal queda DEBAJO de la imagen: medido
+   así, el párrafo cae a 1.19:1 y el rótulo a 2.09:1, contra el 4.5 que pide
+   la norma. El prototipo los tenía como dos <div> con z-index; se perdieron
+   al portarlos a ::before y ::after.
+
+   El z-index:0 de la foto es redundante —con el 1 de los velos alcanza— y
+   está para dejar los tres planos escritos: foto 0, velos 1, texto 2.
+   Lo cubre herramientas/contraste.mjs. */
+.hero__foto{z-index:0}
+.hero::before,.hero::after{content:"";position:absolute;z-index:1;inset:0;pointer-events:none}
 .hero::before{background:linear-gradient(96deg,rgba(11,11,11,.97) 0%,rgba(11,11,11,.9) 34%,rgba(11,11,11,.5) 68%,rgba(11,11,11,.72) 100%)}
 .hero::after{background:linear-gradient(to top,#0b0b0b 0%,rgba(11,11,11,0) 38%)}
 .hero__cuerpo{position:relative;z-index:2;max-width:1000px;width:100%}
 
+/* El rótulo va en hueso y no en --gris-claro, que es lo que pedía el
+   handoff. Detrás de estas dos palabras la foto tiene un reflejo claro: la
+   mediana del fondo es 19 pero sube hasta 92, y ahí el gris caía a 3.74:1
+   en escritorio y 2.91:1 en mobile. En hueso pasa de 8:1 en las dos.
+   Es la misma decisión que ya se tomó para el texto sobre rojo: cuando el
+   fondo no da margen, la jerarquía la hacen el tamaño y el peso —11px de
+   mono con letter-spacing— y no el color. */
 .hero__lugar{display:flex;align-items:center;gap:10px;
   font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.2em;
-  color:var(--gris-claro);text-transform:uppercase;
+  color:var(--hueso);text-transform:uppercase;
   animation:ri-up .7s var(--curva) .05s both}
 .hero__punto{width:8px;height:8px;border-radius:50%;background:var(--rojo);
   flex:none;animation:ri-pulse 2s infinite}
@@ -144,7 +163,12 @@
 /* ── 5. Las clases ───────────────────────────────────────────────────── */
 .clases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
   gap:1px;background:var(--linea-tenue);border:1px solid var(--linea-tenue)}
+/* Columna para que la meta pueda irse al piso de la tarjeta. Las cuatro
+   tarjetas miden lo mismo pero los párrafos no: con «Personal 1 a 1» en dos
+   líneas y el resto en tres, la meta de la cuarta quedaba 24px más arriba
+   que las otras y la fila se veía descuadrada. */
 .clase{background:var(--negro);padding:var(--pad-tarjeta);
+  display:flex;flex-direction:column;
   transition:background .25s var(--curva)}
 .clase__n{font-family:var(--f-mono);font-size:var(--t-rotulo);letter-spacing:.2em;
   color:var(--gris-mudo);text-transform:uppercase}
@@ -155,7 +179,7 @@
 .clase__q{color:var(--gris-texto);font-size:15px;line-height:1.6;margin-top:14px;
   text-wrap:pretty}
 .clase__meta{font-family:var(--f-mono);font-size:var(--t-rotulo-chico);letter-spacing:.16em;
-  color:var(--gris-mudo);text-transform:uppercase;margin-top:18px}
+  color:var(--gris-mudo);text-transform:uppercase;margin-top:auto;padding-top:18px}
 
 /* Al pasar el mouse la tarjeta entera se pinta de rojo. La spec original
    decía que el texto no cambiaba porque «ganaba contraste solo»: medido,
@@ -345,6 +369,13 @@
 
 /* Lo que el diseño no resolvía para pantallas angostas. */
 @media (max-width:640px){
+  /* El velo diagonal está pensado para «texto a la izquierda, foto a la
+     derecha», y en una pantalla angosta esa división no existe: el texto
+     ocupa todo el ancho y el final de cada línea cae sobre la parte clara
+     del gradiente. Acá trabaja el velo de abajo, que es donde está el
+     texto; arriba la foto sigue respirando. */
+  .hero::after{background:linear-gradient(to top,#0b0b0b 0%,
+    rgba(11,11,11,.88) 34%,rgba(11,11,11,0) 76%)}
   /* El titular de contacto ocupaba tres líneas enormes y empujaba los
      botones fuera de la primera pantalla del bloque. */
   .contacto{gap:clamp(20px,5vw,28px)}

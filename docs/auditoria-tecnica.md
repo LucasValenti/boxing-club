@@ -849,6 +849,7 @@ Todo lo de esta tabla está construido y corriendo en `npm test`.
 | **Formulario** | validación vacía, foco, texto del mensaje | es el único flujo interactivo del sitio |
 | **Teclado** | orden de tabulación, trampa de foco en el menú | axe no recorre, solo inspecciona |
 | **Interruptores** | apagar una sección y que desaparezca de verdad | es el mecanismo del que depende publicar incompleto |
+| **Texto sobre foto** | el hero, midiendo los píxeles de la imagen | axe no puede: sabe color contra color, no color contra foto |
 
 Dos de esas comprobaciones no son de calidad sino de **coherencia**, y son las
 que más van a servir con el tiempo. Están en la misma línea que `contacto.mjs`:

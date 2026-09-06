@@ -105,6 +105,7 @@ código 1 si algo falla, así sirve en un hook y en `predeploy`.
 | `validar.mjs` | anclas, `data-negocio`, JSON-LD, dominio, terceros y peso | nada: node pelado |
 | `contacto.mjs` | que el contacto salga todo de `NEGOCIO` | navegador |
 | `interaccion.mjs` | teclado, menú del celular y formulario | navegador |
+| `contraste.mjs` | el texto que va sobre una foto, midiendo los píxeles | navegador |
 | `auditoria.mjs` | accesibilidad en 320, 390, 768, 1440 y sin movimiento | navegador |
 
 `validar.mjs` no depende de nada: corre en un clon recién bajado, antes de

@@ -11,6 +11,7 @@ const PRUEBAS = [
   ['validar.mjs',     'HTML, datos, búsqueda y peso'],
   ['contacto.mjs',    'el contacto sale todo de NEGOCIO'],
   ['interaccion.mjs', 'teclado, menú y formulario'],
+  ['contraste.mjs',   'el texto que va sobre una foto'],
   ['auditoria.mjs',   'accesibilidad en 5 variantes'],
 ];
 
