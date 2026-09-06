@@ -8,7 +8,12 @@ const RAIZ = path.resolve('public');
 const TIPOS = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp',
-  '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
+  '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8',
+  /* Sin esto el .mp4 sale como application/octet-stream y el navegador no
+     lo reproduce: se queda en el póster, igual que si el archivo faltara.
+     En producción lo resuelve Cloudflare, así que el síntoma aparecía solo
+     en las pruebas — el peor lugar para un falso negativo. */
+  '.mp4': 'video/mp4', '.webm': 'video/webm' };
 
 http.createServer(async (req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);

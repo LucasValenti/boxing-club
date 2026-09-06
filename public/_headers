@@ -6,7 +6,7 @@
 #   curl -sI https://<dominio>/ | grep -i 'content-security\|x-content\|referrer'
 
 /*
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://images.unsplash.com; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://images.unsplash.com; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
@@ -27,6 +27,11 @@
 #    banco. Se saca junto con la última — igual que el preconnect del <head>.
 #    Cuando entre el mapa hay que agregar frame-src https://www.google.com, o
 #    la CSP lo bloquea en silencio.
+#
+# 4. media-src 'self' está escrito aunque default-src 'self' ya lo cubriría:
+#    los videos de la tira dependen de esa directiva y dejarla implícita
+#    significa que el día que alguien toque default-src se rompen sin que
+#    nada avise. Si un video pasa a servirse desde otro dominio, va acá.
 
 # Las fuentes nunca cambian: el nombre del archivo identifica el contenido.
 /fonts/*
@@ -41,6 +46,17 @@
   Cache-Control: public, max-age=3600
 /sitio/*
   Cache-Control: public, max-age=3600
+
+# El video y las fotos propias pesan y casi nunca cambian, pero el nombre del
+# archivo no dice cuál es el contenido: el día que el club mande su video, se
+# sube como video/bolsa.mp4 y pisa al de banco. Un año de caché ahí significa
+# que el material viejo queda dando vueltas en los celulares que ya entraron.
+# Una semana es el equilibrio: casi nunca se vuelve a bajar y una corrección
+# llega sola en pocos días.
+/video/*
+  Cache-Control: public, max-age=604800
+/img/*
+  Cache-Control: public, max-age=604800
 
 # El HTML siempre se revalida: es lo que descubre todo lo demás.
 /

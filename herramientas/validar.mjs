@@ -75,12 +75,23 @@ desconocidos.length ? mal(`data-negocio que NEGOCIO no define: ${desconocidos.jo
 
 console.log('\nBúsqueda');
 
-const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+/* Sobre «vivo» y no sobre «html»: el bloque del negocio está comentado a
+   propósito hasta que haya datos reales, y leyendo el HTML crudo esto daba
+   por bueno un SportsActivityLocation que Google nunca ve. Una prueba que
+   valida lo que no se publica miente en la dirección más cara: deja creer
+   que la ficha del negocio está cargada cuando no está.
+   Es el mismo error que ya se cometió una vez con data-flag. */
+const ld = [...vivo.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 ld.forEach((m, i) => {
   try { ok(`JSON-LD ${i + 1}: ${JSON.parse(m[1])['@type']}`); }
   catch (e) { mal(`JSON-LD ${i + 1} no parsea: ${e.message}`); }
 });
 if (!ld.length) mal('no hay bloques JSON-LD');
+/* Y si el del negocio no está, hay que decirlo: es lo que arma la ficha del
+   local en los resultados y es lo que más rinde en una búsqueda local. */
+if (!ld.some((m) => m[1].includes('SportsActivityLocation'))) {
+  avisar('sin JSON-LD del negocio: no hay ficha del local en Google, ver contenido-pendiente.md');
+}
 
 const titulo = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
 titulo.length && titulo.length <= 65
@@ -155,10 +166,38 @@ for (const h of conPreconnect.filter((x) => !recursos.includes(x))) {
   avisar('hay preconnect a ' + h + ' y ya no lo usa nadie: se puede sacar');
 }
 
+console.log('\nVideo de la tira');
+
+/* Un <video> que apunta a un archivo que no está no avisa: se ve el póster
+   para siempre y nadie se entera de que el clip nunca llegó. Pasa fácil al
+   renombrar un archivo o al clonar sin Git LFS. */
+const medios = [...vivo.matchAll(/<video[^>]*>/g)].map((m) => m[0]);
+if (!medios.length) {
+  avisar('no hay ningún video en la tira');
+} else {
+  for (const tag of medios) {
+    for (const attr of ['src', 'poster']) {
+      const ruta = (tag.match(new RegExp(attr + '="([^"]+)"')) || [])[1];
+      if (!ruta) { mal(`un <video> no tiene ${attr}`); continue; }
+      fs.existsSync(path.join(RAIZ, ruta))
+        ? ok(`${ruta}: está`)
+        : mal(`${ruta}: lo pide el HTML y el archivo no existe`);
+    }
+    /* muted es lo que hace que el navegador deje arrancar el video solo.
+       Sin él, play() se rechaza y el clip se queda en el póster. */
+    if (!/\bmuted\b/.test(tag)) mal('un <video> sin muted: no va a poder arrancar solo');
+    /* Sin JavaScript el único modo de verlo es con los controles nativos. */
+    if (!/\bcontrols\b/.test(tag)) avisar('un <video> sin controls: sin JS no hay forma de reproducirlo');
+  }
+}
+
 console.log('\nPeso propio');
 
-/* El presupuesto es lo que se sirve desde este dominio. Las fotos externas
-   no se cuentan acá — se van cuando entren las del club. */
+/* El presupuesto es lo que se sirve desde este dominio y viaja en el camino
+   crítico. Las fotos externas no se cuentan acá — se van cuando entren las
+   del club. El video y las fotos propias tampoco, pero por otro motivo: no
+   se bajan hasta que alguien llega a la tira. Van aparte, más abajo, para
+   que el número exista igual y no se esconda del informe. */
 const PRESUPUESTO = 500 * 1024;
 const pesar = (p) => fs.readdirSync(p, { withFileTypes: true }).reduce((t, e) => {
   const f = path.join(p, e.name);
@@ -181,6 +220,21 @@ console.log(`    ${'total'.padEnd(14)} ${(total / 1024).toFixed(1).padStart(7)} 
 total <= PRESUPUESTO
   ? ok(`dentro del presupuesto de ${PRESUPUESTO / 1024} KB`)
   : mal(`se pasó del presupuesto de ${PRESUPUESTO / 1024} KB`);
+
+/* Lo que se sirve desde este dominio pero recién cuando alguien llega a la
+   tira: preload="none" en los videos y loading="lazy" en las fotos. No entra
+   en el presupuesto de arriba porque no compite con la primera pantalla,
+   pero sí se mide: son megabytes de datos móviles de alguien.
+   El techo es generoso a propósito —son dos clips— y está para avisar si un
+   día alguien sube un video de 20 MB sin darse cuenta. */
+const DIFERIDO = 3 * 1024 * 1024;
+const existe = (p) => fs.existsSync(path.join(RAIZ, p));
+const diferido = ['video', 'img'].filter(existe)
+  .reduce((t, d) => t + pesar(path.join(RAIZ, d)), 0);
+console.log(`    ${'diferido'.padEnd(14)} ${(diferido / 1024).toFixed(1).padStart(7)} KB  (video/ + img/, fuera del camino crítico)`);
+diferido <= DIFERIDO
+  ? ok(`el diferido entra en ${DIFERIDO / 1024 / 1024} MB`)
+  : mal(`el diferido se pasó de ${DIFERIDO / 1024 / 1024} MB`);
 
 const resumen = fallas ? fallas + ' problema(s)' : 'Todo en orden';
 console.log('\n' + resumen + (avisos ? ', ' + avisos + ' aviso(s)' : '') + '.\n');
