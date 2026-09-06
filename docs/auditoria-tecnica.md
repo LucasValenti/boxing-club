@@ -39,7 +39,7 @@ sin pagos, sin contenido que cambie solo.
 
 Dos restricciones mandan sobre todas las demás:
 
-1. **Búsqueda local.** «gimnasio de boxeo rosario» se busca y se decide en dos
+1. **Búsqueda local.** «gimnasio de boxeo <ciudad>» se busca y se decide en dos
    minutos. El contenido tiene que estar en el HTML servido, no armado por JS.
 2. **Mobile con datos móviles.** El público entra desde Instagram, en la calle.
    Si tarda, se fue antes de leer el precio.
@@ -94,13 +94,17 @@ código no adelanta la fecha de salida.**
 
 Riesgos reales, en orden:
 
-- **Datos de una persona real sin verificar.** «El rincón» afirma récord 13–1,
-  plata en Odesur 2018 y título sudamericano de Carlos «Junior» Alanís. Son
-  afirmaciones verificables sobre alguien identificable, sacadas de fuentes
-  públicas. Publicarlas sin que el club las apruebe es el único riesgo del
-  proyecto con consecuencias fuera de la pantalla. El interruptor
-  `mostrarLinaje` existe justamente para esto, y **ya quedó en `false`**: el
-  default seguro es no publicar una afirmación que nadie confirmó.
+- **Datos de una persona real sin verificar.** «El rincón» afirmaba un récord
+  profesional, una medalla continental y un título, atribuidos a dos personas
+  con nombre y apellido y sacados de fuentes públicas sin que el club los
+  confirmara. Era el único riesgo del proyecto con consecuencias fuera de la
+  pantalla: una afirmación verificable sobre alguien identificable no se
+  publica porque «figura en internet».
+  **Resuelto de raíz al pasar el sitio a plantilla:** la sección se reescribió
+  con texto que no afirma nada verificable y sirve para cualquier club, así que
+  volvió a encenderse. El interruptor `mostrarLinaje` sigue existiendo, pero ya
+  no está tapando un problema. Si un club quiere nombrar a alguien, vuelve a
+  aplicar la regla — ver `docs/contenido-pendiente.md`.
 - **Fotos de banco en producción.** Cinco imágenes de Unsplash presentadas como
   «el gimnasio». Los `alt` **ya se hicieron genéricos** —describen lo que se ve
   sin afirmar que sea este club— pero las fotos siguen sin ser del gimnasio, y
@@ -121,7 +125,7 @@ Donde falta información, asumo lo siguiente y lo dejo escrito para que se
 corrija en vez de descubrirse tarde:
 
 1. **El dominio final todavía no está definido.** Uso
-   `https://alanisboxingclub.com.ar` como marcador en todos los ejemplos. Hay
+   `https://example.com` como marcador en todos los ejemplos. Hay
    que reemplazarlo en `canonical`, `og:url`, `robots.txt` y `sitemap.xml` — son
    cuatro lugares y conviene hacerlos de una sola vez.
 2. **El sitio se sirve con Cloudflare Workers Assets**, según `wrangler.jsonc`.
@@ -403,16 +407,16 @@ llega al `<img>`:
 
 ```html
 <!-- Sin esto, el sitio existe en dos direcciones a la vez: el dominio y
-     alanis-boxing-club.workers.dev. Para búsqueda local, competir consigo
+     <worker>.workers.dev. Para búsqueda local, competir consigo
      mismo es el peor resultado posible. -->
-<link rel="canonical" href="https://alanisboxingclub.com.ar/">
+<link rel="canonical" href="https://example.com/">
 
-<meta property="og:url" content="https://alanisboxingclub.com.ar/">
+<meta property="og:url" content="https://example.com/">
 <!-- 1200×630. Para este público el link pegado en WhatsApp es la primera
      impresión más frecuente, antes que Google. Sin imagen, WhatsApp muestra
      un rectángulo gris. -->
-<meta property="og:image" content="https://alanisboxingclub.com.ar/img/og-alanis.jpg">
-<meta property="og:image:alt" content="Entrenamiento en Alanis Boxing Club, Rosario">
+<meta property="og:image" content="https://example.com/img/og.jpg">
+<meta property="og:image:alt" content="Entrenamiento en Club de Boxeo, Tu Ciudad">
 ```
 
 `public/robots.txt`:
@@ -421,7 +425,7 @@ llega al `<img>`:
 User-agent: *
 Allow: /
 
-Sitemap: https://alanisboxingclub.com.ar/sitemap.xml
+Sitemap: https://example.com/sitemap.xml
 ```
 
 `public/sitemap.xml` — una sola URL, y aun así vale: le da a Google una fecha de
@@ -431,7 +435,7 @@ Sitemap: https://alanisboxingclub.com.ar/sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alanisboxingclub.com.ar/</loc>
+    <loc>https://example.com/</loc>
     <lastmod>2026-09-06</lastmod>
   </url>
 </urlset>
@@ -485,7 +489,7 @@ Tres notas sobre esa CSP, porque cada una es una trampa conocida:
 Y conviene verificar que llegaron, porque una CSP que no se aplica no avisa:
 
 ```
-curl -sI https://alanisboxingclub.com.ar/ | grep -i 'content-security\|x-content\|referrer'
+curl -sI https://example.com/ | grep -i 'content-security\|x-content\|referrer'
 ```
 
 ### 5.6 · Hallazgo 6 — versionar sin build
@@ -758,7 +762,7 @@ recorrido.
 
 | | Estado |
 |---|---|
-| `<title>` con «boxeo» + «Rosario» + gancho | ✓ |
+| `<title>` con «boxeo» + la ciudad + gancho | ✓ |
 | `description` local y concreta | ✓ |
 | `SportsActivityLocation` en JSON-LD | ✓ escrito — ⚠ con datos sin confirmar |
 | `FAQPage` con texto idéntico al visible | ✓ y la condición se cumple |
@@ -771,7 +775,7 @@ recorrido.
 
 El `canonical` ya está, y la razón por la que hacía falta se confirmó en
 producción: el sitio publicado responde igual en
-`alanis-boxing-club.lucas-valenti00.workers.dev` que en el dominio final —
+`<worker>.workers.dev` que en el dominio final —
 dos direcciones con el mismo contenido, compitiendo por la misma consulta
 local si no hubiera un canonical que las desempate. Apunta al marcador del
 dominio: hay que corregirlo en cuanto el club confirme el dominio real, o
@@ -783,7 +787,7 @@ estructurados equivocados no son un error cosmético — es lo que Google usa pa
 armar la ficha, y corregirlo después tarda semanas en propagarse.
 
 Y lo que más mueve la aguja está fuera del sitio: **la ficha de Google
-Business.** Para «gimnasio de boxeo rosario», el paquete local aparece arriba de
+Business.** Para «gimnasio de boxeo <ciudad>», el paquete local aparece arriba de
 los resultados orgánicos. Conviene abrirla o reclamarla en paralelo al
 lanzamiento, no después.
 
@@ -1040,7 +1044,7 @@ valen la pena; las últimas están acá para que quede registrado que se evaluar
 se descartaron.
 
 **1. Ficha de Google Business.** No es código y es lo que más mueve la búsqueda
-local. Para «gimnasio de boxeo rosario» el paquete local va arriba de todo lo
+local. Para «gimnasio de boxeo <ciudad>» el paquete local va arriba de todo lo
 orgánico. Conviene abrirla o reclamarla en paralelo al lanzamiento.
 
 **2. El mapa, como imagen estática.** Cuando confirmen la dirección: una captura
@@ -1086,7 +1090,8 @@ Tres tandas. La primera es medio día y se lleva casi todo el beneficio.
 5. ✓ `preconnect` a Unsplash (5.3)
 6. ✓ Comentar la sección de testimonios (5.7)
 7. ✓ Poner `mostrarLinaje` en `false` hasta que el club confirme los datos de
-   Junior Alanís
+   la persona que nombraba la sección (después se reescribió en genérico y
+   volvió a encenderse)
 8. ✓ `alt` genérico en las fotos de banco mientras no sean del club
 
 **Tanda 2 — al confirmar el contenido**

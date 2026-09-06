@@ -8,7 +8,7 @@ El orden vertical es el de este documento. Todo el contenido está en español r
 
 `position:sticky; top:0; z-index:50`, fondo `rgba(11,11,11,.86)` con `backdrop-filter:blur(10px)`, borde inferior `1px solid rgba(244,241,236,.14)`. Padding `14px clamp(16px,4vw,48px)`. Flex, `justify-content:space-between`.
 
-**Izquierda (marca):** cuadrado rojo `26×26px` + «Alanis Boxing Club» (Big Shoulders 900, 22px, uppercase) + «Rosario» (Chivo Mono 10px, `letter-spacing:.18em`, color `#8a8781`). Los tres en fila con `gap:12px`, alineados al centro. Enlaza a `#top`.
+**Izquierda (marca):** cuadrado rojo `26×26px` + «Club de Boxeo» (Big Shoulders 900, 22px, uppercase) + «Tu Ciudad» (Chivo Mono 10px, `letter-spacing:.18em`, color `#8a8781`). Los tres en fila con `gap:12px`, alineados al centro. Enlaza a `#top`.
 
 **Derecha (nav):** `gap:clamp(14px,2.2vw,30px)`, Chivo Mono 11px `letter-spacing:.16em` uppercase.
 - `Clases` → `#clases`
@@ -34,7 +34,7 @@ Link genérico: color `#f4f1ec`, sin subrayado; hover `#E2231A`.
 4. Contenido, `max-width:1000px`.
 
 **Contenido, en orden:**
-- Rótulo de ubicación: punto rojo de 8px (`border-radius:50%`, animación `ri-pulse` 2s infinite, opacidad .5→1) + «Rosario, Santa Fe» en Chivo Mono 11px `letter-spacing:.2em` color `#a8a49d`.
+- Rótulo de ubicación: punto rojo de 8px (`border-radius:50%`, animación `ri-pulse` 2s infinite, opacidad .5→1) + «Tu Ciudad, Tu Provincia» en Chivo Mono 11px `letter-spacing:.2em` color `#a8a49d`.
 - **H1 en dos líneas:** «Ponete» (hueso) / «los guantes» (rojo `#E2231A`). Cada línea es un `<span style="display:block">` con animación `ri-wipe` — `clip-path:inset(0 100% 0 0)` → `inset(0 0 0 0)`, `.8s cubic-bezier(.6,0,.2,1)`, delays `.1s` y `.25s`. Es la animación firma de la página: el texto se descubre de izquierda a derecha, como un golpe.
 - Párrafo: «Entrenamiento completo de boxeo, recreativo y competitivo, femenino y masculino. Para principiantes, mujeres, chicos y adultos que nunca pisaron un gimnasio. **La primera clase no se paga.**» (última frase en `<strong>` color `#f4f1ec` peso 700).
 - **Dos CTAs** (`gap:12px`, wrap):
@@ -70,15 +70,15 @@ Grilla `repeat(auto-fit,minmax(min(100%,320px),1fr))`, `gap:clamp(28px,4vw,64px)
 
 **Columna izquierda:**
 - Rótulo «El rincón» (Chivo Mono 11px `letter-spacing:.2em` gris).
-- H2: «Acá se formó un» / «**campeón sudamericano**» (segunda línea en rojo, separada por `<br>`).
-- Párrafo: «Charly Alanis dirige el club y es el entrenador que formó a **Carlos «Junior» Alanís**: medalla de plata en los Juegos Odesur 2018 y campeón sudamericano ligero. El mismo trabajo de rincón que llevó a un profesional al título es el que vas a tener desde tu primera clase.»
+- H2: «Un entrenador» / «**en tu esquina**» (segunda línea en rojo, separada por `<br>`).
+- Párrafo: «El equipo viene del boxeo competitivo, no solo del gimnasio. El mismo trabajo de rincón que se usa para preparar una pelea es el que vas a tener desde tu primera clase, aunque nunca te hayas puesto un guante: alguien mirando cómo parás, cómo respirás y cómo tirás.»
 
 **Columna derecha — tres stats** en `<dl>`, grilla `repeat(auto-fit,minmax(130px,1fr))`, `gap:1px` sobre `rgba(244,241,236,.14)`, celdas `background:#0b0b0b` padding `22px 18px`. El número va **arriba** (`dd`) y el rótulo abajo (`dt`) — invertido respecto al orden semántico natural, resuelto con el orden del markup.
-- `13–1` (el guión en rojo) — Récord profesional
-- `2018` — Plata Odesur
-- `01` (en rojo) — Título sudamericano
+- `+10` — Años en el club
+- `04` — Formas de entrenar
+- `12` (en rojo) — Máximo por grupo
 
-> **Verificar antes de publicar:** los datos de Carlos «Junior» Alanís vienen de fuentes públicas y no fueron confirmados por el cliente. Récord y títulos son afirmaciones verificables — que las apruebe el gimnasio.
+> **Esta sección cambió respecto del handoff original.** Decía «Acá se formó un campeón sudamericano» y afirmaba un récord profesional, una medalla y un título de dos personas con nombre y apellido, sacados de fuentes públicas y sin confirmar. Eso no puede vivir en una plantilla: son afirmaciones verificables sobre gente real. El texto de arriba no afirma nada que haya que chequear y sirve para cualquier club. Si un club quiere volver a nombrar a alguien, que lo apruebe primero — ver `docs/contenido-pendiente.md`.
 
 ---
 
@@ -154,15 +154,15 @@ Grilla `repeat(auto-fit,minmax(min(100%,300px),1fr))`, `gap:clamp(24px,4vw,56px)
 **Derecha:**
 - Párrafo (`color:#3a3833`, `max-width:40ch`): «Escribinos y te reservamos un lugar en el horario que te quede cómodo. Vení con ropa deportiva, el resto lo ponemos nosotros.»
 - Dos botones, `gap:12px`:
-  - **WhatsApp** → `https://wa.me/5493415632194`. Fondo `#0b0b0b`, texto `#f4f1ec`. Hover: fondo `#E2231A`, texto blanco.
-  - **341 563-2194** → `tel:+5493415632194`. Borde `1px solid rgba(11,11,11,.25)`. Hover: borde `#0b0b0b`.
-- Línea de datos (Chivo Mono 11px `letter-spacing:.14em` uppercase, `color:#6b6862`): «Rueda 2553 · Rosario · alanisbox@hotmail.com»
+  - **WhatsApp** → `https://wa.me/5491155555555`. Fondo `#0b0b0b`, texto `#f4f1ec`. Hover: fondo `#E2231A`, texto blanco.
+  - **11 5555-5555** → `tel:+5491155555555`. Borde `1px solid rgba(11,11,11,.25)`. Hover: borde `#0b0b0b`.
+- Línea de datos (Chivo Mono 11px `letter-spacing:.14em` uppercase, `color:#6b6862`): «Av. Siempreviva 742 · Tu Ciudad · hola@example.com»
 
 ### ⚠ Datos de contacto — cablear en un solo lugar
 El teléfono aparece **4 veces** y no está confirmado por el cliente:
-1. Header, botón «Escribinos» → `wa.me/5493415632194`
-2. Contacto, botón WhatsApp → `wa.me/5493415632194`
-3. Contacto, botón teléfono → `tel:+5493415632194` y su label visible `341 563-2194`
+1. Header, botón «Escribinos» → `wa.me/5491155555555`
+2. Contacto, botón WhatsApp → `wa.me/5491155555555`
+3. Contacto, botón teléfono → `tel:+5491155555555` y su label visible `11 5555-5555`
 4. Contacto, línea de datos → dirección + email
 
 Al portar, poné estos cuatro valores (whatsapp, tel, dirección, email) en **una sola constante o entrada de CMS**. Van a cambiar.
@@ -202,7 +202,7 @@ La página es **estática**. No hay fetching, ni formularios, ni estados de carg
 | Flag | Default | Qué controla |
 |---|---|---|
 | `mostrarPrecios` | `true` | Muestra/oculta la sección Planes completa |
-| `mostrarLinaje` | `true` | Muestra/oculta la sección del campeón sudamericano |
+| `mostrarLinaje` | `true` | Muestra/oculta la sección «El rincón» |
 
 Existen porque los precios no están confirmados y los datos del campeón están sin verificar: permiten publicar sin esas secciones si hace falta.
 

@@ -100,12 +100,11 @@ configuración y herramientas.
   **Empezá por acá si volvés después de un tiempo.**
 - `docs/propuesta.html` — la presentación para el cliente.
 - `docs/wireframes/` — los artboards del canvas de wireframes (`.dc.html`) y
-  `wireframes-alanis-boxing.html`, el canvas armado.
-- `docs/diseno/` — el handoff del diseño, tal como llegó. `SECCIONES.md` es la
-  spec sección por sección y manda cuando algo no cierra;
-  `preview-standalone.html` se abre con doble clic y muestra el resultado
-  buscado. `support.js` y el `.dc.html` son de la herramienta de diseño: no se
-  portan.
+  `canvas.html`, el canvas armado.
+- `docs/diseno/` — el handoff del diseño. `SECCIONES.md` es la spec sección por
+  sección y manda cuando algo no cierra; `preview-standalone.html` se abre con
+  doble clic y muestra el resultado buscado. `support.js` y el `.dc.html` son
+  de la herramienta de diseño: no se portan.
 
 ## Herramientas
 

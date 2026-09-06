@@ -1,6 +1,6 @@
 # Arquitectura
 
-Documento técnico del sitio de Alanis Boxing Club. Para la versión que ve el
+Documento técnico del sitio de Club de Boxeo. Para la versión que ve el
 cliente, ver `propuesta.html`.
 
 ## Qué es esta pieza
@@ -11,7 +11,7 @@ ni pagos, ni contenido que cambie solo. Todo lo que sigue se decide contra eso.
 
 Las dos restricciones que mandan:
 
-1. **Búsqueda local.** «gimnasio de boxeo rosario» se busca en Google y se
+1. **Búsqueda local.** «gimnasio de boxeo <ciudad>» se busca en Google y se
    decide en dos minutos. El contenido tiene que estar en el HTML.
 2. **Mobile con datos móviles.** El público entra desde Instagram, en la calle.
    Si tarda, se va antes de leer el precio.
@@ -91,7 +91,7 @@ esos valores está confirmado por el cliente. Ahora están en `NEGOCIO`
 (`sitio/datos.js`) y el HTML marca los destinos con `data-negocio`:
 
 ```html
-<a href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos</a>
+<a href="https://wa.me/5491155555555" data-negocio="whatsapp">Escribinos</a>
 ```
 
 `app.js` los completa al cargar. El valor también está escrito en el markup, así
@@ -210,10 +210,10 @@ fotos reales del club.
 ## Búsqueda local
 
 - `SportsActivityLocation` en JSON-LD con dirección, teléfono y horarios. Es lo
-  que le dice a Google que esto es un gimnasio de Rosario. **No publicar hasta
+  que le dice a Google que esto es un gimnasio de esa ciudad. **No publicar hasta
   confirmar los datos.**
 - `FAQPage` cuando entre la sección de preguntas: puede ganar resultado ampliado.
-- `<title>` y `description` con «boxeo» + «Rosario»; `lang="es-AR"`.
+- `<title>` y `description` con «boxeo» + la ciudad; `lang="es-AR"`.
 - Imagen de Open Graph: para este público, el link pegado en WhatsApp es la
   primera impresión más frecuente, antes que Google.
 - Fuera del sitio, y es lo que más mueve: la ficha de Google Business.

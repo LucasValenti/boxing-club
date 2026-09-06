@@ -20,7 +20,7 @@ import { chromium } from 'playwright';
 const URL = process.argv[2];
 if (!URL) {
   console.error('uso: node herramientas/rendimiento.mjs <URL>');
-  console.error('ejemplo: node herramientas/rendimiento.mjs https://alanis-boxing-club.lucas-valenti00.workers.dev/');
+  console.error('ejemplo: node herramientas/rendimiento.mjs https://tu-worker.workers.dev/');
   process.exit(1);
 }
 

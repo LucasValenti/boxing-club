@@ -22,7 +22,7 @@ const VARIANTES = [
    una violación de axe sin la captura obliga a reproducirla a mano. */
 const salida = process.env.CAPTURAS
   ? (await fs.mkdir(process.env.CAPTURAS, { recursive: true }), process.env.CAPTURAS)
-  : await fs.mkdtemp(path.join(os.tmpdir(), 'alanis-'));
+  : await fs.mkdtemp(path.join(os.tmpdir(), 'capturas-'));
 /* CHROMIUM apunta a un Chromium ya instalado, para no bajar el que trae
    Playwright. Sin la variable usa el suyo, que es lo normal. */
 const navegador = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });

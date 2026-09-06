@@ -1,12 +1,21 @@
-# Handoff: Alanis Boxing Club — Landing page
+# Handoff de diseño: landing para gimnasio de boxeo
+
+> Este documento y `SECCIONES.md` son el handoff original del que salió el
+> sitio. Se conservan porque `sitio/sitio.css` los cita como la autoridad
+> sobre medidas: cuando algo no cierra, manda `SECCIONES.md`.
+>
+> Estaban escritos para un club concreto y se pasaron a genéricos: el nombre,
+> la ciudad y los datos de contacto que traían eran de un negocio real.
+> Las decisiones de diseño no dependían de eso y quedaron intactas.
 
 ## Overview
-Landing page de una sola vista para **Alanis Boxing Club**, gimnasio de boxeo en Rosario (Santa Fe, Argentina). Objetivo: captar principiantes adultos, mujeres y chicos, y empujar todo el tráfico a **WhatsApp** con el gancho de la primera clase gratis. Idioma: español rioplatense (voseo).
+Landing page de una sola vista para un **gimnasio de boxeo** de barrio.
+Objetivo: captar principiantes adultos, mujeres y chicos, y empujar todo el tráfico a **WhatsApp** con el gancho de la primera clase gratis. Idioma: español rioplatense (voseo).
 
 ## About the design files
 Los archivos de este bundle son **referencias de diseño hechas en HTML** — prototipos que muestran el look y el comportamiento buscados, **no código de producción para copiar tal cual**. La tarea es **recrear estos diseños en el entorno del codebase destino** (React/Next, Astro, Vue, WordPress, lo que sea) usando sus patrones y librerías establecidas. Si todavía no hay codebase, elegí el framework más adecuado: para esta pieza (una sola página, mucho contenido estático, prioridad SEO local y velocidad en mobile) **Astro o Next.js estático son la mejor opción**; un site builder también sirve si el cliente va a editar textos solo.
 
-`Alanis Boxing Club.dc.html` usa un runtime propio del entorno donde se diseñó (`support.js`, tags `<x-dc>`, `<sc-if>`, atributos `style-hover`). **Ignorá ese runtime** — es andamiaje de la herramienta de diseño. Lo que importa es el markup, los estilos inline y las animaciones. `preview-standalone.html` es la misma página empaquetada en un archivo único: abrila en el navegador para ver el resultado real sin instalar nada.
+`diseno-original.dc.html` usa un runtime propio del entorno donde se diseñó (`support.js`, tags `<x-dc>`, `<sc-if>`, atributos `style-hover`). **Ignorá ese runtime** — es andamiaje de la herramienta de diseño. Lo que importa es el markup, los estilos inline y las animaciones. `preview-standalone.html` es la misma página empaquetada en un archivo único: abrila en el navegador para ver el resultado real sin instalar nada.
 
 ## Fidelity
 **Alta fidelidad (hifi).** Colores, tipografías, escalas y espaciados son finales y están pensados para recrearse tal cual. Dos salvedades de contenido, no de diseño:
@@ -69,12 +78,12 @@ No hay logo: la marca se resuelve con un **cuadrado rojo de 26×26px** más el n
 | Archivo | Qué es |
 |---|---|
 | `preview-standalone.html` | **Empezá por acá.** La página completa en un archivo único, se abre offline con doble clic. |
-| `Alanis Boxing Club.dc.html` | El fuente del diseño. Markup + estilos inline reales. Ignorá `<x-dc>`, `<sc-if>` y `support.js`. |
+| `diseno-original.dc.html` | El fuente del diseño. Markup + estilos inline reales. Ignorá `<x-dc>`, `<sc-if>` y `support.js`. |
 | `SECCIONES.md` | Spec detallada sección por sección: layout, contenido exacto, estados, animaciones. |
 | `support.js` | Runtime de la herramienta de diseño. Solo está para que el `.dc.html` abra. **No portar.** |
 
 ## Pendientes de contenido (bloquean el lanzamiento)
-1. **Dirección, teléfono y email reales.** Los actuales (`Rueda 2553`, `+54 341 563-2194`, `alanisbox@hotmail.com`) son los que se encontraron públicamente y **el cliente todavía no los confirmó**. Están cableados en 4 lugares — ver `SECCIONES.md`.
+1. **Dirección, teléfono y email reales.** Los que trae la plantilla son de ejemplo (`Av. Siempreviva 742`, `11 5555-5555`, `hola@example.com`). Ya no están cableados en 4 lugares: van una sola vez en `public/sitio/datos.js` y la página los reparte. Ver `docs/contenido-pendiente.md`.
 2. **Horarios reales.** Hoy el hero dice «Mañana y tarde», genérico a propósito.
 3. **Precios.** Los tres planes dicen «A confirmar».
 4. **Fotos del gimnasio.**
