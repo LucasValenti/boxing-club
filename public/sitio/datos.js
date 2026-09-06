@@ -37,8 +37,13 @@ window.NEGOCIO = {
    publica igual: el lanzamiento no queda rehén de un dato que falta.
    ──────────────────────────────────────────────────────────────────────── */
 window.MOSTRAR = {
-  mostrarLinaje: true,       // «El rincón» — los datos de Junior Alanís están
-                             //   sin verificar. Apagalo si no los confirman.
+  mostrarLinaje: false,      // «El rincón» — APAGADA a propósito. El récord
+                             //   13–1, la plata en Odesur 2018 y el título
+                             //   sudamericano de Junior Alanís salieron de
+                             //   fuentes públicas, no del club. Son
+                             //   afirmaciones verificables sobre una persona
+                             //   real: el default seguro es no publicarlas.
+                             //   Se enciende cuando el club las confirme.
   mostrarPrecios: true,      // «Los planes» — hoy dicen «A confirmar».
   mostrarTestimonios: false, // Apagada: las tres tarjetas son ranuras vacías.
                              //   Se enciende cuando lleguen los reales.

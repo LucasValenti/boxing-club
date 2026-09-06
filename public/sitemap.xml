@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Una sola URL, y aun así vale: le da a Google una fecha de modificación
+     explícita en vez de que la infiera. Al publicar un cambio de contenido,
+     actualizar lastmod. ⚠ El dominio es un marcador. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://alanisboxingclub.com.ar/</loc>
+    <lastmod>2026-09-06</lastmod>
+  </url>
+</urlset>

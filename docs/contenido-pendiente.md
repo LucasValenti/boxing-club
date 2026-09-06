@@ -5,7 +5,28 @@ bloquea: arriba, lo que impide lanzar; abajo, lo que se puede completar después
 
 ## Bloquea el lanzamiento
 
-### 1. Datos de contacto
+### 1. El dominio
+
+No está definido, y bloquea más de lo que parece. Hoy el sitio dice
+`alanisboxingclub.com.ar` en cuatro lugares, y es **un marcador puesto por
+nosotros**, no una dirección que alguien haya comprado:
+
+| Archivo | Qué dice |
+|---|---|
+| `public/index.html` | `<link rel="canonical">` y `og:url` |
+| `public/robots.txt` | la línea `Sitemap:` |
+| `public/sitemap.xml` | el `<loc>` |
+
+**Por qué bloquea:** un `canonical` que apunta a un dominio equivocado es peor
+que no tener ninguno — le dice a Google que la versión buena de esta página es
+otra, y la de verdad se cae de los resultados. Con un dominio sin confirmar, o
+se corrigen los cuatro lugares antes de publicar, o se sacan las cuatro líneas.
+
+**Preguntar:** ¿el club ya tiene dominio? ¿A nombre de quién está y quién paga
+la renovación? Si no tiene, hay que comprarlo antes del lanzamiento: sale poco y
+es lo que va en la ficha de Google Business, en Instagram y en los volantes.
+
+### 2. Datos de contacto
 Los tres valores que hay hoy salieron de fuentes públicas y **el cliente no los
 confirmó**. Van en `public/sitio/datos.js` y desde ahí se estampan solos en los
 cuatro lugares donde aparecen.
@@ -22,39 +43,46 @@ cuatro lugares donde aparecen.
 ¿Quién lo lee y en qué horario? Un WhatsApp que nadie contesta a la noche
 convierte peor que un formulario.
 
-### 2. Horarios reales
+### 3. Horarios reales
 Hoy el hero dice «Mañana y tarde», genérico a propósito. Hacen falta los días y
 las franjas de verdad, por tipo de clase si difieren.
 
-### 3. Precios
+### 4. Precios
 Los tres planes dicen «A confirmar». Cuando lleguen los montos, el precio vuelve
 a su tamaño grande y el sufijo pasa a ser inline (`/mes`, `/sesión`). El layout
 no cambia.
 
-### 4. Fotos del gimnasio
+### 5. Fotos del gimnasio
 Todas las imágenes actuales son de Unsplash: no son el gimnasio. El cliente las
 tiene en Instagram. **Qué pedir:** la sala de bolsas, una clase en actividad, el
 ring, y un retrato de Charly. Horizontales y verticales, lo más grandes que las
 tenga. Se procesan a WebP y se tratan en blanco y negro.
 
-### 5. Verificar los datos del campeón
+### 6. Verificar los datos del campeón
 La sección «El rincón» afirma que Carlos «Junior» Alanís tiene récord 13–1,
 medalla de plata en Odesur 2018 y título sudamericano ligero. Salió de fuentes
 públicas. **Son afirmaciones verificables sobre una persona real: que las
-apruebe el gimnasio antes de publicarlas.** Si no las confirman, la sección se
-apaga y la página funciona igual.
+apruebe el gimnasio antes de publicarlas.**
+
+**Ya está apagada** (`mostrarLinaje: false` en `public/sitio/datos.js`): el
+default seguro es no publicar una afirmación sobre alguien identificable que
+nadie confirmó. La página funciona igual sin la sección. Se enciende el día que
+el club diga que sí.
 
 ## Necesario para las secciones nuevas
 
-### 6. Testimonios
+### 7. Testimonios
 Tres, con nombre, cuánto hace que entrenan y —si aceptan— foto. Sirven más los
 concretos («llegué sin poder saltar a la soga») que los elogios.
 
-La sección está construida pero **apagada** (`mostrarTestimonios: false` en
-`public/sitio/datos.js`): las tres tarjetas son ranuras vacías. Se completan con
-las citas reales y se enciende el interruptor.
+La sección está construida pero **apagada, y además comentada en el HTML**
+(`mostrarTestimonios: false` en `public/sitio/datos.js`, y el bloque comentado
+en `public/index.html`). Comentada porque el interruptor lo resuelve el
+navegador: con solo el flag, las tres «Testimonio pendiente» viajaban igual en
+el HTML servido y se veían sin JavaScript. Se descomenta, se completan las
+citas reales y se enciende el interruptor.
 
-### 7. Preguntas frecuentes
+### 8. Preguntas frecuentes
 Cinco están escritas y publicadas, con respuestas armadas a partir de datos que
 sí están en la spec (60 min sin contacto, de 8 a 17 años, guantes incluidos,
 grupos de hasta 12). **Que las lea el club y las corrija** — están redactadas
@@ -68,7 +96,7 @@ Falta la sexta, y no se puede inventar porque es una regla del negocio:
 Cuando llegue la respuesta se suma en `public/index.html` (sección `#faq`) y en
 el bloque `FAQPage` del JSON-LD, con el mismo texto en los dos lados.
 
-### 8. Formulario: a dónde llega
+### 9. Formulario: a dónde llega
 Hoy la propuesta es que abra WhatsApp con el mensaje ya escrito. Si el cliente
 prefiere que además le caiga por mail o a una planilla, hay que saberlo antes de
 construirlo: cambia la arquitectura (ver `arquitectura.md`).

@@ -8,20 +8,49 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0b0b0b">
 
+<!-- ⚠ EL DOMINIO NO ESTÁ CONFIRMADO. alanisboxingclub.com.ar es un marcador.
+     Un canonical que apunta al dominio equivocado es peor que no tener
+     ninguno: le dice a Google que la buena es otra página y desindexa esta.
+     Cuando se confirme hay que cambiarlo en cuatro lugares — acá, en og:url,
+     en robots.txt y en sitemap.xml. Ver docs/contenido-pendiente.md.
+
+     Y hace falta: con Workers Assets el sitio también responde en
+     alanis-boxing-club.workers.dev, así que hoy hay dos direcciones con el
+     mismo contenido compitiendo por «gimnasio de boxeo rosario». -->
+<link rel="canonical" href="https://alanisboxingclub.com.ar/">
+
 <!-- Cuando alguien pega el link en WhatsApp, esto es lo que se ve. Para este
      público es la primera impresión más frecuente, antes que Google.
      ⚠ Falta la imagen og-alanis.jpg (1200×630) con una foto real. -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://alanisboxingclub.com.ar/">
 <meta property="og:title" content="Alanis Boxing Club — Boxeo en Rosario">
 <meta property="og:description" content="Primera clase gratis. Principiantes, mujeres, chicos y adultos. Guantes incluidos.">
+
+<!-- ⚠ TEMPORAL. El LCP de la página lo sirve hoy una foto de Unsplash, y esa
+     conexión (DNS + TCP + TLS) recién se abre cuando el parser llega al
+     <img>. Se borra junto con la última foto de banco: con las del club no
+     queda ninguna conexión a terceros. -->
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 
 <!-- El titular es lo primero que se ve y lo primero que se mide: su fuente
      se pide antes que el CSS, no después de leerlo. crossorigin es
      obligatorio aunque el archivo sea de este mismo dominio — las fuentes
      siempre se piden en modo CORS, y sin el atributo se descarga dos veces. -->
 <link rel="preload" href="fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+<!-- Los siete archivos de estilo, en el orden de la cascada. Van como <link>
+     y no como @import dentro de un styles.css: un @import no se descubre
+     hasta que el archivo que lo contiene se descargó y se parseó, así que
+     los @font-face quedaban a tres saltos del HTML y las tipografías del
+     cuerpo se pedían tarde. Como <link> se piden todos en el primer parse. -->
+<link rel="stylesheet" href="tokens/fonts.css">
+<link rel="stylesheet" href="tokens/colors.css">
+<link rel="stylesheet" href="tokens/typography.css">
+<link rel="stylesheet" href="tokens/layout.css">
+<link rel="stylesheet" href="tokens/motion.css">
+<link rel="stylesheet" href="base/reset.css">
+<link rel="stylesheet" href="sitio/sitio.css">
 
 <!-- Búsqueda local: es como Google entiende que esto es un gimnasio de
      Rosario y no un blog de boxeo. ⚠ Los datos de contacto no están
@@ -214,8 +243,15 @@
 </section>
 
 <!-- ── 6. Testimonios ────────────────────────────────────────────────── -->
-<!-- Apagada hasta que lleguen los testimonios reales. Las tres tarjetas son
-     ranuras vacías a propósito: acá no se inventa lo que dijo nadie. -->
+<!-- APAGADA hasta que lleguen los testimonios reales. Comentada, y no solo
+     con data-flag: el flag lo resuelve app.js en el navegador, así que las
+     tres «Testimonio pendiente» viajaban igual en el HTML servido. Se veían
+     sin JavaScript, y estaban en lo que Google descarga en el primer pase.
+     Las tarjetas son ranuras vacías a propósito: acá no se inventa lo que
+     dijo nadie.
+
+     Para encenderla: descomentar esto y poner mostrarTestimonios en true.
+
 <section class="seccion" id="testimonios" data-flag="mostrarTestimonios">
   <div class="seccion__cabeza" data-reveal>
     <h2>Los que ya entrenan</h2>
@@ -236,6 +272,7 @@
     </figure>
   </div>
 </section>
+-->
 
 <!-- ── 7. Los planes ─────────────────────────────────────────────────── -->
 <!-- Se apaga con mostrarPrecios mientras los montos no estén confirmados. -->
@@ -312,30 +349,32 @@
 
   <!-- Tira que se arrastra, no mosaico: en el celular se pasa con el dedo y
        en escritorio se ve que sigue. ⚠ Las cinco fotos son de banco de
-       imágenes hasta que lleguen las del club. -->
+       imágenes hasta que lleguen las del club, y por eso los alt describen
+       lo que se ve sin afirmar que sea este gimnasio. Con las fotos reales
+       vuelven a ser específicos. -->
   <div class="tira" data-reveal tabindex="0" role="group" aria-label="Fotos del gimnasio, se desplaza de a una">
     <figure class="tira__foto">
       <img src="https://images.unsplash.com/photo-1754630591156-ef00f2e0d888?w=1200&q=70&auto=format&fit=crop"
-           alt="Sala de bolsas del gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+           alt="Bolsas de boxeo colgadas en un gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
       <figcaption class="tira__pie tira__pie--rojo">Sala de bolsas</figcaption>
     </figure>
     <figure class="tira__foto">
       <img src="https://images.unsplash.com/photo-1636581563867-1ecab574858f?w=1200&q=70&auto=format&fit=crop"
-           alt="Clase golpeando la bolsa" loading="lazy" decoding="async" width="1200" height="1500">
+           alt="Una persona golpeando una bolsa de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
       <figcaption class="tira__pie">Clase de bolsa</figcaption>
     </figure>
     <figure class="tira__foto">
       <img src="https://images.unsplash.com/photo-1716307046875-4c4ba2f43cab?w=1200&q=70&auto=format&fit=crop"
-           alt="El ring del club" loading="lazy" decoding="async" width="1200" height="1500">
+           alt="Un ring de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
       <figcaption class="tira__pie">El ring</figcaption>
     </figure>
     <figure class="tira__foto">
       <img src="https://images.unsplash.com/photo-1636302925863-6ad504baaf3c?w=1200&q=70&auto=format&fit=crop"
-           alt="Entrenamiento en el gimnasio" loading="lazy" decoding="async" width="1200" height="1500">
+           alt="Entrenamiento de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
     </figure>
     <figure class="tira__foto">
       <img src="https://images.unsplash.com/photo-1633394782368-6e7260566004?w=1200&q=70&auto=format&fit=crop"
-           alt="Guantes y equipo del club" loading="lazy" decoding="async" width="1200" height="1500">
+           alt="Guantes de boxeo" loading="lazy" decoding="async" width="1200" height="1500">
     </figure>
   </div>
 </section>
@@ -463,7 +502,7 @@
   <style>[data-reveal]{opacity:1;transform:none}</style>
 </noscript>
 
-<script src="sitio/datos.js"></script>
+<script src="sitio/datos.js" defer></script>
 <script src="sitio/app.js" defer></script>
 </body>
 </html>

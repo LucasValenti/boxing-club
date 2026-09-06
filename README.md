@@ -37,7 +37,11 @@ configuración y herramientas.
   está en el HTML, no lo arma un programa: es lo que hace que Google la lea y
   que abra rápido. Adentro también van los dos bloques de datos estructurados
   (el del gimnasio y el de las preguntas frecuentes).
-- `public/styles.css` — solo `@import`s. Un archivo nuevo se agrega acá.
+- Los siete archivos de estilo se enlazan uno por uno desde el `<head>` de
+  `index.html`, en orden de cascada. Uno nuevo se agrega ahí. No hay un
+  `styles.css` que los importe: un `@import` no se descubre hasta que el
+  navegador bajó y parseó el archivo que lo contiene, y eso dejaba a las
+  tipografías a tres saltos del HTML.
 - `public/tokens/` — `colors.css`, `typography.css`, `layout.css`, `motion.css`
   y `fonts.css`: la paleta, la escala tipográfica, los espaciados y las cinco
   animaciones. Los valores son los del diseño, sin redondear.

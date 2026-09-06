@@ -1,0 +1,49 @@
+# Cabeceras de seguridad y caché. Cloudflare lee este archivo y lo aplica al
+# servir; no se publica como archivo.
+#
+# Verificar después del primer deploy, porque una cabecera que no llega no
+# avisa:
+#   curl -sI https://<dominio>/ | grep -i 'content-security\|x-content\|referrer'
+
+/*
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://images.unsplash.com; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Sobre la CSP, tres cosas que conviene tener escritas:
+#
+# 1. style-src lleva 'unsafe-inline' por el <style> que está adentro del
+#    <noscript>, al final del body. La alternativa limpia es un hash, pero hay
+#    que recalcularlo cada vez que esa regla cambie y se olvida. En un sitio
+#    sin entrada de usuario ni contenido de terceros el riesgo es nulo: es una
+#    concesión consciente.
+#
+# 2. Los dos bloques JSON-LD no necesitan permiso. script-src solo alcanza a
+#    los scripts que se ejecutan, y application/ld+json no se ejecuta.
+#
+# 3. img-src permite images.unsplash.com solo mientras las fotos sean de
+#    banco. Se saca junto con la última — igual que el preconnect del <head>.
+#    Cuando entre el mapa hay que agregar frame-src https://www.google.com, o
+#    la CSP lo bloquea en silencio.
+
+# Las fuentes nunca cambian: el nombre del archivo identifica el contenido.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# El CSS y el JS SÍ cambian, y sin build no llevan hash en el nombre: no se
+# pueden cachear un año o un arreglo no llega hasta que expire. Una hora es el
+# equilibrio; para que un cambio se vea ya, se sube ?v=N en el <link>.
+/tokens/*
+  Cache-Control: public, max-age=3600
+/base/*
+  Cache-Control: public, max-age=3600
+/sitio/*
+  Cache-Control: public, max-age=3600
+
+# El HTML siempre se revalida: es lo que descubre todo lo demás.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate

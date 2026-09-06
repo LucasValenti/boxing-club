@@ -48,10 +48,9 @@ CSS y el markup pasan casi tal cual.
 
 ```
 public/
-├─ index.html          la página entera, contenido incluido
-├─ styles.css          solo @imports
+├─ index.html          la página entera, contenido y los <link> de estilo
 ├─ tokens/
-│  ├─ fonts.css        las cuatro familias, desde Google Fonts
+│  ├─ fonts.css        las tres familias, desde public/fonts/
 │  ├─ colors.css       la paleta y las líneas
 │  ├─ typography.css   la escala fluida
 │  ├─ layout.css       paddings, la grilla de líneas
@@ -65,8 +64,15 @@ public/
 └─ assets/favicon.svg
 ```
 
-`styles.css` importa y nada más, igual que en GEA. Un archivo nuevo se agrega
-ahí y en ningún otro lado.
+Los siete archivos de estilo se enlazan uno por uno desde el `<head>`, en orden
+de cascada. Un archivo nuevo se agrega ahí y en ningún otro lado.
+
+GEA usa un `styles.css` que los importa, y acá se hizo igual hasta que se midió:
+un `@import` no se descubre hasta que el navegador bajó y parseó el archivo que
+lo contiene, así que los `@font-face` —que viven en `tokens/fonts.css`— quedaban
+a tres saltos del HTML. El `preload` salvaba al titular; el cuerpo de la página
+esperaba. Como `<link>` se piden los siete en el primer parse. Está medido en
+`auditoria-tecnica.md` §5.1.
 
 ### La grilla de líneas
 
