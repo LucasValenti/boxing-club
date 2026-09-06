@@ -136,8 +136,27 @@
         "\nClase: " + form.clase.value +
         (form.dias.value.trim() ? "\nDías: " + form.dias.value.trim() : "");
 
-      aviso.textContent = "Te abrimos WhatsApp con el mensaje escrito.";
-      window.open(window.linkWhatsApp(texto), "_blank", "noopener");
+      /* window.open puede devolver null: un bloqueador de ventanas, o un
+         navegador embebido como el de Instagram, que es por donde entra
+         buena parte de este público. Sin esto el aviso decía que abrimos
+         WhatsApp cuando no se abrió nada — la peor forma de perder una
+         consulta que la persona ya se tomó el trabajo de escribir. */
+      var url = window.linkWhatsApp(texto);
+      if (window.open(url, "_blank", "noopener")) {
+        aviso.textContent = "Te abrimos WhatsApp con el mensaje escrito.";
+      } else {
+        aviso.textContent = "";
+        var link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.className = "btn btn--negro";
+        link.textContent = "Abrir WhatsApp";
+        aviso.appendChild(link);
+        /* El foco va al link: si no, quien navega con teclado o con lector
+           de pantalla no se entera de que la acción cambió de lugar. */
+        link.focus();
+      }
     });
 
     /* Escribir algo borra el aviso de error de ese campo. */

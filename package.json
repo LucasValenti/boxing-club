@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
+    "test": "node herramientas/pruebas.mjs",
+    "imagenes": "node herramientas/imagenes.mjs",
+    "predeploy": "npm test",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {

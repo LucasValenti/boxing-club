@@ -20,11 +20,13 @@ También sirve la extensión *Live Server* de VS Code: clic derecho sobre
 ## Cómo publicar
 
 ```
-npm run deploy
+npm test        # las cuatro pruebas, en un solo comando
+npm run deploy  # sube public/ a Cloudflare
 ```
 
-Sube el contenido de `public/` a Cloudflare. La primera vez pide autorizar la
-cuenta con `npx wrangler login`.
+`npm run deploy` corre `npm test` solo antes de subir —es el `predeploy` del
+`package.json`— así que no se puede publicar con una prueba en rojo. La primera
+vez pide autorizar la cuenta con `npx wrangler login`.
 
 ## Archivos
 
@@ -89,20 +91,35 @@ configuración y herramientas.
 
 ## Herramientas
 
-`herramientas/` no se publica: son scripts para revisar el sitio con un
-navegador de verdad (Playwright + axe-core). Necesitan el servidor de pruebas
-levantado en otra terminal:
+`herramientas/` no se publica. Se corre todo junto con:
 
 ```
-node herramientas/servidor.mjs      # sirve public/ en el puerto 8788
-node herramientas/auditoria.mjs     # accesibilidad en 320, 390, 768 y 1440
-node herramientas/contacto.mjs      # prueba que el contacto salga todo de NEGOCIO
+npm test
 ```
 
-`auditoria.mjs` corre una vez más con «reducir movimiento» activado y deja una
-captura de cada variante. Termina con código 1 si encuentra algo, así sirve
-antes de publicar. `CHROMIUM=/ruta/al/chrome` usa un navegador ya instalado en
-vez de bajar el de Playwright.
+que levanta el servidor de pruebas, pasa las cuatro y lo baja. Termina con
+código 1 si algo falla, así sirve en un hook y en `predeploy`.
+
+| Prueba | Qué mira | Necesita |
+| --- | --- | --- |
+| `validar.mjs` | anclas, `data-negocio`, JSON-LD, `<title>`, peso propio | nada: node pelado |
+| `contacto.mjs` | que el contacto salga todo de `NEGOCIO` | navegador |
+| `interaccion.mjs` | teclado, menú del celular y formulario | navegador |
+| `auditoria.mjs` | accesibilidad en 320, 390, 768, 1440 y sin movimiento | navegador |
+
+`validar.mjs` no depende de nada: corre en un clon recién bajado, antes de
+`npm install`. Las otras tres necesitan Chromium — `npx playwright install
+chromium` la primera vez, o `CHROMIUM=/ruta/al/chrome` para usar uno que ya
+tengas. `auditoria.mjs` deja una captura de cada variante.
+
+Y una herramienta que no es una prueba:
+
+```
+npm run imagenes    # herramientas/fotos-crudas/*.jpg → public/img/*.webp
+```
+
+Procesa las fotos del club a WebP en tres anchos (400, 800 y 1600). Los
+originales van en `herramientas/fotos-crudas/`, que no se versiona.
 
 ## Para más adelante
 
