@@ -1,6 +1,7 @@
 # Una sola página, y se quiere toda indexada.
-# ⚠ El dominio del Sitemap es un marcador — ver docs/contenido-pendiente.md.
+# ⚠ Dominio de ejemplo: example.com está reservado para documentación.
+#    Reemplazar por el dominio real del club antes de publicar.
 User-agent: *
 Allow: /
 
-Sitemap: https://alanisboxingclub.com.ar/sitemap.xml
+Sitemap: https://example.com/sitemap.xml

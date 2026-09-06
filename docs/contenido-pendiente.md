@@ -8,7 +8,7 @@ bloquea: arriba, lo que impide lanzar; abajo, lo que se puede completar después
 ### 1. El dominio
 
 No está definido, y bloquea más de lo que parece. Hoy el sitio dice
-`alanisboxingclub.com.ar` en cuatro lugares, y es **un marcador puesto por
+`example.com` en cuatro lugares, y es **un marcador de documentación puesto por
 nosotros**, no una dirección que alguien haya comprado:
 
 | Archivo | Qué dice |
@@ -27,16 +27,16 @@ la renovación? Si no tiene, hay que comprarlo antes del lanzamiento: sale poco 
 es lo que va en la ficha de Google Business, en Instagram y en los volantes.
 
 ### 2. Datos de contacto
-Los tres valores que hay hoy salieron de fuentes públicas y **el cliente no los
-confirmó**. Van en `public/sitio/datos.js` y desde ahí se estampan solos en los
-cuatro lugares donde aparecen.
+Los valores que trae la plantilla son de ejemplo. Van en
+`public/sitio/datos.js` y desde ahí se estampan solos en los cuatro lugares
+donde aparecen en la página.
 
-| Dato | Valor provisorio | Estado |
+| Dato | Valor de ejemplo | Estado |
 |---|---|---|
-| WhatsApp | `+54 9 341 563-2194` | sin confirmar |
-| Teléfono | el mismo | sin confirmar |
-| Dirección | Rueda 2553, Rosario | sin confirmar — además bloquea el mapa |
-| Email | alanisbox@hotmail.com | sin confirmar |
+| WhatsApp | `+54 9 11 5555-5555` | de ejemplo |
+| Teléfono | el mismo | de ejemplo |
+| Dirección | Av. Siempreviva 742 | de ejemplo — además bloquea el mapa |
+| Email | hola@example.com | de ejemplo |
 | Instagram | — | falta |
 
 **Preguntar además:** ¿el WhatsApp que atiende es el mismo número del teléfono?

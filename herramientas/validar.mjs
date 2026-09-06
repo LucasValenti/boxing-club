@@ -102,7 +102,7 @@ console.log('\nDominio');
    es un marcador. Cambiar tres de los cuatro es el error fácil, y un canonical
    que no coincide con el resto es peor que no tener ninguno: le dice a Google
    que la página buena es otra. */
-const MARCADOR = 'alanisboxingclub.com.ar';
+const MARCADOR = 'example.com';
 const host = (s) => { try { return new URL(s).host; } catch { return null; } };
 const robots = fs.readFileSync(path.join(RAIZ, 'robots.txt'), 'utf8');
 const mapa   = fs.readFileSync(path.join(RAIZ, 'sitemap.xml'), 'utf8');

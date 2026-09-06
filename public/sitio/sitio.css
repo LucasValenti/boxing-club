@@ -398,4 +398,9 @@
   /* Los tres datos del hero en dos columnas dejaban al tercero solo en una
      fila. Apilados se leen de un tirón. */
   .hero__datos{grid-template-columns:1fr}
+  /* Las cifras de «El rincón» tienen el mismo problema, y peor: como la
+     grilla se separa con líneas de 1px —el contenedor pinta la línea y cada
+     celda tapa con el fondo—, la celda que sobra no queda vacía sino
+     pintada, y se ve como un bloque roto. Apiladas también. */
+  .stats{grid-template-columns:1fr}
 }

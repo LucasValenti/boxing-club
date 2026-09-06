@@ -1,11 +1,40 @@
-# Alanis Boxing Club
+# Plantilla de landing para gimnasio de boxeo
 
-Landing page del gimnasio de boxeo Alanis Boxing Club, en Rosario. HTML + CSS +
-JavaScript, sin build: se abre y se edita en VS Code.
+Landing de una página para un gimnasio de boxeo, lista para adaptar a
+cualquier club. HTML + CSS + JavaScript, sin build: se abre y se edita en
+VS Code.
 
-**Estado:** etapa 2 de 3. Las trece secciones están construidas y la página
-funciona de punta a punta. Lo que falta es contenido del club: fotos, precios,
-horarios y datos de contacto confirmados — ver `docs/contenido-pendiente.md`.
+**Todo el contenido es de ejemplo.** No hay datos de ningún club real: el
+nombre es «Club de Boxeo», el teléfono y la dirección son ficticios, y el
+dominio apunta a `example.com`, que está reservado para documentación.
+
+## Cómo adaptarla a un club
+
+El grueso del trabajo es un solo archivo:
+
+| Querés cambiar… | Archivo |
+| --- | --- |
+| Nombre, ciudad, teléfono, WhatsApp, dirección, mail | `public/sitio/datos.js` (`NEGOCIO`) |
+| Encender o apagar una sección entera | `public/sitio/datos.js` (`MOSTRAR`) |
+| Textos, precios, preguntas frecuentes | `public/index.html` |
+| El dominio (canonical, og:url, robots.txt, sitemap.xml) | los cuatro a la vez, `npm test` falla si no coinciden |
+| Colores o tipografías | `public/tokens/colors.css`, `typography.css` |
+| Una animación | `public/tokens/motion.css` |
+| Ver cómo va cada sección | `docs/diseno/SECCIONES.md` |
+
+Los datos de contacto están marcados en el HTML con `data-negocio` y
+`app.js` los completa al cargar, así que cambiar el teléfono es cambiar una
+línea y no buscarlo en cuatro lugares del markup. El valor también está
+escrito en el HTML: si el JavaScript no corre, los links funcionan igual.
+
+Lo que hay que conseguir de cada club antes de publicar —fotos, precios,
+horarios, datos de contacto confirmados y el dominio— está en
+`docs/contenido-pendiente.md`, que sirve como checklist de arranque.
+
+Dos cosas que deliberadamente **no** trae la plantilla y hay que completar:
+la sección de testimonios está comentada en el HTML (no se inventan
+testimonios) y el bloque de datos estructurados del negocio también, porque
+publicar un JSON-LD con datos falsos es peor que no tenerlo.
 
 ## Cómo levantarlo
 
@@ -77,17 +106,6 @@ configuración y herramientas.
   `preview-standalone.html` se abre con doble clic y muestra el resultado
   buscado. `support.js` y el `.dc.html` son de la herramienta de diseño: no se
   portan.
-
-## Dónde agregar cosas
-
-| Querés… | Archivo |
-| --- | --- |
-| Cambiar el teléfono, la dirección o los horarios | `public/sitio/datos.js` (`NEGOCIO`) |
-| Encender o apagar una sección entera | `public/sitio/datos.js` (`MOSTRAR`) |
-| Cambiar textos, precios o preguntas | `public/index.html` |
-| Cambiar colores o tipografías | `public/tokens/colors.css`, `typography.css` |
-| Ajustar una animación | `public/tokens/motion.css` |
-| Saber cómo va una sección | `docs/diseno/SECCIONES.md` |
 
 ## Herramientas
 

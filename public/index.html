@@ -3,29 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alanis Boxing Club — Boxeo en Rosario | Primera clase gratis</title>
-<meta name="description" content="Gimnasio de boxeo en Rosario. Clases para principiantes, box fitness, kids y juvenil, y personal 1 a 1. Guantes incluidos y la primera clase no se paga.">
+<!-- Para búsqueda local, sumale la ciudad al título y a la description:
+     «Club de Boxeo — Boxeo en <Ciudad> | Primera clase gratis». Es lo que
+     hace que aparezca en «gimnasio de boxeo <ciudad>». -->
+<title>Club de Boxeo — Clases de boxeo | Primera clase gratis</title>
+<meta name="description" content="Gimnasio de boxeo. Clases para principiantes, box fitness, kids y juvenil, y personal 1 a 1. Guantes incluidos y la primera clase no se paga.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0b0b0b">
 
-<!-- ⚠ EL DOMINIO NO ESTÁ CONFIRMADO. alanisboxingclub.com.ar es un marcador.
-     Un canonical que apunta al dominio equivocado es peor que no tener
-     ninguno: le dice a Google que la buena es otra página y desindexa esta.
-     Cuando se confirme hay que cambiarlo en cuatro lugares — acá, en og:url,
-     en robots.txt y en sitemap.xml. Ver docs/contenido-pendiente.md.
+<!-- ⚠ DOMINIO DE EJEMPLO. example.com está reservado para documentación:
+     es un marcador, no un sitio. Hay que cambiarlo en cuatro lugares —acá,
+     en og:url, en robots.txt y en sitemap.xml— y validar.mjs falla si los
+     cuatro no coinciden entre sí.
 
-     Y hace falta: con Workers Assets el sitio también responde en
-     alanis-boxing-club.workers.dev, así que hoy hay dos direcciones con el
-     mismo contenido compitiendo por «gimnasio de boxeo rosario». -->
-<link rel="canonical" href="https://alanisboxingclub.com.ar/">
+     Un canonical mal apuntado es peor que no tener ninguno: le dice a
+     Google que la página buena es otra. Y hace falta, porque con Workers
+     Assets el sitio responde igual en el dominio propio que en la
+     dirección .workers.dev: sin canonical son dos direcciones con el mismo
+     contenido compitiendo por la misma búsqueda. -->
+<link rel="canonical" href="https://example.com/">
 
 <!-- Cuando alguien pega el link en WhatsApp, esto es lo que se ve. Para este
      público es la primera impresión más frecuente, antes que Google.
-     ⚠ Falta la imagen og-alanis.jpg (1200×630) con una foto real. -->
+     ⚠ Falta la imagen og.jpg (1200×630) con una foto real del club. -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
-<meta property="og:url" content="https://alanisboxingclub.com.ar/">
-<meta property="og:title" content="Alanis Boxing Club — Boxeo en Rosario">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:title" content="Club de Boxeo — Clases de boxeo">
 <meta property="og:description" content="Primera clase gratis. Principiantes, mujeres, chicos y adultos. Guantes incluidos.">
 
 <!-- ⚠ TEMPORAL. El LCP de la página lo sirve hoy una foto de Unsplash, y esa
@@ -52,26 +56,36 @@
 <link rel="stylesheet" href="base/reset.css">
 <link rel="stylesheet" href="sitio/sitio.css">
 
-<!-- Búsqueda local: es como Google entiende que esto es un gimnasio de
-     Rosario y no un blog de boxeo. ⚠ Los datos de contacto no están
-     confirmados — ver docs/contenido-pendiente.md. No publicar así. -->
+<!-- Búsqueda local: es lo que le dice a Google que esto es un gimnasio de
+     una ciudad y no un blog de boxeo. Bien cargado, es lo que arma la ficha
+     del negocio en los resultados.
+
+     COMENTADO A PROPÓSITO. Los datos de abajo son de ejemplo, y publicar
+     datos estructurados falsos no es un error cosmético: es lo que Google
+     usa para la ficha, y corregirlo después tarda semanas en propagarse.
+
+     Para encenderlo: completar los cinco valores con los del club real y
+     descomentar. El texto tiene que coincidir con el que se ve en la
+     página, no ser un resumen.
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
-  "name": "Alanis Boxing Club",
-  "description": "Gimnasio de boxeo en Rosario. Recreativo y competitivo, femenino y masculino.",
+  "name": "Club de Boxeo",
+  "description": "Gimnasio de boxeo. Recreativo y competitivo, femenino y masculino.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Rueda 2553",
-    "addressLocality": "Rosario",
-    "addressRegion": "Santa Fe",
+    "streetAddress": "Av. Siempreviva 742",
+    "addressLocality": "Tu Ciudad",
+    "addressRegion": "Tu Provincia",
     "addressCountry": "AR"
   },
-  "telephone": "+5493415632194",
-  "email": "alanisbox@hotmail.com"
+  "telephone": "+5491155555555",
+  "email": "hola@example.com"
 }
 </script>
+-->
 
 <!-- Las mismas cinco preguntas que están más abajo en la página. Google
      puede mostrar el resultado con las preguntas desplegadas; la condición
@@ -103,15 +117,15 @@
 <header class="header">
   <a class="marca" href="#top">
     <span class="marca__cuadro" aria-hidden="true"></span>
-    <span class="marca__nombre">Alanis Boxing Club</span>
-    <span class="marca__ciudad">Rosario</span>
+    <span class="marca__nombre" data-negocio="nombre">Club de Boxeo</span>
+    <span class="marca__ciudad" data-negocio="ciudad">Tu Ciudad</span>
   </a>
 
   <nav class="nav" aria-label="Principal">
     <a href="#clases">Clases</a>
     <a href="#planes">Planes</a>
     <a href="#contacto">Contacto</a>
-    <a class="nav__cta" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos</a>
+    <a class="nav__cta" href="https://wa.me/5491155555555" data-negocio="whatsapp">Escribinos</a>
   </nav>
 
   <button class="menu-boton" type="button" aria-expanded="false"
@@ -125,7 +139,7 @@
     <li><a href="#gimnasio">El gimnasio</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a class="nav__cta" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos</a>
+  <a class="nav__cta" href="https://wa.me/5491155555555" data-negocio="whatsapp">Escribinos</a>
 </div>
 
 <main>
@@ -142,7 +156,11 @@
   <div class="hero__cuerpo">
     <p class="hero__lugar">
       <span class="hero__punto" aria-hidden="true"></span>
-      Rosario, Santa Fe
+      <!-- Ciudad y provincia van dentro de un mismo span. .hero__lugar es
+           un flex con gap, y si la coma queda suelta entre los dos spans se
+           convierte en un ítem más: se renderiza «Tu Ciudad , Tu Provincia»,
+           con el gap separando la coma a los dos lados. -->
+      <span><span data-negocio="ciudad">Tu Ciudad</span>, <span data-negocio="provincia">Tu Provincia</span></span>
     </p>
 
     <h1><span>Ponete</span><span>los guantes</span></h1>
@@ -176,19 +194,21 @@
 </div>
 
 <!-- ── 4. El rincón ──────────────────────────────────────────────────── -->
-<!-- Se apaga con mostrarLinaje: los datos de Junior Alanís están sin
-     confirmar por el club y son afirmaciones verificables sobre una
-     persona real. Sin el visto bueno, esta sección no sale. -->
+<!-- La sección donde el club cuenta de dónde viene. El texto de abajo es
+     genérico a propósito: sirve para cualquier gimnasio y no afirma nada
+     que haya que verificar. Si el club tiene un nombre fuerte para mostrar
+     —un boxeador que formó, un título— este es el lugar, pero entonces son
+     afirmaciones sobre una persona real y las tiene que aprobar el club
+     antes de publicarlas. Las tres cifras son de ejemplo. -->
 <section class="seccion rincon" id="rincon" data-flag="mostrarLinaje">
   <div class="rincon__texto" data-reveal>
     <p class="rotulo">El rincón</p>
-    <h2>Acá se formó un<br><span class="acento">campeón sudamericano</span></h2>
+    <h2>Un entrenador<br><span class="acento">en tu esquina</span></h2>
     <p class="parrafo">
-      Charly Alanis dirige el club y es el entrenador que formó a
-      <strong>Carlos «Junior» Alanís</strong>: medalla de plata en los Juegos
-      Odesur 2018 y campeón sudamericano ligero. El mismo trabajo de rincón que
-      llevó a un profesional al título es el que vas a tener desde tu primera
-      clase.
+      El equipo viene del boxeo competitivo, no solo del gimnasio. El mismo
+      trabajo de rincón que se usa para preparar una pelea es el que vas a
+      tener desde tu primera clase, aunque nunca te hayas puesto un guante:
+      alguien mirando cómo parás, cómo respirás y cómo tirás.
     </p>
   </div>
 
@@ -197,9 +217,9 @@
        lugar: el lector ve la cifra primero, el lector de pantalla oye el
        rótulo primero. -->
   <dl class="stats" data-reveal>
-    <div><dd>13<span class="acento">–</span>1</dd><dt>Récord profesional</dt></div>
-    <div><dd>2018</dd><dt>Plata Odesur</dt></div>
-    <div><dd class="acento">01</dd><dt>Título sudamericano</dt></div>
+    <div><dd>+10</dd><dt>Años en el club</dt></div>
+    <div><dd>04</dd><dt>Formas de entrenar</dt></div>
+    <div><dd class="acento">12</dd><dt>Máximo por grupo</dt></div>
   </dl>
 </section>
 
@@ -275,7 +295,9 @@
 -->
 
 <!-- ── 7. Los planes ─────────────────────────────────────────────────── -->
-<!-- Se apaga con mostrarPrecios mientras los montos no estén confirmados. -->
+<!-- Los tres montos son de ejemplo. Se apaga entero con mostrarPrecios si
+     el club todavía no definió los precios: mejor sin sección que con un
+     número que después hay que desdecir. -->
 <section class="seccion" id="planes" data-flag="mostrarPrecios">
   <div class="seccion__cabeza" data-reveal>
     <h2>Los planes</h2>
@@ -287,15 +309,15 @@
   <div class="planes">
     <article class="plan" data-reveal>
       <h3>2 por semana</h3>
-      <p class="plan__precio">A confirmar<span>valor mensual</span></p>
+      <p class="plan__precio">$15.000<span>por mes</span></p>
     </article>
     <article class="plan plan--destacado" data-reveal>
       <h3>Libre</h3>
-      <p class="plan__precio">A confirmar<span>valor mensual</span></p>
+      <p class="plan__precio">$25.000<span>por mes</span></p>
     </article>
     <article class="plan" data-reveal>
       <h3>Personal 1 a 1</h3>
-      <p class="plan__precio">A confirmar<span>valor por sesión</span></p>
+      <p class="plan__precio">$10.000<span>por sesión</span></p>
     </article>
   </div>
 </section>
@@ -391,13 +413,13 @@
       <p class="contacto__q">Escribinos y te reservamos un lugar en el horario que
         te quede cómodo. Vení con ropa deportiva, el resto lo ponemos nosotros.</p>
       <div class="botones">
-        <a class="btn btn--negro" href="https://wa.me/5493415632194" data-negocio="whatsapp">Escribinos por WhatsApp</a>
-        <a class="btn btn--linea-clara" href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a>
+        <a class="btn btn--negro" href="https://wa.me/5491155555555" data-negocio="whatsapp">Escribinos por WhatsApp</a>
+        <a class="btn btn--linea-clara" href="tel:+5491155555555" data-negocio="telefono">11 5555-5555</a>
       </div>
       <p class="contacto__datos">
-        <span data-negocio="direccion">Rueda 2553</span> ·
-        <span data-negocio="ciudad">Rosario</span> ·
-        <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
+        <span data-negocio="direccion">Av. Siempreviva 742</span> ·
+        <span data-negocio="ciudad">Tu Ciudad</span> ·
+        <a href="mailto:hola@example.com" data-negocio="email">hola@example.com</a>
       </p>
     </div>
   </section>
@@ -453,11 +475,11 @@
     <div data-reveal>
       <h3 id="mapa-titulo">Cómo llegar</h3>
       <p class="mapa__dir">
-        <span data-negocio="direccion">Rueda 2553</span>,
-        <span data-negocio="ciudad">Rosario</span>, Santa Fe
+        <span data-negocio="direccion">Av. Siempreviva 742</span>,
+        <span data-negocio="ciudad">Tu Ciudad</span>, <span data-negocio="provincia">Tu Provincia</span>
       </p>
       <a class="btn btn--linea-clara" data-negocio="mapa"
-         href="https://www.google.com/maps/search/?api=1&amp;query=Rueda+2553+Rosario+Santa+Fe"
+         href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Siempreviva+742"
          target="_blank" rel="noopener">Abrir en Google Maps</a>
     </div>
   </section>
@@ -472,13 +494,13 @@
 <footer class="pie">
   <div class="pie__marca">
     <span class="marca__cuadro" aria-hidden="true"></span>
-    <span class="marca__nombre">Alanis Boxing Club</span>
+    <span class="marca__nombre" data-negocio="nombre">Club de Boxeo</span>
   </div>
 
   <dl class="pie__datos">
     <div>
       <dt>Dónde</dt>
-      <dd><span data-negocio="direccion">Rueda 2553</span>, <span data-negocio="ciudad">Rosario</span></dd>
+      <dd><span data-negocio="direccion">Av. Siempreviva 742</span>, <span data-negocio="ciudad">Tu Ciudad</span></dd>
     </div>
     <div>
       <dt>Horarios</dt>
@@ -487,13 +509,13 @@
     <div>
       <dt>Escribinos</dt>
       <dd>
-        <a href="tel:+5493415632194" data-negocio="telefono">341 563-2194</a> ·
-        <a href="mailto:alanisbox@hotmail.com" data-negocio="email">alanisbox@hotmail.com</a>
+        <a href="tel:+5491155555555" data-negocio="telefono">11 5555-5555</a> ·
+        <a href="mailto:hola@example.com" data-negocio="email">hola@example.com</a>
       </dd>
     </div>
   </dl>
 
-  <p class="pie__legal">&copy; <span data-anio>2026</span> Alanis Boxing Club</p>
+  <p class="pie__legal">&copy; <span data-anio>2026</span> <span data-negocio="nombre">Club de Boxeo</span></p>
 </footer>
 
 <noscript>
