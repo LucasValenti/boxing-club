@@ -22,8 +22,7 @@
         el.href = window.linkWhatsApp(el.getAttribute("data-saludo"));
       } else if (campo === "telefono") {
         el.href = "tel:" + N.telefono;
-        var etiqueta = el.querySelector("[data-negocio-texto]") || el;
-        if (etiqueta === el) etiqueta.textContent = N.telefonoVisible;
+        el.textContent = N.telefonoVisible;
       } else if (campo === "email") {
         el.href = "mailto:" + N.email;
         el.textContent = N.email;
@@ -47,12 +46,17 @@
       return;
     }
     var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e, i) {
-        if (!e.isIntersecting) return;
-        e.target.style.transitionDelay = (i % 4) * 0.07 + "s";
-        e.target.classList.add("visible");
-        obs.unobserve(e.target);
-      });
+      /* Se filtra ANTES de numerar. El observador entrega en la misma tanda
+         las que entraron y las que salieron, así que el índice crudo contaba
+         también a las que no se revelan: un elemento que entraba solo, detrás
+         de tres que salían, arrancaba con 0.21s de retraso y parecía trabado.
+         La cascada tiene que contar los que entran y nada más. */
+      entradas.filter(function (e) { return e.isIntersecting; })
+        .forEach(function (e, i) {
+          e.target.style.transitionDelay = (i % 4) * 0.07 + "s";
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
     elementos.forEach(function (el) { obs.observe(el); });
   }
