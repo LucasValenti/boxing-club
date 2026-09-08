@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página no encontrada — Club de Boxeo</title>
+<!-- Una página de error no va al índice: no tiene contenido propio y en los
+     resultados de búsqueda solo ensucia. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b0b0b">
+
+<!-- No enlaza sitio.css: son 38 KB de estilos de secciones que acá no existen.
+     Con los tokens y el reset alcanza, y lo poco que falta va abajo. -->
+<link rel="stylesheet" href="tokens/fonts.css">
+<link rel="stylesheet" href="tokens/colors.css">
+<link rel="stylesheet" href="tokens/typography.css">
+<link rel="stylesheet" href="base/reset.css">
+<style>
+  body{min-height:100svh;display:grid;place-content:center;justify-items:start;
+    gap:24px;padding:clamp(20px,6vw,80px);
+    background:var(--negro);color:var(--hueso);font-family:var(--f-cuerpo)}
+  .error__n{font-family:var(--f-titulo);font-weight:800;line-height:.85;
+    font-size:clamp(96px,26vw,320px);color:var(--rojo)}
+  .error__t{font-family:var(--f-titulo);font-weight:800;text-transform:uppercase;
+    line-height:1;font-size:var(--t-h2)}
+  .error__q{color:var(--gris-texto);font-size:var(--t-parrafo);max-width:46ch}
+  /* Mismo gesto que los .btn del sitio: relleno igual y 44px de alto mínimo,
+     que es el mínimo táctil. */
+  .error__volver{display:inline-block;min-height:44px;padding:13px 26px;
+    background:var(--rojo);color:var(--blanco);font-family:var(--f-titulo);
+    font-weight:800;font-size:var(--t-boton);text-transform:uppercase;
+    letter-spacing:.04em}
+</style>
+</head>
+<body>
+  <p class="error__n">404</p>
+  <h1 class="error__t">Esta página<br>no existe</h1>
+  <p class="error__q">Puede que el link esté viejo o mal copiado. Todo el sitio
+    es una sola página: volvé al inicio y vas a encontrar las clases, los
+    planes y cómo escribirnos.</p>
+  <a class="error__volver" href="/">Volver al inicio</a>
+</body>
+</html>

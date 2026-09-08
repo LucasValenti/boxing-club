@@ -1,0 +1,15 @@
+# Archivos que están en public/ pero que Cloudflare no tiene que publicar.
+# Es el equivalente de un .gitignore, pero para lo que sube wrangler.
+#
+# .htaccess es configuración de Apache: en Cloudflare no hace nada, y servirlo
+# como archivo de texto solo regala la CSP y la estructura del sitio.
+.htaccess
+
+# ⚠ Esto no se puede probar en local: `wrangler deploy --dry-run` no emite el
+#   manifiesto de assets, así que el único momento en que se sabe si funcionó
+#   es después del primer deploy de verdad. Ahí se confirma con:
+#
+#     curl -D - -o /dev/null -s https://<dominio>/.htaccess
+#
+#   Tiene que dar 404. Si da 200, este archivo no se aplicó y hay que sacar el
+#   .htaccess de public/ antes de publicar en Cloudflare.

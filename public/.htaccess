@@ -1,0 +1,114 @@
+# Cabeceras de seguridad y caché para hosting Apache/LiteSpeed (Hostinger).
+# ────────────────────────────────────────────────────────────────────────────
+# Es la traducción de public/_headers, que SOLO lee Cloudflare. Los dos
+# archivos existen a la vez porque el sitio puede publicarse en cualquiera de
+# los dos lados, y cada uno ignora al del otro: Apache no sabe qué es
+# _headers, y Cloudflare no ejecuta .htaccess.
+#
+# ⚠ La CSP está escrita dos veces, acá y en _headers. Tiene que ser idéntica
+#   en los dos: `npm test` compara las dos líneas y falla si se separan.
+#   Si tocás una, tocá la otra.
+#
+# En Hostinger se sube el CONTENIDO de public/ adentro de public_html/, así
+# que este archivo termina en public_html/.htaccess, que es donde sirve.
+#
+# Verificar después de publicar, porque una cabecera que no llega no avisa:
+#   curl -D - -o /dev/null -s https://<dominio>/
+
+# ── 1. Sin listado de directorios ──────────────────────────────────────────
+# Sin esto, entrar a /img/ o /fonts/ devuelve el índice del directorio.
+Options -Indexes
+
+# ── 2. Los archivos de configuración no se sirven ──────────────────────────
+# _headers y .assetsignore son configuración de Cloudflare, no contenido: en
+# Apache son archivos de texto normales y cualquiera los puede leer.
+<FilesMatch "^(_headers|\.assetsignore|\.htaccess)$">
+  Require all denied
+</FilesMatch>
+
+# ── 3. HTTPS obligatorio ───────────────────────────────────────────────────
+# Hostinger también tiene el interruptor «Forzar HTTPS» en hPanel; con esto
+# alcanza y no depende de que alguien se acuerde de prenderlo.
+#
+# La segunda condición es la que evita el bucle infinito si algún día hay un
+# proxy adelante (Cloudflare en modo Flexible, por ejemplo): ahí el servidor
+# ve HTTP aunque el visitante haya pedido HTTPS, y sin este chequeo redirige
+# para siempre.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── 4. Página 404 ──────────────────────────────────────────────────────────
+# Es una sola página con anclas: lo que no existe tiene que devolver un 404 de
+# verdad, no la home. Es el equivalente del not_found_handling de wrangler.jsonc.
+ErrorDocument 404 /404.html
+
+# ── 5. Cabeceras de seguridad ──────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Idéntica a la de _headers. Ver el comentario de ese archivo para el
+  # porqué de 'unsafe-inline' en style-src y del permiso a unsplash.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: https://images.unsplash.com; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), usb=()"
+
+  # HSTS solo sobre HTTPS. Mandarlo por HTTP no sirve de nada y el navegador
+  # lo descarta, pero además es la forma de no dejar clavado un dominio en
+  # HTTPS si todavía se está probando el certificado.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# ── 6. Caché ───────────────────────────────────────────────────────────────
+# Los mismos plazos que _headers. Allá se agrupa por carpeta y acá por
+# extensión, que en este sitio da exactamente lo mismo: los .woff2 solo están
+# en fonts/, el CSS y el JS solo en tokens/, base/ y sitio/, y los medios solo
+# en video/, img/ y assets/.
+<IfModule mod_headers.c>
+  # Las fuentes nunca cambian: el nombre del archivo identifica el contenido.
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # El CSS y el JS SÍ cambian, y sin build no llevan hash en el nombre: no se
+  # pueden cachear un año o un arreglo no llega hasta que expire. Una hora es
+  # el equilibrio; para que un cambio se vea ya, se sube ?v=N en el <link>.
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # El video y las fotos pesan y casi nunca cambian, pero el nombre no dice
+  # cuál es el contenido: el día que el club mande su video pisa al de banco.
+  # Una semana es el equilibrio.
+  <FilesMatch "\.(mp4|webm|webp|jpg|jpeg|png|svg)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # El HTML siempre se revalida: es lo que descubre todo lo demás.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ── 7. Tipos MIME ──────────────────────────────────────────────────────────
+# Un .mp4 servido como application/octet-stream no se reproduce: se queda en
+# el póster, igual que si el archivo faltara. LiteSpeed suele saberlos, pero
+# declararlos cuesta cinco líneas y el síntoma es mudo.
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType video/mp4 .mp4
+  AddType video/webm .webm
+</IfModule>
+
+# ── 8. Compresión ──────────────────────────────────────────────────────────
+# Solo lo que comprime: el woff2, el webp y el mp4 ya vienen comprimidos y
+# volver a pasarlos gasta CPU para no bajar un byte.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE text/javascript application/javascript
+  AddOutputFilterByType DEFLATE image/svg+xml application/json
+</IfModule>

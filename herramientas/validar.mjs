@@ -166,6 +166,48 @@ for (const h of conPreconnect.filter((x) => !recursos.includes(x))) {
   avisar('hay preconnect a ' + h + ' y ya no lo usa nadie: se puede sacar');
 }
 
+console.log('\nPublicación');
+
+/* El sitio se puede publicar en Cloudflare o en un hosting Apache/LiteSpeed
+   (Hostinger), y cada uno lee un archivo distinto: _headers el primero,
+   .htaccess el segundo. Ninguno de los dos avisa cuando falta algo — una CSP
+   que no llega no rompe nada visible, solo deja el sitio sin defensa, y una
+   CSP más estricta de un lado bloquea recursos en silencio.
+   Por eso la comparación se hace acá: es el único lugar donde alguien mira
+   los dos archivos a la vez. */
+const htaccess = fs.existsSync(path.join(RAIZ, '.htaccess'))
+  ? fs.readFileSync(path.join(RAIZ, '.htaccess'), 'utf8') : null;
+
+if (!htaccess) {
+  avisar('no hay public/.htaccess: en un hosting Apache el sitio va sin cabeceras de seguridad');
+} else {
+  const cspApache = (htaccess.match(/Header\s+always\s+set\s+Content-Security-Policy\s+"([^"]+)"/) || [])[1] || '';
+  if (!cspApache) {
+    mal('.htaccess sin Content-Security-Policy');
+  } else if (cspApache.trim() !== csp.trim()) {
+    mal('la CSP de _headers y la de .htaccess no coinciden — el sitio se comporta distinto según dónde se publique');
+  } else {
+    ok('la misma CSP en _headers y en .htaccess');
+  }
+
+  /* Un ErrorDocument que apunta a un archivo que no está devuelve el 404
+     pelado del servidor, con el nombre del hosting y sin salida al sitio. */
+  const doc404 = (htaccess.match(/^\s*ErrorDocument\s+404\s+(\S+)/m) || [])[1];
+  if (!doc404) {
+    mal('.htaccess sin ErrorDocument 404');
+  } else if (!fs.existsSync(path.join(RAIZ, doc404.replace(/^\//, '')))) {
+    mal(`ErrorDocument 404 apunta a ${doc404} y el archivo no existe`);
+  } else {
+    ok(`ErrorDocument 404 → ${doc404}, y está`);
+  }
+}
+
+/* wrangler.jsonc pide un 404.html para not_found_handling: si no está, sirve
+   un 404 vacío y el visitante queda sin manera de volver al sitio. */
+fs.existsSync(path.join(RAIZ, '404.html'))
+  ? ok('404.html presente (lo usan Cloudflare y Apache)')
+  : mal('falta public/404.html, y las dos configuraciones lo esperan');
+
 console.log('\nVideo de la tira');
 
 /* Un <video> que apunta a un archivo que no está no avisa: se ve el póster
