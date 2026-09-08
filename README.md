@@ -48,14 +48,49 @@ También sirve la extensión *Live Server* de VS Code: clic derecho sobre
 
 ## Cómo publicar
 
+El sitio son archivos estáticos y no tiene build, así que se publica en
+cualquier lado. Están preparados los dos destinos y no se estorban.
+
+### En Cloudflare
+
 ```
-npm test        # las cuatro pruebas, en un solo comando
+npm test        # las cinco pruebas, en un solo comando
 npm run deploy  # sube public/ a Cloudflare
 ```
 
 `npm run deploy` corre `npm test` solo antes de subir —es el `predeploy` del
 `package.json`— así que no se puede publicar con una prueba en rojo. La primera
 vez pide autorizar la cuenta con `npx wrangler login`.
+
+### En Hostinger (o cualquier Apache/LiteSpeed)
+
+Se sube **el contenido de `public/`** adentro de `public_html/`, no la carpeta
+`public` entera: si se sube la carpeta, el sitio queda en `midominio.com/public/`
+y todas las rutas del HTML apuntan a otro lado.
+
+```
+public/index.html   →  public_html/index.html
+public/.htaccess    →  public_html/.htaccess     ← el que más se olvida
+public/fonts/       →  public_html/fonts/
+...y así con el resto
+```
+
+Antes de subir hay que correr `npm test` a mano: acá no hay `predeploy` que
+lo dispare solo.
+
+Dos avisos que cuestan una tarde cada uno:
+
+- **`.htaccess` empieza con punto**, así que el cliente de FTP no lo muestra
+  hasta que se le pide ver los archivos ocultos. Sin ese archivo el sitio se
+  ve bien pero va sin ninguna cabecera de seguridad, sin caché y sin la
+  página 404.
+- **El `_headers` no hace nada en Hostinger.** Es de Cloudflare. Se sube igual
+  —el `.htaccess` lo bloquea para que nadie lo lea— pero quien toque la CSP
+  tiene que tocar los dos archivos. `npm test` falla si se separan.
+
+Lo que en Cloudflare resuelve `wrangler.jsonc` y `_headers`, en Hostinger lo
+resuelve `public/.htaccess`: HTTPS obligatorio, la página 404, las cinco
+cabeceras de seguridad, los plazos de caché, los tipos MIME y la compresión.
 
 ## Archivos
 
@@ -87,7 +122,19 @@ configuración y herramientas.
 - `public/sitio/app.js` — todo el JavaScript del sitio: los interruptores de
   sección, los datos de contacto, el revelado al hacer scroll, el menú del
   celular y el formulario que arma el mensaje de WhatsApp.
-- `public/img/` — fotos del gimnasio (todavía vacía).
+- `public/img/` — fotos del gimnasio. Por ahora solo los dos pósters de los
+  videos de la tira; las del club van acá.
+- `public/404.html` — la página de error. No enlaza `sitio.css`: con los
+  tokens y el reset alcanza. La usan los dos destinos de publicación.
+- `public/.htaccess` — la configuración del servidor para Hostinger o
+  cualquier Apache/LiteSpeed: HTTPS, la 404, las cabeceras de seguridad, la
+  caché, los tipos MIME y la compresión. Es la traducción de `_headers`.
+- `public/_headers` — lo mismo, pero para Cloudflare, que es el único que lo
+  lee. La CSP está escrita en los dos archivos y `npm test` falla si difieren.
+- `public/.assetsignore` — le dice a wrangler que no publique el `.htaccess`,
+  que en Cloudflare no sirve para nada y solo regalaría la CSP. No se puede
+  verificar en local: hay que confirmarlo con un `curl` después del primer
+  deploy, y el propio archivo explica cómo.
 
 ### Documentación
 
@@ -98,6 +145,10 @@ configuración y herramientas.
   hacerlos. Empezá por el plan de trabajo del final.
 - `docs/contenido-pendiente.md` — la lista de lo que hay que pedirle al cliente.
   **Empezá por acá si volvés después de un tiempo.**
+- `docs/lanzamiento.md` — el orden en que hay que hacer las cosas para pasar de
+  «aprobado» a «publicado»: dominio, contenido, deploy, verificación de
+  cabeceras y ficha de Google. Contenido-pendiente dice qué pedir; este dice
+  qué hacer con eso cuando llegó.
 - `docs/propuesta.html` — la presentación para el cliente.
 - `docs/wireframes/` — los artboards del canvas de wireframes (`.dc.html`) y
   `canvas.html`, el canvas armado.
@@ -119,7 +170,7 @@ código 1 si algo falla, así sirve en un hook y en `predeploy`.
 
 | Prueba | Qué mira | Necesita |
 | --- | --- | --- |
-| `validar.mjs` | anclas, `data-negocio`, JSON-LD, dominio, terceros y peso | nada: node pelado |
+| `validar.mjs` | anclas, `data-negocio`, JSON-LD, dominio, terceros, publicación y peso | nada: node pelado |
 | `contacto.mjs` | que el contacto salga todo de `NEGOCIO` | navegador |
 | `interaccion.mjs` | teclado, menú del celular y formulario | navegador |
 | `contraste.mjs` | el texto que va sobre una foto, midiendo los píxeles | navegador |
