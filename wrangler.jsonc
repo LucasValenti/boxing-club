@@ -14,5 +14,7 @@
     // Una sola página con anclas. No hay rutas: cualquier dirección que no
     // exista devuelve un 404 de verdad, que es lo que Google espera.
     "not_found_handling": "404-page"
-  }
+  },
+  // Logs de errores en Cloudflare (capa KUSAK)
+  "observability": { "enabled": true }
 }
